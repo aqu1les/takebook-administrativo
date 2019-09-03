@@ -1,0 +1,94 @@
+#root {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eaeaea;
+}
+form#LoginForm {
+    background: linear-gradient(to bottom, rgb(252, 162, 97), #fcc196);
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 50%;
+}
+form#LoginForm > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eaeaea;
+    border-radius: 75px;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
+}
+form#LoginForm img {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    height: 80%;
+    width: 80%;
+    transition: 200ms transform;
+}
+form#LoginForm img:hover {
+    transform: scale(1.1);
+}
+form#LoginForm input {
+    height: 35px;
+    width: 280px;
+    margin: 10px;
+    border-radius: 14px;
+    border: unset;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
+    padding: 8px;
+    transition: 200ms transform;
+    font-weight: 500;
+}
+form#LoginForm input:hover {
+    transform: scale(1.05);
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.19);
+}
+form#LoginForm input::placeholder {
+    font-style: italic;
+    font-weight: 600;
+}
+form#LoginForm input:focus {
+    outline: unset;
+}
+form#LoginForm #button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 35px;
+    width: 160px;
+    border-radius: 10px;
+    border: 0;
+    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
+    background: rgb(0, 183, 255);
+    color: #fff;
+    transition: 200ms transform;
+    font-weight: bolder;
+    font-size: 12pt;
+}
+form#LoginForm #button:hover {
+    transform: scale(1.05);
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.19);
+}
+
+@media only screen and (max-width: 823px) {
+    form#LoginForm {
+        background-color: #ddd;
+        box-shadow: 0 0 0 0;
+        width: 100vw;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+    }
+    form#LoginForm > img {
+        margin-top: -80px;
+        width: 50%;
+        height: 20%;
+    }
+    form#LoginForm input {
+        width: 85vw;
+    }
+}
