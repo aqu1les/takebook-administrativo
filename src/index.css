@@ -9,7 +9,12 @@ body {
     height: 100vh;
 }
 * {
-    font-family: "Montserrat";
+    font-family: "Roboto", sans-serif;
+}
+#root {
+    height: 100%;
+    width: 100%;
+    background-color: #eaeaea;
 }
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

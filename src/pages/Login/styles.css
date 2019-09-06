@@ -1,56 +1,81 @@
 #root {
-    height: 100%;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #eaeaea;
+}
+div#card-auth {
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    width: 920px;
+    height: 500px;
+    border-radius: 14px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 4px 2px 10px 0 rgba(0, 0, 0, 0.1);
+}
+div#divider {
+    background: #ccc;
+    width: 2px;
+    height: 400px;
+    border-radius: 80px;
+}
+div#logo-img {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+#logo {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    transition: 200ms transform;
+}
+#logo:hover {
+    transform: scale(1.1);
+}
+#app-name {
+    display: none;
 }
 form#LoginForm {
-    background: linear-gradient(to bottom, rgb(252, 162, 97), #fcc196);
-    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 50%;
+    justify-content: center;
+    height: 100%;
 }
-form#LoginForm > div {
+form#LoginForm > svg {
+    border-radius: 100px;
+    box-shadow: 4px 2px 10px 0 rgba(0, 0, 0, 0.1);
+    transition: 200ms transform;
+}
+form#LoginForm > svg:hover {
+    transform: scale(1.1);
+}
+form#LoginForm > h2 {
+    margin-top: 5px;
+}
+div.form-group {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #eaeaea;
-    border-radius: 75px;
-    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
-}
-form#LoginForm img {
-    margin-top: 10px;
-    margin-bottom: 25px;
-    height: 80%;
-    width: 80%;
-    transition: 200ms transform;
-}
-form#LoginForm img:hover {
-    transform: scale(1.1);
+    border-radius: 50px;
+    flex-direction: row;
+    border: rgb(100, 168, 207) solid 1.5px;
+    margin: 5px;
+    background-color: #fff;
+    padding: 3px;
+    padding-left: 8px;
 }
 form#LoginForm input {
-    height: 35px;
-    width: 280px;
-    margin: 10px;
+    width: 240px;
     border-radius: 14px;
     border: unset;
-    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
     padding: 8px;
-    transition: 200ms transform;
     font-weight: 500;
 }
-form#LoginForm input:hover {
-    transform: scale(1.05);
-    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.19);
-}
 form#LoginForm input::placeholder {
-    font-style: italic;
-    font-weight: 600;
+    font-weight: 500;
 }
 form#LoginForm input:focus {
     outline: unset;
@@ -58,12 +83,12 @@ form#LoginForm input:focus {
 form#LoginForm #button {
     margin-top: 5px;
     margin-bottom: 5px;
-    height: 35px;
+    height: 40px;
     width: 160px;
-    border-radius: 10px;
+    border-radius: 40px;
     border: 0;
     box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
-    background: rgb(0, 183, 255);
+    background: #f58634;
     color: #fff;
     transition: 200ms transform;
     font-weight: bolder;
@@ -74,21 +99,34 @@ form#LoginForm #button:hover {
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.19);
 }
 
-@media only screen and (max-width: 823px) {
-    form#LoginForm {
-        background-color: #ddd;
-        box-shadow: 0 0 0 0;
+@media only screen and (max-width: 920px) {
+    #root {
+        background-color: #fff;
+    }
+    #logo {
+        display: none;
+    }
+    #app-name {
+        display: initial;
+        width: 100%;
+    }
+    div#card-auth {
         width: 100vw;
-        height: 100vh;
-        align-items: center;
-        justify-content: center;
+        box-shadow: unset;
+        flex-direction: column;
     }
-    form#LoginForm > img {
-        margin-top: -80px;
-        width: 50%;
-        height: 20%;
+    div#divider {
+        display: none;
     }
-    form#LoginForm input {
-        width: 85vw;
+    form#LoginForm {
+        height: auto;
+        min-height: 300px;
+        width: auto;
+    }
+    form#LoginForm > svg {
+        display: none;
+    }
+    form#LoginForm > h2 {
+        margin-top: -50px;
     }
 }

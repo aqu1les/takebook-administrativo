@@ -29,5 +29,9 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "jsonwebtoken": "^8.5.1",
+        "react-test-renderer": "^16.9.0"
     }
 }
