@@ -1,8 +1,11 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-//import { HelloWorld } from './components/Hello';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Report from './pages/Report';
+import Adverts from './pages/Adverts';
+import Users from './pages/Users';
+import Layout from './components/Layout';
 
 export default function Router() {
     return (
@@ -10,7 +13,14 @@ export default function Router() {
             <Switch>
                 <Route exact path="/" render={() => <Redirect to="/auth" />} />
                 <Route path="/auth" component={Login} />
-                <Route path="/dashboard" component={Dashboard} />
+                <Layout>
+                    <Switch>
+                        <Route path="/dashboard" component={Dashboard} />
+                        <Route path="/users" component={Users} />
+                        <Route path="/adverts" component={Adverts} />
+                        <Route path="/reports" component={Report} />
+                    </Switch>
+                </Layout>
             </Switch>
         </BrowserRouter>
     );
