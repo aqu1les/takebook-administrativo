@@ -13,14 +13,14 @@ export default function Router() {
             <Switch>
                 <Route exact path="/" render={() => <Redirect to="/auth" />} />
                 <Route path="/auth" component={Login} />
-                <Layout>
-                    <Switch>
+                <Switch>
+                    <Layout>
                         <Route path="/dashboard" component={Dashboard} />
                         <Route path="/users" component={Users} />
                         <Route path="/adverts" component={Adverts} />
                         <Route path="/reports" component={Report} />
-                    </Switch>
-                </Layout>
+                    </Layout>
+                </Switch>
             </Switch>
         </BrowserRouter>
     );

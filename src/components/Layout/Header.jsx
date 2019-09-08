@@ -4,13 +4,20 @@ import styled from "styled-components";
 import menuIcon from "../../assets/icons/menu.svg";
 import notificationIcon from "../../assets/icons/notifications.svg";
 import logo from "../../assets/logo.svg";
+import defaultProfile from "../../assets/icons/profile-user.svg";
 
 const Header = styled.header`
     height: 62px;
     background-color: #024973;
     margin-bottom: 20px;
-    width: 100%;
+    width: 100vw;
     grid-area: header;
+    @media only screen and (max-width: 576px) {
+        height: 50px;
+        background-color: #024973;
+        position: fixed;
+        top: 0;
+    }
     nav {
         height: 100%;
         margin-left: auto;
@@ -19,6 +26,7 @@ const Header = styled.header`
         display: flex;
         align-items: center;
         justify-content: space-between;
+        width: 100%;
         div {
             display: flex;
             align-items: center;
@@ -43,17 +51,18 @@ const Header = styled.header`
 
             @media only screen and (max-width: 576px) {
                 min-width: initial;
-                h2 {
-                    display: none;
-                }
+                display: none;
             }
         }
         #mid-part {
             justify-content: center;
+            a {
+                width: 50px;
+                height: 50px;
+            }
         }
         #end-part {
             justify-content: flex-end;
-            margin-right: 10px;
             #btnImg {
                 background-color: unset;
                 border: none;
@@ -63,18 +72,23 @@ const Header = styled.header`
                     border: none;
                 }
             }
-        }
-        a {
-            width: 50px;
-            height: 50px;
+            #userOptions {
+                background-color: unset;
+                border: none;
+                cursor: pointer;
+                &:focus {
+                    outline: none;
+                    border: none;
+                }
+            }
+            @media only screen and (max-width: 576px) {
+                justify-content: space-around;
+            }
         }
     }
 `;
 
 export default class header extends Component {
-    state = {
-        dropdownOpen: false
-    };
     render() {
         return (
             <Header>
@@ -96,15 +110,18 @@ export default class header extends Component {
                         </NavLink>
                     </div>
                     <div id="end-part">
-                        <button
-                            id="btnImg"
-                            onClick={() =>
-                                this.setState({ dropdownOpen: true })
-                            }
-                        >
+                        <button id="btnImg">
                             <img
                                 src={notificationIcon}
                                 alt="Ícone de notificação"
+                                width="20"
+                                height="20"
+                            />
+                        </button>
+                        <button id="userOptions" onClick={() => {}}>
+                            <img
+                                src={defaultProfile}
+                                alt="Foto padrão dos usuários"
                                 width="24"
                                 height="24"
                             />

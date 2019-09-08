@@ -34,11 +34,32 @@ const Menu = styled.aside`
     a.active {
         background-color: #004066;
     }
+    @media only screen and (max-width: 576px) {
+        width: 60px;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        position: fixed;
+        margin-top: 10px;
+        bottom: 0;
+        a {
+            justify-content: center;
+        }
+        a svg {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        a p {
+            display: none;
+        }
+    }
     ${props =>
         props.show === false &&
         css`
-            width: 0;
-            display: none;
+            width: 80px;
+            a p {
+                display: none;
+            }
         `}
 `;
 

@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1280" height="720" viewBox="0 0 1920 1080">
+  <defs>
+    <clipPath id="clip-Web_1920_1">
+      <rect width="1920" height="1080"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_1" data-name="Web 1920 – 1" clip-path="url(#clip-Web_1920_1)">
+    <rect width="1920" height="1080" fill="#eaeaea"/>
+    <g id="Background_triangulos" data-name="Background triangulos">
+      <g id="Grupo_51" data-name="Grupo 51">
+        <path id="Polígono_27" data-name="Polígono 27" d="M53.5,0,107,87H0Z" transform="translate(87 451) rotate(90)" fill="#004973"/>
+        <path id="União_3" data-name="União 3" d="M87,0l87,53.5L87,107ZM0,53.5,87,0V107Z" transform="translate(81 451)" fill="#fa0"/>
+        <path id="Polígono_29" data-name="Polígono 29" d="M13,0,26,21H0Z" transform="translate(66 440) rotate(-90)" fill="#004973"/>
+        <path id="Polígono_30" data-name="Polígono 30" d="M53.5,0,107,87H0Z" transform="translate(168 505) rotate(-90)" fill="#ff3d00"/>
+        <path id="Polígono_31" data-name="Polígono 31" d="M53.5,0,107,87H0Z" transform="translate(455 854) rotate(90)" fill="#fa0"/>
+        <path id="Polígono_32" data-name="Polígono 32" d="M53.5,0,107,87H0Z" transform="translate(341 398) rotate(90)" fill="#2dc3f3"/>
+        <path id="Polígono_33" data-name="Polígono 33" d="M113,0,226,184H0Z" transform="translate(184 854) rotate(90)" fill="#ff3d00"/>
+        <path id="Polígono_34" data-name="Polígono 34" d="M113,0,226,184H0Z" transform="translate(0 967) rotate(-90)" fill="#004973"/>
+        <path id="Polígono_35" data-name="Polígono 35" d="M113,0,226,184H0Z" transform="translate(184 628) rotate(90)" fill="#fa0"/>
+        <path id="Polígono_36" data-name="Polígono 36" d="M113,0,226,184H0Z" transform="translate(368 741) rotate(90)" fill="#004973"/>
+        <path id="Polígono_37" data-name="Polígono 37" d="M113,0,226,184H0Z" transform="translate(368 977) rotate(90)" fill="#004973"/>
+        <path id="Polígono_38" data-name="Polígono 38" d="M113,0,226,184H0Z" transform="translate(0 1193) rotate(-90)" fill="#fa0"/>
+        <path id="União_5" data-name="União 5" d="M0,54l87,53.5L0,161Zm0-.5L87,0V107Z" transform="translate(281 854)" fill="#0090ff"/>
+        <path id="Polígono_41" data-name="Polígono 41" d="M53.5,0,107,87H0Z" transform="translate(368 908) rotate(-90)" fill="rgba(255,170,0,0.82)"/>
+        <path id="Polígono_42" data-name="Polígono 42" d="M53.5,0,107,87H0Z" transform="translate(281 854) rotate(-90)" fill="#004973"/>
+        <path id="Polígono_43" data-name="Polígono 43" d="M53.5,0,107,87H0Z" transform="translate(455 747) rotate(90)" fill="#2dc3f3"/>
+        <path id="Polígono_44" data-name="Polígono 44" d="M53.5,0,107,87H0Z" transform="translate(368 801) rotate(-90)" fill="#fc750e"/>
+        <path id="Polígono_45" data-name="Polígono 45" d="M113,0,226,184H0Z" transform="translate(455 581) rotate(90)" fill="#ff3d00"/>
+        <path id="Polígono_46" data-name="Polígono 46" d="M113,0,226,184H0Z" transform="translate(87 807) rotate(-90)" fill="#ff3d00"/>
+        <path id="Polígono_47" data-name="Polígono 47" d="M107,0,214,175H0Z" transform="translate(630 694) rotate(90)" fill="#fbaa4a"/>
+        <path id="Polígono_48" data-name="Polígono 48" d="M53.5,0,107,87H0Z" transform="translate(271 635) rotate(-90)" fill="#fa0"/>
+        <path id="União_4" data-name="União 4" d="M37,46.381,36,47V45.763L0,23.5,36,1.237V0l1,.618L38,0V1.237L74,23.5,38,45.763V47Z" transform="translate(381 458)" fill="#2dc3f3"/>
+        <path id="Polígono_51" data-name="Polígono 51" d="M13,0,26,21H0Z" transform="translate(315 514) rotate(90)" fill="#ff5c07"/>
+        <path id="Polígono_52" data-name="Polígono 52" d="M13,0,26,21H0Z" transform="translate(507 385) rotate(90)" fill="#004973"/>
+        <path id="Polígono_53" data-name="Polígono 53" d="M13,0,26,21H0Z" transform="translate(687 1011) rotate(90)" fill="#004973"/>
+        <path id="Polígono_54" data-name="Polígono 54" d="M13,0,26,21H0Z" transform="translate(385 1024) rotate(90)" fill="#00a2ff"/>
+        <path id="Polígono_55" data-name="Polígono 55" d="M34.5,0,69,56H0Z" transform="translate(601 930) rotate(90)" fill="#ff6f00"/>
+      </g>
+      <g id="Grupo_53" data-name="Grupo 53" transform="translate(1294 -462)">
+        <path id="Polígono_27-2" data-name="Polígono 27" d="M53.5,0,107,87H0Z" transform="translate(600 173) rotate(-90)" fill="#004973"/>
+        <path id="União_3-2" data-name="União 3" d="M87,107l87-53.5L87,0ZM0,53.5,87,107V0Z" transform="translate(606 173) rotate(180)" fill="#fa0"/>
+        <path id="Polígono_29-2" data-name="Polígono 29" d="M13,0,26,21H0Z" transform="translate(621 29) rotate(90)" fill="#004973"/>
+        <path id="Polígono_30-2" data-name="Polígono 30" d="M53.5,0,107,87H0Z" transform="translate(519 13) rotate(90)" fill="#ff3d00"/>
+        <path id="Polígono_31-2" data-name="Polígono 31" d="M53.5,0,107,87H0Z" transform="translate(232 576) rotate(-90)" fill="#fa0"/>
+        <path id="Polígono_32-2" data-name="Polígono 32" d="M53.5,0,107,87H0Z" transform="translate(346 120) rotate(-90)" fill="#2dc3f3"/>
+        <path id="Polígono_33-2" data-name="Polígono 33" d="M113,0,226,184H0Z" transform="translate(503 695) rotate(-90)" fill="#ff3d00"/>
+        <path id="Polígono_34-2" data-name="Polígono 34" d="M113,0,226,184H0Z" transform="translate(687 356) rotate(90)" fill="#004973"/>
+        <path id="Polígono_35-2" data-name="Polígono 35" d="M113,0,226,184H0Z" transform="translate(503 469) rotate(-90)" fill="#fa0"/>
+        <path id="Polígono_36-2" data-name="Polígono 36" d="M113,0,226,184H0Z" transform="translate(319 582) rotate(-90)" fill="#004973"/>
+        <path id="Polígono_37-2" data-name="Polígono 37" d="M113,0,226,184H0Z" transform="translate(319 818) rotate(-90)" fill="#004973"/>
+        <path id="Polígono_38-2" data-name="Polígono 38" d="M113,0,226,184H0Z" transform="translate(687 582) rotate(90)" fill="#fa0"/>
+        <path id="União_5-2" data-name="União 5" d="M0,107,87,53.5,0,0Zm0,.5L87,161V54Z" transform="translate(406 630) rotate(180)" fill="#0090ff"/>
+        <path id="Polígono_41-2" data-name="Polígono 41" d="M53.5,0,107,87H0Z" transform="translate(319 416) rotate(90)" fill="rgba(255,170,0,0.82)"/>
+        <path id="Polígono_42-2" data-name="Polígono 42" d="M53.5,0,107,87H0Z" transform="translate(406 362) rotate(90)" fill="#004973"/>
+        <path id="Polígono_43-2" data-name="Polígono 43" d="M53.5,0,107,87H0Z" transform="translate(232 469) rotate(-90)" fill="#2dc3f3"/>
+        <path id="Polígono_44-2" data-name="Polígono 44" d="M53.5,0,107,87H0Z" transform="translate(319 309) rotate(90)" fill="#fc750e"/>
+        <path id="Polígono_45-2" data-name="Polígono 45" d="M113,0,226,184H0Z" transform="translate(232 422) rotate(-90)" fill="#ff3d00"/>
+        <path id="Polígono_46-2" data-name="Polígono 46" d="M113,0,226,184H0Z" transform="translate(600 196) rotate(90)" fill="#ff3d00"/>
+        <path id="Polígono_47-2" data-name="Polígono 47" d="M107,0,214,175H0Z" transform="translate(57 523) rotate(-90)" fill="#fbaa4a"/>
+        <path id="Polígono_48-2" data-name="Polígono 48" d="M53.5,0,107,87H0Z" transform="translate(416 143) rotate(90)" fill="#fa0"/>
+        <path id="União_4-2" data-name="União 4" d="M37,46.381,36,47V45.763L0,23.5,36,1.237V0l1,.618L38,0V1.237L74,23.5,38,45.763V47Z" transform="translate(306 120) rotate(180)" fill="#2dc3f3"/>
+        <path id="Polígono_51-2" data-name="Polígono 51" d="M13,0,26,21H0Z" transform="translate(372 155) rotate(-90)" fill="#ff5c07"/>
+        <path id="Polígono_52-2" data-name="Polígono 52" d="M13,0,26,21H0Z" transform="translate(180 26) rotate(-90)" fill="#004973"/>
+        <path id="Polígono_53-2" data-name="Polígono 53" d="M13,0,26,21H0Z" transform="translate(0 652) rotate(-90)" fill="#004973"/>
+        <path id="Polígono_54-2" data-name="Polígono 54" d="M13,0,26,21H0Z" transform="translate(302 665) rotate(-90)" fill="#00a2ff"/>
+        <path id="Polígono_55-2" data-name="Polígono 55" d="M34.5,0,69,56H0Z" transform="translate(86 614) rotate(-90)" fill="#ff6f00"/>
+      </g>
+      <g id="Grupo_54" data-name="Grupo 54" transform="translate(1077 609)">
+        <path id="Polígono_27-3" data-name="Polígono 27" d="M29.5,0,59,48H0Z" transform="translate(48 421) rotate(90)" fill="#004973"/>
+        <path id="União_3-3" data-name="União 3" d="M47.5,0,95,29,47.5,58ZM0,29,47.5,0V58Z" transform="translate(44 421)" fill="#fa0"/>
+        <path id="Polígono_29-3" data-name="Polígono 29" d="M7,0l7,12H0Z" transform="translate(36 415) rotate(-90)" fill="#004973"/>
+        <path id="Polígono_30-3" data-name="Polígono 30" d="M29.5,0,59,47H0Z" transform="translate(92 451) rotate(-90)" fill="#ff3d00"/>
+        <path id="Polígono_31-3" data-name="Polígono 31" d="M29.5,0,59,48H0Z" transform="translate(249 641) rotate(90)" fill="#fa0"/>
+        <path id="Polígono_32-3" data-name="Polígono 32" d="M29.5,0,59,47H0Z" transform="translate(186 392) rotate(90)" fill="#2dc3f3"/>
+        <path id="Polígono_33-3" data-name="Polígono 33" d="M62,0l62,101H0Z" transform="translate(101 641) rotate(90)" fill="#ff3d00"/>
+        <path id="Polígono_34-3" data-name="Polígono 34" d="M61.5,0,123,101H0Z" transform="translate(0 703) rotate(-90)" fill="#004973"/>
+        <path id="Polígono_35-3" data-name="Polígono 35" d="M61.5,0,123,101H0Z" transform="translate(101 518) rotate(90)" fill="#fa0"/>
+        <path id="Polígono_36-3" data-name="Polígono 36" d="M61.5,0,123,100H0Z" transform="translate(201 580) rotate(90)" fill="#004973"/>
+        <path id="Polígono_37-3" data-name="Polígono 37" d="M62,0l62,100H0Z" transform="translate(201 708) rotate(90)" fill="#004973"/>
+        <path id="Polígono_38-3" data-name="Polígono 38" d="M62,0l62,101H0Z" transform="translate(0 827) rotate(-90)" fill="#fa0"/>
+        <path id="União_5-3" data-name="União 5" d="M0,29.516,48,58.758,0,88Zm0-.274L48,0V58.484Z" transform="translate(154 641)" fill="#0090ff"/>
+        <path id="Polígono_41-3" data-name="Polígono 41" d="M29.5,0,59,48H0Z" transform="translate(201 671) rotate(-90)" fill="rgba(255,170,0,0.82)"/>
+        <path id="Polígono_42-3" data-name="Polígono 42" d="M29,0,58,47H0Z" transform="translate(154 641) rotate(-90)" fill="#004973"/>
+        <path id="Polígono_43-3" data-name="Polígono 43" d="M29,0,58,48H0Z" transform="translate(249 583) rotate(90)" fill="#2dc3f3"/>
+        <path id="Polígono_44-3" data-name="Polígono 44" d="M29,0,58,48H0Z" transform="translate(201 612) rotate(-90)" fill="#fc750e"/>
+        <path id="Polígono_45-3" data-name="Polígono 45" d="M62,0l62,101H0Z" transform="translate(249 492) rotate(90)" fill="#ff3d00"/>
+        <path id="Polígono_46-3" data-name="Polígono 46" d="M62,0l62,100H0Z" transform="translate(48 616) rotate(-90)" fill="#ff3d00"/>
+        <path id="Polígono_47-3" data-name="Polígono 47" d="M58.5,0,117,95H0Z" transform="translate(344 554) rotate(90)" fill="#fbaa4a"/>
+        <path id="Polígono_48-3" data-name="Polígono 48" d="M29.5,0,59,48H0Z" transform="translate(148 522) rotate(-90)" fill="#fa0"/>
+        <path id="União_4-3" data-name="União 4" d="M20,25.658,19.46,26v-.684L0,13,19.46.684V0L20,.342,20.541,0V.684L40,13,20.541,25.316V26Z" transform="translate(208 425)" fill="#2dc3f3"/>
+        <path id="Polígono_51-3" data-name="Polígono 51" d="M7.5,0,15,11H0Z" transform="translate(172 455) rotate(90)" fill="#ff5c07"/>
+        <path id="Polígono_52-3" data-name="Polígono 52" d="M7,0l7,11H0Z" transform="translate(277 385) rotate(90)" fill="#004973"/>
+        <path id="Polígono_53-3" data-name="Polígono 53" d="M7,0l7,11H0Z" transform="translate(375 727) rotate(90)" fill="#004973"/>
+        <path id="Polígono_54-3" data-name="Polígono 54" d="M7,0l7,11H0Z" transform="translate(210 734) rotate(90)" fill="#00a2ff"/>
+        <path id="Polígono_55-3" data-name="Polígono 55" d="M19,0,38,30H0Z" transform="translate(328 683) rotate(90)" fill="#ff6f00"/>
+      </g>
+      <g id="Grupo_55" data-name="Grupo 55" transform="translate(702 994)">
+        <path id="Polígono_27-4" data-name="Polígono 27" d="M29.5,0,59,48H0Z" transform="translate(327 95) rotate(-90)" fill="#004973"/>
+        <path id="União_3-4" data-name="União 3" d="M47.5,58,95,29,47.5,0ZM0,29,47.5,58V0Z" transform="translate(331 94) rotate(180)" fill="#fa0"/>
+        <path id="Polígono_29-4" data-name="Polígono 29" d="M7,0l7,12H0Z" transform="translate(339 16) rotate(90)" fill="#004973"/>
+        <path id="Polígono_30-4" data-name="Polígono 30" d="M29.5,0,59,47H0Z" transform="translate(283 7) rotate(90)" fill="#ff3d00"/>
+        <path id="Polígono_31-4" data-name="Polígono 31" d="M29.5,0,59,48H0Z" transform="translate(126 315) rotate(-90)" fill="#fa0"/>
+        <path id="Polígono_32-4" data-name="Polígono 32" d="M29.5,0,59,47H0Z" transform="translate(189 66) rotate(-90)" fill="#2dc3f3"/>
+        <path id="Polígono_33-4" data-name="Polígono 33" d="M62,0l62,101H0Z" transform="translate(274 380) rotate(-90)" fill="#ff3d00"/>
+        <path id="Polígono_34-4" data-name="Polígono 34" d="M61.5,0,123,101H0Z" transform="translate(375 195) rotate(90)" fill="#004973"/>
+        <path id="Polígono_35-4" data-name="Polígono 35" d="M61.5,0,123,101H0Z" transform="translate(274 256) rotate(-90)" fill="#fa0"/>
+        <path id="Polígono_36-4" data-name="Polígono 36" d="M61.5,0,123,100H0Z" transform="translate(174 318) rotate(-90)" fill="#004973"/>
+        <path id="Polígono_37-4" data-name="Polígono 37" d="M62,0l62,100H0Z" transform="translate(174 447) rotate(-90)" fill="#004973"/>
+        <path id="Polígono_38-4" data-name="Polígono 38" d="M62,0l62,101H0Z" transform="translate(375 318) rotate(90)" fill="#fa0"/>
+        <path id="União_5-4" data-name="União 5" d="M0,58.484,48,29.242,0,0Zm0,.274L48,88V29.516Z" transform="translate(221 344) rotate(180)" fill="#0090ff"/>
+        <path id="Polígono_41-4" data-name="Polígono 41" d="M29.5,0,59,48H0Z" transform="translate(174 227) rotate(90)" fill="rgba(255,170,0,0.82)"/>
+        <path id="Polígono_42-4" data-name="Polígono 42" d="M29,0,58,47H0Z" transform="translate(221 198) rotate(90)" fill="#004973"/>
+        <path id="Polígono_43-4" data-name="Polígono 43" d="M29,0,58,48H0Z" transform="translate(126 256) rotate(-90)" fill="#2dc3f3"/>
+        <path id="Polígono_44-4" data-name="Polígono 44" d="M29,0,58,48H0Z" transform="translate(174 169) rotate(90)" fill="#fc750e"/>
+        <path id="Polígono_45-4" data-name="Polígono 45" d="M62,0l62,101H0Z" transform="translate(126 231) rotate(-90)" fill="#ff3d00"/>
+        <path id="Polígono_46-4" data-name="Polígono 46" d="M62,0l62,100H0Z" transform="translate(327 107) rotate(90)" fill="#ff3d00"/>
+        <path id="Polígono_47-4" data-name="Polígono 47" d="M58.5,0,117,95H0Z" transform="translate(31 286) rotate(-90)" fill="#fbaa4a"/>
+        <path id="Polígono_48-4" data-name="Polígono 48" d="M29.5,0,59,48H0Z" transform="translate(227 78) rotate(90)" fill="#fa0"/>
+        <path id="União_4-4" data-name="União 4" d="M20,.342,19.46,0V.684L0,13,19.46,25.316V26l.54-.342.54.342v-.684L40,13,20.541.684V0Z" transform="translate(167 66) rotate(180)" fill="#2dc3f3"/>
+        <path id="Polígono_51-4" data-name="Polígono 51" d="M7.5,0,15,11H0Z" transform="translate(203 85) rotate(-90)" fill="#ff5c07"/>
+        <path id="Polígono_52-4" data-name="Polígono 52" d="M7,0l7,11H0Z" transform="translate(98 14) rotate(-90)" fill="#004973"/>
+        <path id="Polígono_53-4" data-name="Polígono 53" d="M7,0l7,11H0Z" transform="translate(0 356) rotate(-90)" fill="#004973"/>
+        <path id="Polígono_54-4" data-name="Polígono 54" d="M7,0l7,11H0Z" transform="translate(165 363) rotate(-90)" fill="#00a2ff"/>
+        <path id="Polígono_55-4" data-name="Polígono 55" d="M19,0,38,30H0Z" transform="translate(47 336) rotate(-90)" fill="#ff6f00"/>
+      </g>
+    </g>
+  </g>
+</svg>

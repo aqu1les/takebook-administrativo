@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import background from '../../assets/TESTEBG.png';
 const width920 = "@media only screen and (max-width: 920px)"
 
 export const Container = styled.div`
@@ -8,8 +8,12 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url(${background});
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     ${width920} {
         background-color: #fff;
+        background-image: none;
     }
 `;
 
@@ -138,8 +142,10 @@ export const SendButton = styled.button`
         transform: scale(1.05);
         box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.19);
     }
-    &:active {
-        outline: unset;
+    &:focus {
+        outline: none;
+        opacity: 0.8;
+        border: 0;
     }
 `;
 export const UserIcon = styled.img`

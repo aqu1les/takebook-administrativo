@@ -8,6 +8,9 @@ const Footer = styled.footer`
     justify-content: center;
     padding: 0 25px;
     background: #fff;
+    @media only screen and (max-width: 576px) {
+        display: none;
+    }
 `;
 
 export default () => {
