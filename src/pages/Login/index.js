@@ -12,12 +12,16 @@ import {
     FormGroup,
     Input,
     SendButton,
-    UserIcon
+    UserIcon,
+    BgLogin
 } from './styles';
 import api from '../../services/api';
 import user from '../../assets/icons/user.svg';
 import logo from '../../assets/book-app.png';
 import appName from '../../assets/takebook-name-only.png';
+import leftBottom from '../../assets/login/left-bottom.svg';
+import topRight from '../../assets/login/top-right.svg';
+import bottomCenter from '../../assets/login/bottom-center.svg';
 
 class Login extends Component {
     async componentDidMount() {
@@ -53,6 +57,11 @@ class Login extends Component {
     render() {
         return this.state.authenticated ? <Redirect to="/dashboard" push={true} /> :
             <Container>
+                <BgLogin>
+                    <img id="left-bottom" src={leftBottom} alt="" />
+                    <img id="bot-center" src={bottomCenter} alt="" />
+                    <img id="top-right" src={topRight} alt="" />
+                </BgLogin>
                 <CardAuth>
                     <LogoImg>
                         <Logo src={logo} alt="Livro logo TAKEBOOK" width="200" height="200" />

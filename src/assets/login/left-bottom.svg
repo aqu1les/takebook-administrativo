@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 687 693.19">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #004973;
+      }
+
+      .cls-2 {
+        fill: #fa0;
+      }
+
+      .cls-3 {
+        fill: #ff3d00;
+      }
+
+      .cls-4 {
+        fill: #2dc3f3;
+      }
+
+      .cls-5 {
+        fill: #0090ff;
+      }
+
+      .cls-6 {
+        fill: #fc750e;
+      }
+
+      .cls-7 {
+        fill: #fbaa4a;
+      }
+
+      .cls-8 {
+        fill: #ff5c07;
+      }
+
+      .cls-9 {
+        fill: #00a2ff;
+      }
+
+      .cls-10 {
+        fill: #ff6f00;
+      }
+    </style>
+  </defs>
+  <title>Ativo 1</title>
+  <g id="Camada_2" data-name="Camada 2">
+    <g id="Camada_1-2" data-name="Camada 1">
+      <g>
+        <path class="cls-1" d="M87,119.5,0,173V66Z"/>
+        <path class="cls-2" d="M168,66l87,53.5L168,173ZM81,119.5,168,66V173Z"/>
+        <path class="cls-1" d="M66,42,87,29V55Z"/>
+        <path class="cls-3" d="M168,66.5,255,13V120Z"/>
+        <path class="cls-2" d="M455,522.5,368,576V469Z"/>
+        <path class="cls-4" d="M341,66.5,254,120V13Z"/>
+        <path class="cls-3" d="M3.07,693.11,184,582,0,469V693.1Z"/>
+        <path class="cls-1" d="M0,469,184,356V582Z"/>
+        <path class="cls-2" d="M184,356,0,469V243Z"/>
+        <path class="cls-1" d="M368,469,184,582V356Z"/>
+        <path class="cls-1" d="M348.78,693.19,184,592V693.19Z"/>
+        <path class="cls-2" d="M184,693.19V582L3.07,693.11Z"/>
+        <path class="cls-5" d="M281,523l87,53.5L281,630Zm0-.5L368,469V576Z"/>
+        <path d="M368,469.5,455,416V523Z"/>
+        <path class="cls-1" d="M281,415.5,368,362V469Z"/>
+        <path class="cls-4" d="M455,415.5,368,469V362Z"/>
+        <path class="cls-6" d="M368,362.5,455,309V416Z"/>
+        <path class="cls-3" d="M455,309,271,422V196Z"/>
+        <path class="cls-3" d="M87,309,271,196V422Z"/>
+        <path class="cls-7" d="M630,416,455,523V309Z"/>
+        <path class="cls-2" d="M271,196.5,358,143V250Z"/>
+        <path class="cls-4" d="M418,119.38l-1,.62v-1.24L381,96.5l36-22.26V73l1,.62,1-.62v1.24L455,96.5l-36,22.26V120Z"/>
+        <path class="cls-8" d="M315,142l-21,13V129Z"/>
+        <path class="cls-1" d="M507,13,486,26V0Z"/>
+        <path class="cls-1" d="M687,639l-21,13V626Z"/>
+        <path class="cls-9" d="M385,652l-21,13V639Z"/>
+        <path class="cls-10" d="M601,579.5,545,614V545Z"/>
+      </g>
+    </g>
+  </g>
+</svg>

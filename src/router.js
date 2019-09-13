@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Report from './pages/Report';
 import Adverts from './pages/Adverts';
 import Users from './pages/Users';
+import Profile from './pages/Profile';
 import Layout from './components/Layout';
 
 export default function Router() {
@@ -19,6 +20,7 @@ export default function Router() {
                         <Route path="/users" component={Users} />
                         <Route path="/adverts" component={Adverts} />
                         <Route path="/reports" component={Report} />
+                        <Route path="/me" component={Profile} />
                     </Layout>
                 </Switch>
             </Switch>

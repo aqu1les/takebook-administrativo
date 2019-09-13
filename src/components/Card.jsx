@@ -49,6 +49,7 @@ const Card = styled.div`
         height: 100%;
         align-items: center;
         justify-content: center;
+        text-align: center;
         div {
             font-weight: bold;
             font-size: 24pt;
@@ -58,6 +59,8 @@ const Card = styled.div`
         width: 33%;
         height: 80px;
         margin: 5px 0;
+        flex-direction: column;
+        align-items: center;
         #icon-div {
             img {
                 width: 30px;
@@ -66,7 +69,7 @@ const Card = styled.div`
         }
         #content-div {
             div {
-                font-weight: bold;
+                font-weight: normal;
                 font-size: 10pt;
                 text-align: center;
             }

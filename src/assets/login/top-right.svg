@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 461.94 237.62">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ff3d00;
+      }
+
+      .cls-2 {
+        fill: #004973;
+      }
+
+      .cls-3 {
+        fill: #fa0;
+      }
+
+      .cls-4 {
+        fill: #0090ff;
+      }
+
+      .cls-5 {
+        fill: #ffb900;
+      }
+
+      .cls-6 {
+        fill: #fbaa4a;
+      }
+
+      .cls-7 {
+        fill: #00a2ff;
+      }
+
+      .cls-8 {
+        fill: #ff6f00;
+      }
+    </style>
+  </defs>
+  <title>Ativo 3</title>
+  <g id="Camada_2" data-name="Camada 2">
+    <g id="Camada_1-2" data-name="Camada 1">
+      <g>
+        <path class="cls-1" d="M336.89,78.4,461.94,0V153Z"/>
+        <path class="cls-2" d="M461.94,0l-125,78.4V0Z"/>
+        <path class="cls-2" d="M213.94,160.78l123-76.23.92,153.07Z"/>
+        <path class="cls-3" d="M461.94,153,337.76,229.23,336.89,78.4Z"/>
+        <polygon class="cls-4" points="270.96 35.95 213.94 71.74 272.96 107.69 270.96 35.95"/>
+        <polygon class="cls-4" points="270.96 35.95 213.94 0 213.94 71.91 270.96 35.95"/>
+        <path class="cls-5" d="M213.94,0l-59,38.44V0Z"/>
+        <path class="cls-6" d="M91.5,0h63.42V38.44Z"/>
+        <path class="cls-2" d="M0,116.52l13.52-8.61v17.21Z"/>
+        <path class="cls-7" d="M202.87,125.12l13.53-8.6v17.21Z"/>
+        <path class="cls-8" d="M57.79,77.17,94.67,53.81v46.72Z"/>
+        <path class="cls-2" d="M213.94,0h123V78.4Z"/>
+        <path class="cls-3" d="M154.92,38.44,213.94,0V71.74Z"/>
+      </g>
+    </g>
+  </g>
+</svg>

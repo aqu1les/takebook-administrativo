@@ -51,8 +51,13 @@ export const OpenReq = styled.div`
     
     h3 {
         text-align: center;
+        cursor: pointer;
         font-size: 24pt;
         min-width: 30px;
+        transition: transform 200ms;
+        &:hover {
+            transform: scale(1.1);
+        }
     }
     @media only screen and (max-width: 576px) {
         padding: 0;

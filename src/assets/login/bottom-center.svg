@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 566.46 95">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #004973;
+      }
+
+      .cls-2 {
+        fill: #fa0;
+      }
+
+      .cls-3 {
+        fill: #ff3d00;
+      }
+
+      .cls-4 {
+        fill: #2dc3f3;
+      }
+
+      .cls-5 {
+        fill: #ff5c07;
+      }
+    </style>
+  </defs>
+  <title>Ativo 2</title>
+  <g id="Camada_2" data-name="Camada 2">
+    <g id="Camada_1-2" data-name="Camada 1">
+      <g>
+        <path class="cls-1" d="M234.34,65.53,282.2,36.19V94.87Z"/>
+        <path class="cls-2" d="M186.48,36.19,138.62,65.53l47.86,29.34Zm47.86,29.34L186.48,36.19V94.87Z"/>
+        <path class="cls-1" d="M242.59,23,231,30.16V15.9Z"/>
+        <path class="cls-3" d="M186.48,36.47,138.62,65.81V7.13Z"/>
+        <path class="cls-4" d="M91.32,36.47,139.17,7.13V65.81Z"/>
+        <path class="cls-2" d="M107.42,94.87,82,78.42V94.7C89.85,94.7,98.52,94.7,107.42,94.87Z"/>
+        <path class="cls-4" d="M49,40.37l.55-.34v.68l19.8,12.21L49.51,65.13v.68L49,65.47l-.55.34v-.68L28.6,52.92,48.41,40.71V40Z"/>
+        <path class="cls-5" d="M105.62,77.87l11.55-7.13V85Z"/>
+        <path class="cls-1" d="M0,7.13,11.55,0V14.26Z"/>
+      </g>
+      <g>
+        <path class="cls-1" d="M330,65.59,282,95V36.18Z"/>
+        <path class="cls-2" d="M377.74,36.68l47.5,28.91L377.74,94.5Zm-47.5,28.91,47.5-28.91V94.5Z"/>
+        <path class="cls-1" d="M319.24,23.22l12-7v14Z"/>
+        <path class="cls-3" d="M378.24,36.68l47-29.41V66.09Z"/>
+        <path class="cls-4" d="M472.24,36.68l-47,29.41V7.27Z"/>
+        <path class="cls-2" d="M479.24,94.7V78.06L452.08,94.7Z"/>
+        <path class="cls-4" d="M514.24,65.75l-.54.34v-.68L494.24,53.13,513.7,40.85v-.68l.54.34.54-.34v.68l19.46,12.28L514.78,65.41v.68Z"/>
+        <path class="cls-5" d="M455.24,77.56l-8,7.47v-15Z"/>
+        <path class="cls-1" d="M566.46,5.28l-14.22,9-.61-14Z"/>
+      </g>
+    </g>
+  </g>
+</svg>

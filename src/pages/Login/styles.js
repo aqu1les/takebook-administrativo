@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import background from '../../assets/TESTEBG.png';
 const width920 = "@media only screen and (max-width: 920px)"
 
 export const Container = styled.div`
@@ -8,9 +7,6 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(${background});
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
     ${width920} {
         background-color: #fff;
         background-image: none;
@@ -21,6 +17,7 @@ export const CardAuth = styled.div`
     display: flex;
     flex-direction: row;
     background-color: #fff;
+    position: absolute;
     width: 920px;
     height: 500px;
     border-radius: 14px;
@@ -154,6 +151,29 @@ export const UserIcon = styled.img`
     transition: 200ms transform;
     &:hover {
         transform: scale(1.1);
+    }
+    ${width920} {
+        display: none;
+    }
+`;
+export const BgLogin = styled.div`
+    #left-bottom {
+        position: absolute;
+        left: 0;
+        bottom:0;
+        width: 480px;
+    }
+    #bot-center {
+        position: absolute;
+        width: 480px;
+        bottom: 0;
+        left: 40%;
+    }
+    #top-right {
+        position: absolute;
+        width: 480px;
+        top: 0;
+        right: 0;
     }
     ${width920} {
         display: none;
