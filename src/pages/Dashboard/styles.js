@@ -13,14 +13,31 @@ export const CardHeader = styled.div`
     }
 `;
 export const CardBody = styled.section`
-    margin-top: 10px;
+    margin-top: 15px;
     display: flex;
+    justify-content: space-between;
     height: 100%;
     flex-direction: row;
-    background-color: #FFF;
-    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    div {
+        width: 49.5% !important;
+        background-color: #FFF;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100% !important;
+        svg {
+            touch-action: pan-y;
+        }
+    }
     @media only screen and (max-width: 576px) {
         flex-direction: column;
+        min-height: 490px;
+        height: 600px !important;
+        div {
+            height: 240px !important;
+            width: 100% !important;
+        }
     }
 `;
 export const CardFooter = styled.div`

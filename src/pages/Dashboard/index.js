@@ -7,6 +7,8 @@ import profile from '../../assets/icons/profile.svg';
 import book from '../../assets/icons/learning.svg';
 import addBook from '../../assets/icons/add-book.svg';
 import api from '../../services/api';
+import Chart from './chart';
+
 
 export default class Dashboard extends Component {
     async componentDidMount() {
@@ -85,8 +87,9 @@ export default class Dashboard extends Component {
                             <Card text="Novos Livros" qtd={this.state.weeklyBooks} icon={addBook} />
                         </CardHeader>
                         <CardBody>
-                            STAT
-                    </CardBody>
+                            <Chart />
+                            <Chart />
+                        </CardBody>
                         <CardFooter>
                             <OpenReq>
                                 <img src={book} alt="Ícone de requests" width="60" height="60" />
@@ -102,7 +105,7 @@ export default class Dashboard extends Component {
                             </OpenReq>
                         </CardFooter>
                     </Wrapper>
-                )
+                );
         }
     }
 }

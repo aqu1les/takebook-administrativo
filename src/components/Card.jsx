@@ -30,6 +30,7 @@ const Card = styled.div`
     border-radius: 3px;
     transition: transform 200ms;
     cursor: pointer;
+    padding-top: 5px;
     &:hover {
         transform: scale(1.05);
     }

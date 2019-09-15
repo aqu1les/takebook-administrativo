@@ -14,8 +14,9 @@ export default class layout extends Component {
     render() {
         const Layout = styled.div`
             display: grid;
-            min-height: 100%;
+            min-height: 100vh;
             grid-template-columns: ${this.state.open ? "240px" : "80px"} 1fr;
+            max-width: 100vw;
             grid-template-rows: 62px 1fr 52px;
             grid-template-areas: "header header" "menu main" "menu footer";
             @media only screen and (max-width: 576px) {
@@ -43,7 +44,7 @@ export default class layout extends Component {
             <Layout>
                 <Header handleMenu={this.handleMenu} />
                 <Menu show={this.state.open} />
-                <Main>{this.props.children}</Main>
+                <Main id="main">{this.props.children}</Main>
                 <Footer />
             </Layout>
         );
