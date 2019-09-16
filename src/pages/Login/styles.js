@@ -1,6 +1,25 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 const width920 = "@media only screen and (max-width: 920px)"
 
+const fade = keyframes`
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+`
+const shake = keyframes`
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(100);
+    }
+    100% {
+        transform: translateX(0);
+    }
+`
 export const Container = styled.div`
     width: 100vw;
     height: 100vh;
@@ -29,6 +48,11 @@ export const CardAuth = styled.div`
         box-shadow: unset;
         flex-direction: column;
     }
+    ${props =>
+        props.submiting === true && css`
+            border: 1px solid #000;
+        `
+    }
 `;
 
 export const Divider = styled.div`
@@ -45,6 +69,7 @@ export const LogoImg = styled.div`
     width: 50%;
     display: flex;
     justify-content: center;
+    animation: ${fade} 1000ms;
 `;
 
 export const Logo = styled.img`
@@ -101,11 +126,22 @@ export const FormGroup = styled.div`
     justify-content: center;
     border-radius: 50px;
     flex-direction: row;
-    border: rgb(100, 168, 207) solid 1.5px;
     margin: 5px;
     background-color: #fff;
     padding: 3px;
     padding-left: 8px;
+    ${props =>
+        props.error === true && css`
+            animation: ${shake} 200ms;
+            border: 1px solid red;
+        `
+    }
+    ${props =>
+        props.error === false && css`
+            animation: ${shake} 200ms;
+            border: rgb(100, 168, 207) solid 1.5px;
+        `
+    }    
 `;
 
 export const Input = styled.input`
@@ -138,10 +174,10 @@ export const SendButton = styled.button`
     &:hover {
         transform: scale(1.05);
         box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.19);
+        opacity: 0.8;
     }
     &:focus {
         outline: none;
-        opacity: 0.8;
         border: 0;
     }
 `;
