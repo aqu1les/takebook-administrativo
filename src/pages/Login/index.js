@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { checkAuth } from '../../validations';
 import {
     Container,
     CardAuth,
@@ -22,13 +21,9 @@ import appName from '../../assets/takebook-name-only.png';
 import leftBottom from '../../assets/login/left-bottom.svg';
 import topRight from '../../assets/login/top-right.svg';
 import bottomCenter from '../../assets/login/bottom-center.svg';
+import { checkAuth } from "../../validations";
 
 class Login extends Component {
-    async componentDidMount() {
-        const checked = await checkAuth();
-        return this.setState({ authenticated: checked });
-    }
-
     state = {
         email: '',
         password: '',
@@ -38,7 +33,14 @@ class Login extends Component {
         emailError: false,
         passwordError: false
     }
+    componentDidMount() {
+        this.check();
+    }
 
+    async check() {
+        const auth = await checkAuth();
+        if (auth) return this.setState({ authenticated: true });
+    }
     handleSubmitLogin = async e => {
         e.preventDefault();
         if (!this.state.email && !this.state.password) return this.setState({ emailError: true, passwordError: true });
@@ -50,7 +52,7 @@ class Login extends Component {
             password: this.state.password
         });
         localStorage.setItem('authKey', response.data.token);
-        return this.props.history.push('/dashboard');
+        if (response.data) return this.setState({ authenticated: true });
     }
 
     handleChange = e => {
@@ -62,7 +64,7 @@ class Login extends Component {
         }
     }
     render() {
-        return this.state.authenticated ? <Redirect to="/dashboard" push={true} /> :
+        return this.state.authenticated ? <Redirect to="/dashboard" /> :
             <Container>
                 <BgLogin>
                     <img id="left-bottom" src={leftBottom} alt="" />

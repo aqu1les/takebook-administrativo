@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { checkAuth } from '../../validations';
 import Card from '../../components/Card';
 import { Wrapper, CardHeader, CardBody, CardFooter, OpenReq, Divider } from './styles';
 import profile from '../../assets/icons/profile.svg';
@@ -9,11 +8,11 @@ import addBook from '../../assets/icons/add-book.svg';
 import api from '../../services/api';
 import Chart from './chart';
 
-
 export default class Dashboard extends Component {
-    async componentDidMount() {
-        const checked = await checkAuth();
-        if (!checked) return this.setState({ redirect: "auth" });
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextState.totalUsers !== 'loading' || this.props !== nextProps;
+    }
+    componentDidMount() {
         this.countUsers();
         this.countBooks();
         this.weekly();
@@ -22,9 +21,9 @@ export default class Dashboard extends Component {
     }
     state = {
         redirect: '',
-        totalUsers: 0,
-        totalBooks: 0,
-        weeklyBooks: 0,
+        totalUsers: 'loading',
+        totalBooks: 'loading',
+        weeklyBooks: 'loading',
         totalReports: 0,
         totalAdverts: 0
     }
@@ -32,7 +31,6 @@ export default class Dashboard extends Component {
         localStorage.removeItem('authKey');
         return this.props.history.push('/auth');
     }
-
     countUsers = async () => {
         const response = await api.get('/users', {
             headers: {
@@ -42,7 +40,6 @@ export default class Dashboard extends Component {
 
         return this.setState({ totalUsers: response.data.total });
     }
-
     countBooks = async () => {
         const response = await api.get('/books', {
             headers: {
@@ -52,7 +49,6 @@ export default class Dashboard extends Component {
 
         return this.setState({ totalBooks: response.data.total });
     }
-
     weekly = async () => {
         const response = await api.get('/books/week', {
             headers: {
@@ -62,7 +58,6 @@ export default class Dashboard extends Component {
 
         return this.setState({ weeklyBooks: response.data.count });
     }
-
     reports = async () => {
         const response = await api.get('/reports', {
             headers: {
@@ -72,17 +67,15 @@ export default class Dashboard extends Component {
 
         return this.setState({ totalReports: response.data.total })
     }
-
     adverts = async () => {
         const response = await api.get('/books?filter=1', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('authKey')}`
             }
         });
-        
+
         return this.setState({ totalAdverts: response.data.total })
     }
-
     handleClickCard = e => {
         return this.setState({ redirect: "users" })
     }
@@ -94,8 +87,6 @@ export default class Dashboard extends Component {
     }
     render() {
         switch (this.state.redirect) {
-            case "auth":
-                return <Redirect to="/auth" />
             case "users":
                 return <Redirect to="/users" />
             case "adverts":
@@ -104,7 +95,6 @@ export default class Dashboard extends Component {
                 return <Redirect to="/reports" />
             default:
                 return (
-
                     <Wrapper>
                         <CardHeader>
                             <Card text="Usuarios" qtd={this.state.totalUsers} icon={profile} onClick={this.handleClickCard} />

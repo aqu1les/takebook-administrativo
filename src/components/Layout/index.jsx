@@ -1,21 +1,33 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
 import Menu from "./Menu";
+import { checkAuth, getToken } from "../../validations";
 
-export default class layout extends Component {
-    state = {
-        open: true
-    };
-    handleMenu = () => {
-        return this.setState({ open: this.state.open ? false : true });
+class layout extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            authenticated: getToken() ? true : false
+        };
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.children.type !== nextProps.children.type;
+    }
+    componentDidMount() {
+        this.checkAuthentication();
+    }
+    checkAuthentication = async () => {
+        const checked = await checkAuth();
+        if (!checked) return this.setState({ authenticated: false });
     };
     render() {
         const Layout = styled.div`
             display: grid;
             min-height: 100vh;
-            grid-template-columns: ${this.state.open ? "240px" : "80px"} 1fr;
+            grid-template-columns: 240px 1fr;
             max-width: 100vw;
             grid-template-rows: 62px 1fr 52px;
             grid-template-areas: "header header" "menu main" "menu footer";
@@ -40,13 +52,19 @@ export default class layout extends Component {
             }
         `;
 
-        return (
-            <Layout>
-                <Header handleMenu={this.handleMenu} />
-                <Menu show={this.state.open} />
-                <Main id="main">{this.props.children}</Main>
-                <Footer />
-            </Layout>
-        );
+        if (this.state.authenticated) {
+            return (
+                <Layout id="Layout">
+                    <Header handleMenu={this.handleMenu} />
+                    <Menu show={this.state.open} />
+                    <Main id="main">{this.props.children}</Main>
+                    <Footer />
+                </Layout>
+            );
+        } else {
+            return <Redirect to="/login" />;
+        }
     }
 }
+
+export default layout;

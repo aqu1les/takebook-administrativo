@@ -8,13 +8,12 @@ import { Header } from "./styles";
 
 export default class header extends Component {
     state = {
-        redirect: false,
+        logout: false,
         profile: false
     };
-
     logout = () => {
         localStorage.removeItem("authKey");
-        return this.setState({ redirect: true });
+        return this.setState({ logout: true });
     };
     handleRedirectProfile = () => {
         return this.setState({ profile: true });
@@ -23,15 +22,36 @@ export default class header extends Component {
         const main = document.getElementById("main");
         return main.scrollTo({ top: 0 });
     };
+    handleMenu = () => {
+        const layout = document.getElementById("Layout");
+        const menuTexts = document.querySelectorAll("aside>a>p");
+        if (
+            getComputedStyle(layout).gridTemplateColumns.split(" ")[0] ===
+            "240px"
+        ) {
+            layout.style.gridTemplateColumns = "80px 1fr";
+            menuTexts.forEach(li => {
+                li.style.display = "none";
+            });
+        } else if (
+            getComputedStyle(layout).gridTemplateColumns.split(" ")[0] ===
+            "80px"
+        ) {
+            layout.style.gridTemplateColumns = "240px 1fr";
+            menuTexts.forEach(li => {
+                li.style.display = "block";
+            });
+        }
+    };
     render() {
         if (this.state.profile) return <Redirect to="/me" />;
-        else if (this.state.redirect) return <Redirect to="/auth" />;
+        else if (this.state.logout) return <Redirect to="/login" />;
         else {
             return (
                 <Header>
                     <nav role="navigation">
                         <div id="initial-part">
-                            <button onClick={this.props.handleMenu}>
+                            <button onClick={this.handleMenu}>
                                 <img
                                     src={menuIcon}
                                     alt="Ícone para abrir/fechar o menu"
