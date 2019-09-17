@@ -17,12 +17,16 @@ export default class Dashboard extends Component {
         this.countUsers();
         this.countBooks();
         this.weekly();
+        this.reports();
+        this.adverts();
     }
     state = {
         redirect: '',
         totalUsers: 0,
         totalBooks: 0,
-        weeklyBooks: 0
+        weeklyBooks: 0,
+        totalReports: 0,
+        totalAdverts: 0
     }
     handleLogout = e => {
         localStorage.removeItem('authKey');
@@ -59,6 +63,26 @@ export default class Dashboard extends Component {
         return this.setState({ weeklyBooks: response.data.count });
     }
 
+    reports = async () => {
+        const response = await api.get('/reports', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('authKey')}`
+            }
+        });
+
+        return this.setState({ totalReports: response.data.total })
+    }
+
+    adverts = async () => {
+        const response = await api.get('/books?filter=1', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('authKey')}`
+            }
+        });
+        
+        return this.setState({ totalAdverts: response.data.total })
+    }
+
     handleClickCard = e => {
         return this.setState({ redirect: "users" })
     }
@@ -80,6 +104,7 @@ export default class Dashboard extends Component {
                 return <Redirect to="/reports" />
             default:
                 return (
+
                     <Wrapper>
                         <CardHeader>
                             <Card text="Usuarios" qtd={this.state.totalUsers} icon={profile} onClick={this.handleClickCard} />
@@ -93,13 +118,13 @@ export default class Dashboard extends Component {
                         <CardFooter>
                             <OpenReq>
                                 <img src={book} alt="Ícone de requests" width="60" height="60" />
-                                <p>40<br />Solicitações em <br />aberto</p>
+                                <p>{this.state.totalAdverts}<br />Solicitações em <br />aberto</p>
                                 <Divider />
                                 <h3 onClick={this.redirectRequests}>Ir <br />{'>'}</h3>
                             </OpenReq>
                             <OpenReq >
                                 <img src={book} alt="Ícone de denúncias" width="60" height="60" />
-                                <p>40<br />Denúncias em <br />aberto</p>
+                                <p>{this.state.totalReports}<br />Denúncias em <br />aberto</p>
                                 <Divider />
                                 <h3 onClick={this.redirectReports}>Ir <br />{'>'}</h3>
                             </OpenReq>
