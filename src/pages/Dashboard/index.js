@@ -32,47 +32,27 @@ export default class Dashboard extends Component {
         return this.props.history.push('/auth');
     }
     countUsers = async () => {
-        const response = await api.get('/users', {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('authKey')}`
-            }
-        });
+        const response = await api.get('/users');
 
         return this.setState({ totalUsers: response.data.total });
     }
     countBooks = async () => {
-        const response = await api.get('/books', {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('authKey')}`
-            }
-        });
+        const response = await api.get('/books');
 
         return this.setState({ totalBooks: response.data.total });
     }
     weekly = async () => {
-        const response = await api.get('/books/week', {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('authKey')}`
-            }
-        });
+        const response = await api.get('/books/week');
 
         return this.setState({ weeklyBooks: response.data.count });
     }
     reports = async () => {
-        const response = await api.get('/reports', {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('authKey')}`
-            }
-        });
+        const response = await api.get('/reports');
 
         return this.setState({ totalReports: response.data.total })
     }
     adverts = async () => {
-        const response = await api.get('/books?filter=1', {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('authKey')}`
-            }
-        });
+        const response = await api.get('/books?filter=1');
 
         return this.setState({ totalAdverts: response.data.total })
     }
