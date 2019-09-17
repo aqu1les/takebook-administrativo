@@ -14,7 +14,10 @@ class layout extends Component {
         };
     }
     shouldComponentUpdate(nextProps, nextState) {
-        return this.props.children.type !== nextProps.children.type;
+        return (
+            this.props.children.type !== nextProps.children.type ||
+            this.state.authenticated !== nextState.authenticated
+        );
     }
     componentDidMount() {
         this.checkAuthentication();
