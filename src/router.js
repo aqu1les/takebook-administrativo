@@ -12,7 +12,7 @@ export default () => {
     return (
         <Switch>
             <Route exact path="/" render={() => <Redirect to="/login" />} />
-            <Route path="/login" component={Login} />
+            <Route path="/login" render={() => sessionStorage.getItem('authKey') ? <Redirect to="/dashboard" /> : <Login />} />
             <Route path="/dashboard" render={() => <Layout><Dashboard /></Layout>} />
             <Route path="/users" render={() => <Layout><Users /></Layout>} />
             <Route path="/adverts" render={() => <Layout><Adverts /></Layout>} />

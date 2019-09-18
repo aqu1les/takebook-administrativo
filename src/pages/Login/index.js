@@ -51,7 +51,7 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password
         });
-        localStorage.setItem('authKey', response.data.token);
+        sessionStorage.setItem('authKey', response.data.token);
         if (response.data) return this.setState({ authenticated: true });
     }
 

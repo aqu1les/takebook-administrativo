@@ -4,28 +4,14 @@ import styled from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
 import Menu from "./Menu";
-import { checkAuth, getToken } from "../../validations";
 
 class layout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            authenticated: getToken() ? true : false
+            authenticated: sessionStorage.getItem("authKey") ? true : false
         };
     }
-    shouldComponentUpdate(nextProps, nextState) {
-        return (
-            this.props.children.type !== nextProps.children.type ||
-            this.state.authenticated !== nextState.authenticated
-        );
-    }
-    componentDidMount() {
-        this.checkAuthentication();
-    }
-    checkAuthentication = async () => {
-        const checked = await checkAuth();
-        if (!checked) return this.setState({ authenticated: false });
-    };
     render() {
         const Layout = styled.div`
             display: grid;

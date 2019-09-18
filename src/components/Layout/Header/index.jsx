@@ -12,7 +12,7 @@ export default class header extends Component {
         profile: false
     };
     logout = () => {
-        localStorage.removeItem("authKey");
+        sessionStorage.removeItem("authKey");
         return this.setState({ logout: true });
     };
     handleRedirectProfile = () => {

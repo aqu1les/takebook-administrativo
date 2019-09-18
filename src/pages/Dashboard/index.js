@@ -10,14 +10,14 @@ import Chart from './chart';
 
 export default class Dashboard extends Component {
     shouldComponentUpdate(nextProps, nextState) {
-        return nextState.totalUsers !== 'loading' || this.props !== nextProps;
+        return nextState.totalUsers !== 'loading' || (this.props !== nextProps || this.state !== nextState);
     }
     componentDidMount() {
-        this.countUsers();
-        this.countBooks();
-        this.weekly();
-        this.reports();
-        this.adverts();
+        try {
+            this.loadData();
+        } catch (err) {
+            console.log(err);
+        }
     }
     state = {
         redirect: '',
@@ -29,32 +29,21 @@ export default class Dashboard extends Component {
     }
     handleLogout = e => {
         localStorage.removeItem('authKey');
-        return this.props.history.push('/auth');
+        return this.setState({ redirect: 'login' });
     }
-    countUsers = async () => {
-        const response = await api.get('/users');
-
-        return this.setState({ totalUsers: response.data.total });
-    }
-    countBooks = async () => {
-        const response = await api.get('/books');
-
-        return this.setState({ totalBooks: response.data.total });
-    }
-    weekly = async () => {
-        const response = await api.get('/books/week');
-
-        return this.setState({ weeklyBooks: response.data.count });
-    }
-    reports = async () => {
-        const response = await api.get('/reports');
-
-        return this.setState({ totalReports: response.data.total })
-    }
-    adverts = async () => {
-        const response = await api.get('/books?filter=1');
-
-        return this.setState({ totalAdverts: response.data.total })
+    loadData = async () => {
+        const totalUsers = await api.get('/users');
+        const totalBooks = await api.get('/books');
+        const weeklyBooks = await api.get('/books/week');
+        const totalReports = await api.get('/reports');
+        const totalAdverts = await api.get('/books?filter=1');
+        this.setState({
+            totalUsers: totalUsers.data.total,
+            totalBooks: totalBooks.data.total,
+            weeklyBooks: weeklyBooks.data.count,
+            totalReports: totalReports.data.total,
+            totalAdverts: totalAdverts.data.total
+        });
     }
     handleClickCard = e => {
         return this.setState({ redirect: "users" })
