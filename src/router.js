@@ -1,24 +1,32 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import Reports from './pages/Report';
-import Adverts from './pages/Adverts';
-import Users from './pages/Users';
-import Profile from './pages/Profile';
-import Layout from './components/Layout';
+import { Route, Switch, Redirect } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Reports from "./pages/Report";
+import Adverts from "./pages/Adverts";
+import Users from "./pages/Users";
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
 
 export default () => {
-    return (
-        <Switch>
-            <Route exact path="/" render={() => <Redirect to="/login" />} />
-            <Route path="/login" render={() => sessionStorage.getItem('authKey') ? <Redirect to="/dashboard" /> : <Login />} />
-            <Route path="/dashboard" render={() => <Layout><Dashboard /></Layout>} />
-            <Route path="/users" render={() => <Layout><Users /></Layout>} />
-            <Route path="/adverts" render={() => <Layout><Adverts /></Layout>} />
-            <Route path="/reports" render={() => <Layout><Reports /></Layout>} />
-            <Route path="/me" render={() => <Layout><Profile /></Layout>} />
-            <Route component={() => <h1>Page not found</h1>} />
-        </Switch>
-    );
-}
+	return (
+		<Switch>
+			<Route exact path="/" render={() => <Redirect to="/login" />} />
+			<Route
+				path="/login"
+				render={() =>
+					sessionStorage.getItem("authKey") ? (
+						<Redirect to="/dashboard" />
+					) : (
+						<Login />
+					)
+				}
+			/>
+			<Route path="/dashboard" component={Dashboard} />
+			<Route path="/users" component={Users} />
+			<Route path="/adverts" Component={Adverts} />
+			<Route path="/reports" Component={Reports} />
+			<Route path="/me" Component={Profile} />
+			<Route component={() => <h1>Page not found</h1>} />
+		</Switch>
+	);
+};
