@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect, NavLink } from "react-router-dom";
 import notificationIcon from "../../../assets/icons/notifications.svg";
-import defaultProfile from "../../../assets/icons/profile-user.svg";
+import defaultProfile from "../../../assets/icons/defaultProfile.svg";
 import { Header } from "./style";
 
 export default class header extends Component {

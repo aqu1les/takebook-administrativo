@@ -35,7 +35,6 @@ export const Menu = styled.aside`
         height: 50px;
         max-width: 100%;
         width: 100%;
-        
         display: flex;
         align-items: center;
         &:visited {
@@ -44,8 +43,10 @@ export const Menu = styled.aside`
         &:hover {
             background-color: #005b91;
         }
-        svg {
-            margin-left: 25px;
+        img {
+            margin-left: 24px;
+            width: 24px;
+            height: 24px;
         }
         p {
             margin-left: 25px;
