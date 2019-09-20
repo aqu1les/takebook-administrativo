@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import Card from '../../components/Card';
+import Card from '../../components/Dashboard/Card';
 import { Wrapper, CardHeader, CardBody, CardFooter, OpenReq, Divider } from './styles';
 import profile from '../../assets/icons/profile.svg';
 import book from '../../assets/icons/learning.svg';
