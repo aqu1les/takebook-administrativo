@@ -13,7 +13,7 @@ import {
     SendButton,
     UserIcon,
     BgLogin
-} from './styles';
+} from './style';
 import api from '../../services/api';
 import user from '../../assets/icons/user.svg';
 import logo from '../../assets/book-app.png';
@@ -21,7 +21,7 @@ import appName from '../../assets/takebook-name-only.png';
 import leftBottom from '../../assets/login/left-bottom.svg';
 import topRight from '../../assets/login/top-right.svg';
 import bottomCenter from '../../assets/login/bottom-center.svg';
-import { checkAuth } from "../../validations";
+import { checkAuth } from '../../validations';
 
 class Login extends Component {
     state = {
@@ -52,6 +52,8 @@ class Login extends Component {
             password: this.state.password
         });
         sessionStorage.setItem('authKey', response.data.token);
+        delete (response.data.token);
+        localStorage.setItem('user_info', JSON.stringify(response.data.user));
         if (response.data) return this.setState({ authenticated: true });
     }
 
