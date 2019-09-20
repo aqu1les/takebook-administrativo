@@ -1,59 +1,36 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import styled from "styled-components";
+import React from "react";
 import Header from "./Header";
-import Footer from "./Footer";
 import Menu from "./Menu";
+import styled from "styled-components";
+import topRight from "../../assets/login/top-right.svg";
+import leftBottom from "../../assets/login/left-bottom.svg";
 
-class layout extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            authenticated: sessionStorage.getItem("authKey") ? true : false
-        };
-    }
-    render() {
-        const Layout = styled.div`
-            display: grid;
-            min-height: 100vh;
-            grid-template-columns: 240px 1fr;
-            max-width: 100vw;
-            grid-template-rows: 62px 1fr 52px;
-            grid-template-areas: "header header" "menu main" "menu footer";
-            @media only screen and (max-width: 576px) {
-                grid-template-columns: 60px 1fr;
-                grid-template-rows: 50px 1fr 50px;
-                grid-template-areas: "header header" "main main" "menu menu";
-                max-height: 100%;
-            }
-        `;
-        const Main = styled.main`
-            grid-area: main;
-            margin: 20px 10px 20px 20px;
-            padding: 15px;
-            max-width: 100vw;
-            & > div {
-                height: 100%;
-            }
-            @media only screen and (max-width: 576px) {
-                padding: 0;
-                overflow: scroll;
-            }
-        `;
-
-        if (this.state.authenticated) {
-            return (
-                <Layout id="Layout">
-                    <Header handleMenu={this.handleMenu} />
-                    <Menu show={this.state.open} />
-                    <Main id="main">{this.props.children}</Main>
-                    <Footer />
-                </Layout>
-            );
-        } else {
-            return <Redirect to="/login" />;
-        }
-    }
+export default function Layout(props) {
+    return (
+        <Wrapper>
+            <Header />
+            <Menu />
+            <Main>{props.children}</Main>
+        </Wrapper>
+    );
 }
-
-export default layout;
+const Main = styled.main`
+    height: 100%;
+    background-image: url(${topRight}), url(${leftBottom});
+    background-position: right top, left bottom;
+    background-size: 300px, 280px;
+    background-repeat: no-repeat;
+    flex-grow: 100;
+    & > div {
+        margin-top: 50px;
+        margin-right: 30px;
+        margin-left: 30px;
+    }
+`;
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+    background-color: #fff;
+`;

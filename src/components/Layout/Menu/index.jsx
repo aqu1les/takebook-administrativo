@@ -1,72 +1,18 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import styled, { css } from "styled-components";
+import { Menu } from "./style.js";
+import logo from "../../../assets/book-app.png";
 
-const Menu = styled.aside`
-    grid-area: menu;
-    width: 100%;
-    transition: width 300ms;
-    transition-timing-function: ease;
-    display: flex;
-    flex-direction: column;
-    background-color: #01588c;
-    align-items: center;
-    a {
-        text-decoration: none;
-        color: #fff;
-        height: 50px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        &:visited {
-            color: #fff;
-        }
-        &:hover {
-            background-color: #005b91;
-        }
-        svg {
-            margin-left: 25px;
-        }
-        p {
-            margin-left: 25px;
-        }
-    }
-    a.active {
-        background-color: #004066;
-    }
-    @media only screen and (max-width: 576px) {
-        width: 60px;
-        flex-direction: row;
-        width: 100%;
-        justify-content: center;
-        position: fixed;
-        margin-top: 10px;
-        bottom: 0;
-        a {
-            justify-content: center;
-        }
-        a svg {
-            margin-left: 20px;
-            margin-right: 20px;
-        }
-        a p {
-            display: none;
-        }
-    }
-    ${props =>
-        props.show === false &&
-        css`
-            width: 80px;
-            a p {
-                display: none;
-            }
-        `}
-`;
-
-export default props => {
-    const { show } = props;
+export default function Aside() {
     return (
-        <Menu show={show}>
+        <Menu>
+            <div id="img">
+                <img
+                    src={logo}
+                    alt="Ícone do aplicativo"
+                    title="Ícone do aplicativo"
+                />
+            </div>
             <NavLink to="/dashboard" activeClassName="active">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -118,4 +64,4 @@ export default props => {
             </NavLink>
         </Menu>
     );
-};
+}

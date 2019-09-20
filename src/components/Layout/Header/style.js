@@ -1,13 +1,13 @@
 import styled, { css } from "styled-components";
 export const Header = styled.header`
 	${props =>
-		!props.show &&
-		css`
+        props.show &&
+        css`
 			display: none;
 		`}
 	height: 62px;
 	position: absolute;
-	width: 220px;
+	width: 260px;
 	top: 0;
 	right: 0;
 	z-index: 10;
@@ -18,8 +18,8 @@ export const Header = styled.header`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		border-radius: 0 0 0 20px;
-		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		border-radius: 0 0 0 8px;
+		box-shadow: 1px 1px 16px 0px rgba(0, 0, 0, 0.2);
 		#btnNotification {
 			cursor: pointer;
 			margin-left: 30px;
@@ -89,7 +89,13 @@ export const Header = styled.header`
 				cursor: pointer;
 				display: flex;
 				justify-content: space-between;
-				align-items: center;
+                align-items: center;
+                a {
+                    text-decoration: none;
+                    &:visited {
+                        color: #000;
+                    }
+                }
 				&:hover {
 					opacity: 0.5;
 				}
