@@ -48,47 +48,6 @@ export const CardFooter = styled.div`
         flex-direction: column;
     }
 `;
-export const OpenReq = styled.div`
-    height: 140px;
-    width: 48%;
-    background-color: #ff5205;
-    color: #FFF;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    padding: 5px;
-    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
-    p {
-        text-align: center;
-        font-size: 18pt;
-        font-weight: bold;
-    }
-    
-    h3 {
-        text-align: center;
-        cursor: pointer;
-        font-size: 24pt;
-        min-width: 30px;
-        transition: transform 200ms;
-        &:hover {
-            transform: scale(1.1);
-        }
-    }
-    @media only screen and (max-width: 576px) {
-        padding: 0;
-        width: 100%;
-        height: 100px;
-        margin-right: 15px;
-        p {
-            font-size: 12pt;
-        }
-        h3 {
-            font-size: 16pt;
-        }
-    }
-`;
 export const Divider = styled.div`
     height: 85%;
     width: 1px;

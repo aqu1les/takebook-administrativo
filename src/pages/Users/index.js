@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 export default class Users extends Component {
     render() {
-        return <h1>Users</h1>
+        return (
+            <div>
+                <h2>Usuários</h2>
+            </div>
+        );
     }
 }

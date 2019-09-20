@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 export default class Adverts extends Component {
     render() {
-        return <h1>Anunciozada</h1>
+        return (
+            <div>
+                <h2>Anunciozada</h2>
+            </div>
+        );
     }
 }
