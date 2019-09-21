@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Wrapper } from './style';
-import api from '../../services/api';
+import React, { Component } from "react";
+import { Wrapper } from "./style";
+import api from "../../services/api";
 
 export default class Dashboard extends Component {
     componentDidMount() {
@@ -11,18 +11,18 @@ export default class Dashboard extends Component {
         }
     }
     state = {
-        totalUsers: 'loading',
-        totalBooks: 'loading',
-        weeklyBooks: 'loading',
+        totalUsers: "loading",
+        totalBooks: "loading",
+        weeklyBooks: "loading",
         totalReports: 0,
         totalAdverts: 0
     }
     loadData = async () => {
-        const totalUsers = await api.get('/users');
-        const totalBooks = await api.get('/books');
-        const weeklyBooks = await api.get('/books/week');
-        const totalReports = await api.get('/reports');
-        const totalAdverts = await api.get('/books?filter=1');
+        const totalUsers = await api.get("/users");
+        const totalBooks = await api.get("/books");
+        const weeklyBooks = await api.get("/books/week");
+        const totalReports = await api.get("/reports");
+        const totalAdverts = await api.get("/books/validate");
         this.setState({
             totalUsers: totalUsers.data.total,
             totalBooks: totalBooks.data.total,
