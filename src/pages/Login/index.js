@@ -29,8 +29,7 @@ class Login extends Component {
         loading: false,
         emailError: false,
         passwordError: false,
-        notify: false,
-        notificationMessage: ''
+        notify: {}
     }
     handleSubmitLogin = async e => {
         e.preventDefault();
@@ -48,16 +47,19 @@ class Login extends Component {
         });
 
         if (response === "Senha Inválida!") {
-            this.notify("Senha inválida!");
+            this.notifyError("Senha inválida!");
             return this.setState({ passwordError: true, loading: false });
         } else if (response === "E-mail inválido!") {
             this.notify("E-mail inválido!");
             return this.setState({ emailError: true, loading: false });
         }
+        this.notifySuccess("Logando...");
         sessionStorage.setItem("authKey", response.data.token);
         delete (response.data.token);
         localStorage.setItem("user_info", JSON.stringify(response.data.user));
-        if (response.data) return this.setState({ authenticated: true });
+        setTimeout(() => {
+            if (response.data) return this.setState({ authenticated: true });
+        }, 3000);
     }
 
     handleChange = e => {
@@ -68,8 +70,20 @@ class Login extends Component {
             return this.handleSubmitLogin(e);
         }
     }
-    notify(msg) {
-        this.setState({ notify: true, notificationMessage: msg });
+    notifyError(msg) {
+        this.setState({ notify: { show: true, notificationMessage: msg, variant: "danger" } });
+        setTimeout(() => {
+            this.setState({ notify: false });
+        }, 3000);
+    }
+    notifySuccess(msg) {
+        this.setState({
+            notify: {
+                show: true,
+                notificationMessage: msg,
+                variant: "success"
+            }
+        });
         setTimeout(() => {
             this.setState({ notify: false });
         }, 3000);
@@ -78,7 +92,7 @@ class Login extends Component {
         return this.state.authenticated ? <Redirect to="/dashboard" /> :
             <Wrapper>
                 <CardAuth>
-                    <PopUp show={this.state.notify} msg={this.state.notificationMessage} />
+                    <PopUp show={this.state.notify.show} msg={this.state.notify.notificationMessage} variant={this.state.notify.variant} />
                     <LogoImg submiting={this.state.loading}>
                         <Logo src={logo} alt="Livro logo TAKEBOOK" width="200" height="200" />
                         <AppName src={logo} alt="Livro logo TAKEBOOK" />

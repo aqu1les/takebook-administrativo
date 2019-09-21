@@ -92,7 +92,7 @@ export const LogoImg = styled.div`
     animation: ${fade} 1000ms;
     ${props =>
         props.submiting === true && css`
-            animation: ${rotate} 500ms, infinite;
+            animation: ${rotate} 1s infinite ease-in-out;
         `
     }
 `;
