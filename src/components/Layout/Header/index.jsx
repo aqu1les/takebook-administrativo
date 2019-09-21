@@ -7,7 +7,8 @@ import { Header } from "./style";
 export default class header extends Component {
     state = {
         logout: false,
-        user_name: ""
+        user_name: "",
+        avatar: ""
     };
     componentDidMount() {
         const user = JSON.parse(localStorage.getItem("user_info"));
@@ -15,6 +16,7 @@ export default class header extends Component {
             0,
             1
         )}.`;
+        this.setState({ avatar: user.avatar_url ? user.avatar_url : defaultProfile });
         this.setState({ user_name: userName });
         document
             .querySelector("main")
@@ -86,7 +88,7 @@ export default class header extends Component {
                             </li>
                         </ul>
                         <img
-                            src={defaultProfile}
+                            src={this.state.avatar}
                             alt="Foto padrão dos usuários"
                             title="Imagem do usuário"
                             id="ProfilePic"
