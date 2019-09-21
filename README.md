@@ -15,11 +15,11 @@ Esse projeto foi criado usando [Create React App](https://github.com/facebook/cr
 
 ## Iniciando o projeto
 
-### Para iniciar o projeto execute o comando `npm start` ou `yarn start`. <br>
+Para iniciar o projeto execute o comando `npm start` ou `yarn start`. <br>
 
-### Acesse [http://localhost:3000](http://localhost:3000) para ver o projeto pelo browser.<br>
+Acesse [http://localhost:3000](http://localhost:3000) para ver o projeto pelo browser.<br>
 
-### A página vai atualizar caso você edite algum arquivo.<br>
+A página vai atualizar caso você edite algum arquivo.<br>
 
 ## Estrutura de pastas
 
@@ -31,7 +31,7 @@ Esse projeto foi criado usando [Create React App](https://github.com/facebook/cr
 
 ## Rotas
 
-### As rotas se encontram no arquivo `src/routes.js`, e nela se encontra todas as páginas renderizadas em sua respectiva rota.
+### As rotas se encontram no arquivo `src/routes.js`, e nele se encontra todas as páginas renderizadas em sua respectiva rota.
 
 ## Testes
 
@@ -41,7 +41,7 @@ Ao acrescentar uma função/funcionalidade, deverá ser criado obrigatoriamente 
 
 Acesse [rodando testes](https://facebook.github.io/create-react-app/docs/running-tests) para informações sobre testes.<br>
 
-## Tecnologias/Dependências utilizadas.
+## Tecnologias/Dependências utilizadas
 
 -   [x] React.js
 -   [x] Jest
