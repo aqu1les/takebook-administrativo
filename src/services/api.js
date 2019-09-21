@@ -13,9 +13,11 @@ api.interceptors.request.use(config => {
 });
 
 api.interceptors.response.use(response => response,
-    error => {
-        const { status } = error.response;
+    err => {
+        const { status, data } = err.response;
         if (status === 401) {
+            if (data.error === "Incorrect Password") return "Senha Inválida!";
+            else if (data.error === "User not found") return "E-mail inválido!";
             localStorage.removeItem("user_info");
             sessionStorage.removeItem("authKey");
             return window.location.pathname = "/login";
