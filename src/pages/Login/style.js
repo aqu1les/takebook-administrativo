@@ -1,5 +1,9 @@
 import styled, { keyframes, css } from 'styled-components';
-const width920 = "@media only screen and (max-width: 920px)"
+import leftBottom from '../../assets/login/left-bottom.svg';
+import bottomCenter from '../../assets/login/bottom-center.svg';
+import topRight from '../../assets/login/top-right.svg';
+
+const width920 = "@media only screen and (max-width: 920px)";
 
 const fade = keyframes`
     from {
@@ -9,27 +13,46 @@ const fade = keyframes`
         opacity: 1;
     }
 `
+const rotate = keyframes`
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+`
 const shake = keyframes`
     0% {
         transform: translateX(0);
     }
-    50% {
-        transform: translateX(100);
+    35% {
+        transform: translateX(-20px);
+    }
+    70% {
+        transform: translateX(20px);
     }
     100% {
         transform: translateX(0);
     }
 `
-export const Container = styled.div`
+export const Wrapper = styled.div`
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url(${leftBottom}), url(${bottomCenter}), url(${topRight});
+    background-size: 480px, 480px, 480px;
+    background-position: left bottom, center bottom, right top;
+    background-repeat: no-repeat;
     ${width920} {
-        background-color: #fff;
-        background-image: none;
+        width: 100vw;
+        height: 100vh;
+        background-color: #FFF;
+        background-position: left bottom, right bottom, right top;
+        background-size: 200px;
     }
+    overflow: hidden;
 `;
 
 export const CardAuth = styled.div`
@@ -44,15 +67,12 @@ export const CardAuth = styled.div`
     justify-content: center;
     box-shadow: 4px 2px 10px 0 rgba(0, 0, 0, 0.1);
     ${width920} {
-        width: 100vw;
         box-shadow: unset;
+        position: relative;
+        width: 100vw;
         flex-direction: column;
-    }
-    ${props =>
-        props.submiting === true && css`
-            border: 1px solid #000;
-        `
-    }
+        background-color: rgba(255, 255, 255, 0);
+    }    
 `;
 
 export const Divider = styled.div`
@@ -70,6 +90,11 @@ export const LogoImg = styled.div`
     display: flex;
     justify-content: center;
     animation: ${fade} 1000ms;
+    ${props =>
+        props.submiting === true && css`
+            animation: ${rotate} 500ms, infinite;
+        `
+    }
 `;
 
 export const Logo = styled.img`
@@ -88,7 +113,7 @@ export const AppName = styled.img`
     display: none;
     ${width920} {
         display: initial;
-        width: 100%;
+        width: 70%;
     }
 `;
 
@@ -123,22 +148,24 @@ export const H2 = styled.h2`
 export const FormGroup = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
     border-radius: 50px;
     flex-direction: row;
     margin: 5px;
     background-color: #fff;
     padding: 3px;
     padding-left: 8px;
+    label {
+        display: flex;
+        align-items: center;
+    }
     ${props =>
         props.error === true && css`
-            animation: ${shake} 200ms;
+            animation: ${shake} 100ms;
             border: 1px solid red;
         `
     }
     ${props =>
         props.error === false && css`
-            animation: ${shake} 200ms;
             border: rgb(100, 168, 207) solid 1.5px;
         `
     }    
@@ -147,7 +174,7 @@ export const FormGroup = styled.div`
 export const Input = styled.input`
     width: 240px;
     border-radius: 14px;
-    border: unset;
+    border: 0;
     padding: 8px;
     font-weight: 500;
     &::-webkit-input-placeholder {
@@ -187,29 +214,6 @@ export const UserIcon = styled.img`
     transition: 200ms transform;
     &:hover {
         transform: scale(1.1);
-    }
-    ${width920} {
-        display: none;
-    }
-`;
-export const BgLogin = styled.div`
-    #left-bottom {
-        position: absolute;
-        left: 0;
-        bottom:0;
-        width: 480px;
-    }
-    #bot-center {
-        position: absolute;
-        width: 480px;
-        bottom: 0;
-        left: 40%;
-    }
-    #top-right {
-        position: absolute;
-        width: 480px;
-        top: 0;
-        right: 0;
     }
     ${width920} {
         display: none;
