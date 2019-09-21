@@ -58,22 +58,29 @@ export const Menu = styled.aside`
         border-left: 2px solid #e3b02f;
     }
     @media only screen and (max-width: 576px) {
-        width: 60px;
-        flex-direction: row;
-        width: 100%;
-        justify-content: center;
         position: fixed;
-        margin-top: 10px;
         bottom: 0;
+        height: 52px;
+        width: 100vw;
+        background: linear-gradient(to right, #004975, #0091e4);
+        flex-direction: row;
+        align-items: center;
         a {
+            width: 25%;
             justify-content: center;
+            img {
+                margin: 0;
+            }
         }
-        a svg {
-            margin-left: 20px;
-            margin-right: 20px;
+        #img, a>p {
+            display: none
         }
-        a p {
-            display: none;
+        a.active {
+            background-color: #0a85ae;
+            border-left: 0;
+            border-top: 2px solid #e3b02f;
+            padding: 0;
+            width: 25%;
         }
     }
 `;

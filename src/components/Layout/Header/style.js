@@ -10,7 +10,10 @@ export const Header = styled.header`
 	width: 260px;
 	top: 0;
 	right: 0;
-	z-index: 10;
+    z-index: 10;
+    @media only screen and (max-width: 576px) {
+        width: 200px;
+    }
 	nav {
 		height: 100%;
 		width: 100%;
@@ -103,6 +106,7 @@ export const Header = styled.header`
 		}
 		#dropdown-content.open {
 			display: block;
-		}
-	}
+        }
+    }
+    
 `;

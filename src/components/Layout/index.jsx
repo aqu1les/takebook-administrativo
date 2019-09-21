@@ -26,8 +26,13 @@ const Main = styled.main`
         margin-right: 30px;
         margin-left: 30px;
         margin-bottom: 20px;
-
         flex-grow: 100;
+        @media only screen and (max-width: 576px) {
+            margin-top: 70px;
+        }
+    }
+    @media only screen and (max-width: 576px) {
+        background-size: 250px, 140px;
     }
 `;
 const Wrapper = styled.div`
