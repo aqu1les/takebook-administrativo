@@ -16,6 +16,20 @@ export default class header extends Component {
             1
         )}.`;
         this.setState({ user_name: userName });
+        document
+            .querySelector("main")
+            .addEventListener("mousedown", this.handleClickOutside);
+        document
+            .querySelector("aside")
+            .addEventListener("mousedown", this.handleClickOutside);
+    }
+    componentWillUnmount() {
+        document
+            .querySelector("main")
+            .addEventListener("mousedown", this.handleClickOutside);
+        document
+            .querySelector("aside")
+            .addEventListener("mousedown", this.handleClickOutside);
     }
     logout = () => {
         sessionStorage.removeItem("authKey");
@@ -28,6 +42,14 @@ export default class header extends Component {
     handleDropdown = () => {
         const dropdown = document.getElementById("dropdown-content");
         dropdown.classList.toggle("open");
+    };
+    handleClickOutside = () => {
+        const dropdown = document.getElementById("dropdown-content");
+        dropdown.classList.forEach(c => {
+            if (c === "open") {
+                dropdown.classList.remove("open");
+            }
+        });
     };
     render() {
         if (this.state.logout) return <Redirect to="/login" />;
@@ -46,10 +68,7 @@ export default class header extends Component {
                             <h5>{this.state.user_name}</h5>
                             <i className="arrow-down"></i>
                         </div>
-                        <ul
-                            id="dropdown-content"
-                            onMouseLeave={this.handleDropdown}
-                        >
+                        <ul id="dropdown-content">
                             <li onClick={this.handleRedirectProfile}>
                                 <NavLink to="/me">Perfil</NavLink>
                             </li>
