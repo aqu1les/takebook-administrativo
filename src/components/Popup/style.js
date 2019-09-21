@@ -25,11 +25,11 @@ const disappear = keyframes`
 `;
 export const PopUp = styled.div`
     position: absolute;
+    background-color: ${props => props.variant === "danger" ? 'rgb(255, 10, 60)' : 'rgb(0, 150, 0)'};
     top: 20px;
     right: 0;
     width: 220px;
     height: 50px;
-    background-color: rgb(255, 10, 60);
     border-radius: 15px 0px 0px 15px;
     box-shadow: 4px 2px 10px 0 rgba(0, 0, 0, 0.1);
     color: #FFF;
