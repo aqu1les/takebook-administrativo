@@ -11,12 +11,16 @@ export default class header extends Component {
         avatar: ""
     };
     componentDidMount() {
+        if (!localStorage.getItem("user_info"))
+            return this.setState({ logout: true });
         const user = JSON.parse(localStorage.getItem("user_info"));
         const userName = `${user.first_name} ${user.last_name.substring(
             0,
             1
         )}.`;
-        this.setState({ avatar: user.avatar_url ? user.avatar_url : defaultProfile });
+        this.setState({
+            avatar: user.avatar_url ? user.avatar_url : defaultProfile
+        });
         this.setState({ user_name: userName });
         document
             .querySelector("main")
@@ -89,7 +93,7 @@ export default class header extends Component {
                         </ul>
                         <img
                             src={this.state.avatar}
-                            alt="Foto padrão dos usuários"
+                            alt="Foto do usuário"
                             title="Imagem do usuário"
                             id="ProfilePic"
                         />

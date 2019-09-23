@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const Loading = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;

@@ -30,7 +30,8 @@ export const Header = styled.header`
 		#ProfilePic {
 			width: 36px;
 			height: 36px;
-			margin-right: 20px;
+            margin-right: 20px;
+            border-radius: 80px;
 			&:hover {
 				box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
 				border-radius: 50px;

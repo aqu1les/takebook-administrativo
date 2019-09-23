@@ -45,8 +45,11 @@ class Login extends Component {
             email: this.state.email,
             password: this.state.password
         });
-
-        if (response === "Senha Inválida!") {
+        if (!response) {
+            this.notifyError("Erro no servidor!");
+            return this.setState({ loading: false });
+        }
+        else if (response === "Senha Inválida!") {
             this.notifyError("Senha inválida!");
             return this.setState({ passwordError: true, loading: false });
         } else if (response === "E-mail inválido!") {
@@ -60,6 +63,7 @@ class Login extends Component {
         setTimeout(() => {
             if (response.data) return this.setState({ authenticated: true });
         }, 3000);
+
     }
 
     handleChange = e => {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Wrapper } from "./style";
+import { Wrapper, Loading } from "./style";
 import api from "../../services/api";
 import axios from 'axios';
 
@@ -28,17 +28,19 @@ export default class Dashboard extends Component {
             const weeklyBooks = await api.get("/books/week", { cancelToken: this.signal.token });
             const totalReports = await api.get("/reports", { cancelToken: this.signal.token });
             const totalAdverts = await api.get("/books/validate", { cancelToken: this.signal.token });
-            if (totalUsers || totalBooks || weeklyBooks || totalReports || totalAdverts) {
+            if (totalUsers && totalBooks && weeklyBooks && totalReports && totalAdverts) {
                 return this.setState({
                     totalUsers: totalUsers.data.total,
                     totalBooks: totalBooks.data.total,
                     weeklyBooks: weeklyBooks.data.count,
                     totalReports: totalReports.data.total,
-                    totalAdverts: totalAdverts.data.total
+                    totalAdverts: totalAdverts.data.total,
+                    isLoading: false
                 });
             }
         }
         catch (err) {
+            this.setState({ isLoading: false });
             console.log(err);
         }
     }
@@ -46,10 +48,19 @@ export default class Dashboard extends Component {
         this.signal.cancel('Api is being canceled');
     }
     render() {
-        return (
-            <Wrapper>
-                <h2>Página Inicial</h2>
-            </Wrapper>
-        );
+        let { isLoading } = this.state;
+        if (isLoading) {
+            return (
+                <Loading>
+                    <div className="lds-dual-ring"></div>
+                </Loading>
+            );
+        } else {
+            return (
+                <Wrapper>
+                    <h2>Página Inicial</h2>
+                </Wrapper>
+            );
+        }
     }
 }

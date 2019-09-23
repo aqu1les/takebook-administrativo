@@ -42,7 +42,7 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     background-image: url(${leftBottom}), url(${bottomCenter}), url(${topRight});
-    background-size: 480px, 480px, 480px;
+    background-size: 480px;
     background-position: left bottom, center bottom, right top;
     background-repeat: no-repeat;
     ${width920} {

@@ -27,8 +27,11 @@ const Main = styled.main`
         margin-left: 30px;
         margin-bottom: 20px;
         flex-grow: 100;
+        height: calc(100vh - 70px);
         @media only screen and (max-width: 576px) {
             margin-top: 70px;
+            margin-bottom: 70px;
+            height: calc(100% - 140px);
         }
     }
     @media only screen and (max-width: 576px) {

@@ -22,13 +22,11 @@ export default () => {
                         )
                 }
             />
-            <Layout>
-                <Route path="/dashboard" component={Dashboard} />
-                <Route path="/users" component={Users} />
-                <Route path="/adverts" component={Adverts} />
-                <Route path="/reports" component={Reports} />
-                <Route path="/me" component={Profile} />
-            </Layout>
+            <Route path="/dashboard" render={() => <Layout><Dashboard /></Layout>} />
+            <Route path="/users" render={() => <Layout><Users /></Layout>} />
+            <Route path="/adverts" render={() => <Layout><Adverts /></Layout>} />
+            <Route path="/reports" render={() => <Layout><Reports /></Layout>} />
+            <Route path="/me" render={() => <Layout><Profile /></Layout>} />
             <Route component={() => <h1>Page not found</h1>} />
         </Switch>
     );
