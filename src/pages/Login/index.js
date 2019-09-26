@@ -35,9 +35,18 @@ class Login extends Component {
         e.preventDefault();
         this.setState({ loading: true });
 
-        if (!this.state.email && !this.state.password) return this.setState({ emailError: true, passwordError: true, loading: false });
-        if (!this.state.email) return this.setState({ emailError: true, loading: false });
-        if (!this.state.password) return this.setState({ passwordError: true, loading: false });
+        if (!this.state.email && !this.state.password) {
+            this.notifyError("Preencha os campos!");
+            return this.setState({ emailError: true, passwordError: true, loading: false });
+        }
+        if (!this.state.email) {
+            this.notifyError("Digite o e-mail");
+            return this.setState({ emailError: true, loading: false });
+        }
+        if (!this.state.password) {
+            this.notifyError("Digite a senha");
+            return this.setState({ passwordError: true, loading: false });
+        }
 
         this.setState({ emailError: false, passwordError: false });
 
@@ -53,7 +62,7 @@ class Login extends Component {
             this.notifyError("Senha inválida!");
             return this.setState({ passwordError: true, loading: false });
         } else if (response === "E-mail inválido!") {
-            this.notify("E-mail inválido!");
+            this.notifyError("E-mail inválido!");
             return this.setState({ emailError: true, loading: false });
         }
         this.notifySuccess("Logando...");
