@@ -7,7 +7,8 @@ export const Header = styled.header`
 		`}
 	height: 62px;
 	position: absolute;
-	width: 260px;
+    max-width: 240px;
+    width: 240px;
 	top: 0;
 	right: 0;
     z-index: 10;
@@ -25,8 +26,22 @@ export const Header = styled.header`
 		box-shadow: 1px 1px 16px 0px rgba(0, 0, 0, 0.2);
 		#btnNotification {
 			cursor: pointer;
-			margin-left: 30px;
-		}
+            margin-left: 30px;
+        }
+        #notification_counter {
+            position: absolute;
+            background-color: red;
+            width: 10px;
+            height: 12px;
+            color: #FFF;
+            left: 42px;
+            top: 15px;
+            border-radius: 3px;
+            font-size: 8pt;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 		#ProfilePic {
 			width: 36px;
 			height: 36px;

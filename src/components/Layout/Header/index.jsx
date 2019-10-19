@@ -70,6 +70,7 @@ export default class header extends Component {
                             height="20"
                             id="btnNotification"
                         />
+                        <div id="notification_counter">0</div>
                         <div id="dropdown" onClick={this.handleDropdown}>
                             <h5>{this.state.user_name}</h5>
                             <i className="arrow-down"></i>

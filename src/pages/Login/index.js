@@ -116,7 +116,7 @@ class Login extends Component {
                         <h2>Login</h2>
                         <FormGroup error={this.state.emailError}>
                             <label htmlFor="email_input"><img src={emailIcon} alt="Ícone do e-mail" /></label>
-                            <Input id="email_input" name="email" type="email" onChange={this.handleChange} placeholder="Digite aqui seu e-mail" required={true} />
+                            <Input id="email_input" name="email" type="email" onChange={this.handleChange} placeholder="Digite aqui seu e-mail" required={true} autoFocus={true} />
                         </FormGroup>
                         <FormGroup error={this.state.passwordError}>
                             <label htmlFor="password_input"><img src={passwordIcon} alt="Ícone da senha" /></label>
