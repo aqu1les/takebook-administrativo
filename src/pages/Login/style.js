@@ -72,7 +72,7 @@ export const CardAuth = styled.div`
         width: 100vw;
         flex-direction: column;
         background-color: rgba(255, 255, 255, 0);
-    }    
+    }
 `;
 
 export const Divider = styled.div`

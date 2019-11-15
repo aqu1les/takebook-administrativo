@@ -6,6 +6,7 @@ import Adverts from "./pages/Adverts";
 import Users from "./pages/Users";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
+import notFound from "./pages/404-not-found";
 import Layout from "./components/Layout";
 
 export default () => {
@@ -27,7 +28,7 @@ export default () => {
             <Route path="/adverts" render={() => <Layout><Adverts /></Layout>} />
             <Route path="/reports" render={() => <Layout><Reports /></Layout>} />
             <Route path="/me" render={() => <Layout><Profile /></Layout>} />
-            <Route component={() => <h1>Page not found</h1>} />
+            <Route component={notFound} />
         </Switch>
     );
 };
