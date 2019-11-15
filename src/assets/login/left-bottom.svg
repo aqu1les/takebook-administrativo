@@ -59,7 +59,7 @@
         <path class="cls-1" d="M348.78,693.19,184,592V693.19Z"/>
         <path class="cls-2" d="M184,693.19V582L3.07,693.11Z"/>
         <path class="cls-5" d="M281,523l87,53.5L281,630Zm0-.5L368,469V576Z"/>
-        <path d="M368,469.5,455,416V523Z"/>
+        <path class="cls-2" d="M368,469.5,455,416V523Z"/>
         <path class="cls-1" d="M281,415.5,368,362V469Z"/>
         <path class="cls-4" d="M455,415.5,368,469V362Z"/>
         <path class="cls-6" d="M368,362.5,455,309V416Z"/>
