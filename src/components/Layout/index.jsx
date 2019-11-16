@@ -29,13 +29,16 @@ const Main = styled.main`
         flex-grow: 100;
         height: calc(100vh - 70px);
         @media only screen and (max-width: 576px) {
-            margin-top: 70px;
-            margin-bottom: 70px;
-            height: calc(100% - 140px);
+            margin: 70px 0 0 0;
+            padding: 5px;
+            max-width: 100vw;
+            height: calc(100vh - 140px);
         }
     }
     @media only screen and (max-width: 576px) {
         background-size: 250px, 140px;
+        height: 100vh;
+        max-width: 100vw;
     }
 `;
 const Wrapper = styled.div`

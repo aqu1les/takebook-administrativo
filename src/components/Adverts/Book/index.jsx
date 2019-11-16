@@ -8,11 +8,11 @@ export default function Book(props) {
             <header>
                 <img src={covers_url[0].url} alt="Capa do livro" />
                 <div>
-                    <h1>{title}</h1>
-                    <h2>{author}</h2>
+                    <h2>{title}</h2>
+                    <h3>{author}</h3>
                 </div>
             </header>
-            <button>> Ver</button>
+            <button onClick={props.onClick}>> Ver</button>
         </Card>
     );
 }
