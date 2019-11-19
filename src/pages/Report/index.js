@@ -4,7 +4,7 @@ export default class Report extends Component {
     render() {
         return (
             <div>
-                <h2>Reports</h2>
+                <h2>Denúncias</h2>
             </div>
         );
     }

@@ -11,6 +11,7 @@ export const Card = styled.div`
     flex-direction: column;
     margin: 10px;
     position: relative;
+    background-color: #FFFFFF;
     
     header {
         display: flex;
