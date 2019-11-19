@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const width920 = "@media only screen and (max-width: 920px)";
 
@@ -29,7 +29,7 @@ export const Card = styled.div`
     }
 `;
 export const Header = styled.header`
-    height: 15%;
+    height: 13%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -41,9 +41,59 @@ export const Main = styled.main`
     h2 {
         margin-bottom: 10px;
     }
+    ${width920} {
+        height: 75%;        
+    }
+`;
+export const Footer = styled.footer`
+    height: 7%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ${width920} {
+        height: 12%;     
+    }
+    ul {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        list-style: none;
+        li button {
+            background-color: none;
+            border: none;
+            padding: 8px;
+            border-radius: 8px;
+            min-width: 28px;
+            color: #2bc1f3;
+            background-color: #FFFFFF;
+            cursor: pointer;
+            &:hover {
+                text-decoration: underline;
+            }
+            &:active, &:focus {
+                outline: none;
+            }
+        }
+        li button:disabled {
+            cursor: not-allowed;
+            background-color: #ebebe4;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        li button.active {
+            cursor: not-allowed;
+            background-color: #2bc1f3;
+            color: #FFFFFF;
+        }
+        
+    }
 `;
 export const Content = styled.section`
-    height: 95%;
+    height: 92%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -85,12 +135,14 @@ export const ModalCard = styled.section`
 `
 export const ModalLeftSide = styled.div`
     height: 100%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     div#covers {
-        div.slide {
+        padding: 5px;
+        div.slide {            
             position: relative;
             width: 200px;
             height: 300px;
@@ -110,12 +162,15 @@ export const ModalLeftSide = styled.div`
                 height: 20px;
                 border-radius: 100px;
                 border: none;
+                cursor: pointer;
             }
         }        
     }    
-    div img {
-        height: 100px;
-        width: 100px;
+    div#buttons img {
+        height: 90px;
+        width: 90px;
+        cursor: pointer;
+        border-radius: 100px;
     }
 `
 export const ModalDivider = styled.div`
@@ -125,4 +180,85 @@ export const ModalDivider = styled.div`
 `
 export const ModalRightSide = styled.div`
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    form {
+        display: flex;
+        flex-direction: column;
+        height: 80%;
+        width: 80%;
+        label {
+            color: #6D6E6E;
+            font-size: 16px;
+        }
+        input, textarea, select {
+            border: 1px solid #E2E4E5;
+            border-radius: 10px;
+            height: 28px;
+            max-height: 46px;
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            &:focus, &:active {
+                border: 1px solid #2BC1F3;
+                outline: none;
+            }
+        }
+        .row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between
+            div {
+                display: flex;
+                flex-direction: column;
+                select {
+                    height: 46px;
+                }
+                input, select {
+                    min-width: 120px;
+                }
+            }
+        }
+        #categories {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            div {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                input {
+                    width: 20px;
+                    height: 20px;
+                }
+                label {
+                    margin: 0 5px;
+                }
+            }
+        }
+        textarea {
+            max-height: 70px;
+            height: 70px;
+        }
+    }
+`
+const fade = keyframes`
+    from {
+        background-image: linear-gradient(to right, #dcdcdc, #dcdcdc);
+    }
+    to {
+        background-image: linear-gradient(to right, #FFFFFF, #FFF);
+    }
+`
+export const Holder = styled.div`
+    width: 280px;
+    height: 130px;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.16);
+    border-radius: 12px;
+    padding: 5px;
+    margin: 10px;
+    animation: ${fade} 2s infinite;
 `

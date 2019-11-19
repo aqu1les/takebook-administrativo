@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Wrapper, Card, Header, Main, Content, ModalCard, ModalLeftSide, ModalDivider, ModalRightSide } from "./style";
+import { Wrapper, Card, Header, Main, Content, Footer, ModalCard, ModalLeftSide, ModalDivider, ModalRightSide, Holder } from "./style";
 import api from "../../services/api";
 import Book from "../../components/Adverts/Book";
 import SearchField from "../../components/SearchField";
@@ -11,22 +11,30 @@ export default class Adverts extends Component {
 
     state = {
         adverts: [],
+        advPages: {
+            current_page: "",
+            last_page: "",
+            prev_page_url: "",
+            next_page_url: ""
+        },
         filtered: [],
         filterByTitle: "",
         modalOpen: false,
         modalBook: {
-            id: null,
-            author: null,
-            count_likes: null,
+            id: "",
+            author: "",
+            count_likes: "",
             covers_url: [{
-                id: null,
-                url: null
+                id: "",
+                url: ""
             }],
-            description: null,
-            price: null,
-            title: null,
+            description: "",
+            price: "",
+            title: "",
             user: {}
-        }
+        },
+        categories: [],
+        loading: true
     }
 
     componentDidMount() {
@@ -39,10 +47,13 @@ export default class Adverts extends Component {
 
     loadData = async () => {
         const response = await api.get("/books/validate");
-        console.log(response.data);
+        const categoriesResponse = await api.get("/categories");
         this.setState({
             adverts: this.state.adverts.concat(response.data.data),
-            filtered: this.state.adverts.concat(response.data.data)
+            advPages: { ...response.data, data: null },
+            filtered: this.state.adverts.concat(response.data.data),
+            categories: this.state.categories.concat(categoriesResponse.data.data),
+            loading: false
         });
     }
     handleChange = e => {
@@ -72,29 +83,65 @@ export default class Adverts extends Component {
         return this.changeCover();
     }
     closeModal = () => {
+        this.changeCover();
         return this.setState({ modalOpen: false });
     }
     changeCover = (index) => {
         const x = document.getElementsByClassName("slide");
         let slideIndex = index;
+        for (let i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
         if (index >= 0) {
             if (index >= x.length) slideIndex = 0;
-            for (let i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-            }
+
             return x[slideIndex].style.display = "block";
         } else {
             if (x[0]) x[0].style.display = "block";
         }
     }
+    acceptBook = async () => {
+        const book = this.state.modalBook;
+        book.status = 1;
+        const { data } = await api.put(`/books/${this.state.modalBook.id}`, book);
+        this.setState({
+            modalOpen: false,
+            adverts: this.state.adverts.filter(ad => ad.id !== data.id),
+            filtered: this.state.adverts.filter(ad => ad.id !== data.id)
+        });
+    }
+    getData = async (e, page) => {
+        this.setState({ loading: true });
+        const response = await api.get(`/books/validate?page=${page}`);
+        this.setState({
+            adverts: response.data.data,
+            advPages: { ...response.data, data: null },
+            filtered: response.data.data,
+            loading: false
+        });
+    }
 
     render() {
+        const holder = [];
+        const paginate = [];
         let body = this.state.filtered.length > 0 ?
             this.state.filtered.map(ad => (
                 <Book book={ad} key={ad.id} onClick={(e) => this.openModal(ad.id, e)} />
             ))
             :
             "Nenhum livro foi encontrado!";
+
+        for (let i = 1; i <= this.state.advPages.last_page; i++) {
+            const li = <li key={i}>
+                <button onClick={(e) => this.getData(e, i)} className={this.state.advPages.current_page === i ? "active" : ""} disabled={this.state.advPages.current_page === i ? true : false}>{i}</button>
+            </li>;
+            paginate.push(li);
+        }
+
+        for (let i = 1; i <= 12; i++) {
+            const bookCard = <Holder key={i} />;
+            holder.push(bookCard);
+        }
 
         return (
             <Wrapper>
@@ -106,9 +153,16 @@ export default class Adverts extends Component {
                     <Main>
                         <h2>Resultado</h2>
                         <Content>
-                            {body}
+                            {this.state.loading ? holder : body}
                         </Content>
                     </Main>
+                    <Footer>
+                        <ul>
+                            <li><button onClick={(e) => this.getData(e, 1)} disabled={!this.state.advPages.prev_page_url}>First Page</button></li>
+                            {paginate}
+                            <li><button onClick={(e) => this.getData(e, this.state.advPages.last_page)} disabled={!this.state.advPages.next_page_url}>Last Page</button></li>
+                        </ul>
+                    </Footer>
                 </Card>
                 <Modal open={this.state.modalOpen} click={this.closeModal}>
                     <ModalCard>
@@ -121,13 +175,47 @@ export default class Adverts extends Component {
                                     </div>
                                 ))}
                             </div>
-                            <div>
-                                <img src={refuse} alt="Refuse Button" />
-                                <img src={accept} alt="Accept Button" />
+                            <div id="buttons">
+                                <img src={refuse} alt="Refuse Button" onClick={() => { }} title="Recusar" />
+                                <img src={accept} alt="Accept Button" onClick={this.acceptBook} title="Aceitar" />
                             </div>
                         </ModalLeftSide>
                         <ModalDivider />
-                        <ModalRightSide></ModalRightSide>
+                        <ModalRightSide>
+                            <form>
+                                <label htmlFor="title">Título do anúncio</label>
+                                <input type="text" id="title" value={this.state.modalBook.title} disabled />
+
+                                <label htmlFor="author">Autor do livro</label>
+                                <input type="text" id="author" value={this.state.modalBook.author} disabled />
+
+                                <div className="row">
+                                    <div>
+                                        <label htmlFor="status">Estado</label>
+                                        <select id="status" disabled value={this.state.modalBook.status}>
+                                            <option value="0" >Novo</option>
+                                            <option value="1">Usado</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label htmlFor="price">Preço</label>
+                                        <input id="price" value={this.state.modalBook.price} disabled />
+                                    </div>
+                                </div>
+
+                                <label htmlFor="categories">Categorias</label>
+                                <div id="categories">
+                                    {this.state.categories.map(cat => (
+                                        <div key={cat.id}>
+                                            <input type="checkbox" id={cat.name} />
+                                            <label htmlFor={cat.name}>{cat.name}</label>
+                                        </div>
+                                    ))}
+                                </div>
+                                <label>Descrição</label>
+                                <textarea value={this.state.modalBook.description} disabled></textarea>
+                            </form>
+                        </ModalRightSide>
                     </ModalCard>
                 </Modal>
             </Wrapper>
