@@ -36,7 +36,6 @@ export default class Adverts extends Component {
         categories: [],
         loading: true
     }
-
     componentDidMount() {
         try {
             this.loadData();
@@ -44,7 +43,6 @@ export default class Adverts extends Component {
             console.log(err);
         }
     }
-
     loadData = async () => {
         const response = await api.get("/books/validate");
         const categoriesResponse = await api.get("/categories");
