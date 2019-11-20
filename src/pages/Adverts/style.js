@@ -132,6 +132,13 @@ export const ModalCard = styled.section`
     justify-content: space-around;
     position: absolute;
     z-index: 2;
+
+    ${width920} {
+        flex-direction: column;
+        width: 100vw;
+        height: 80%;
+        border-radius: 0;
+    }
 `
 export const ModalLeftSide = styled.div`
     height: 100%;
@@ -140,6 +147,7 @@ export const ModalLeftSide = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
     div#covers {
         padding: 5px;
         div.slide {            
@@ -163,6 +171,13 @@ export const ModalLeftSide = styled.div`
                 border-radius: 100px;
                 border: none;
                 cursor: pointer;
+                ${width920} {
+                    left: 50px;
+                }                
+            }
+            ${width920} {
+                width: 120px;
+                height: 200px;
             }
         }        
     }    
@@ -171,12 +186,25 @@ export const ModalLeftSide = styled.div`
         width: 90px;
         cursor: pointer;
         border-radius: 100px;
+        ${width920} {
+            height: 45px;
+            width: 45px;
+        }
+    }
+    ${width920} {
+        height: fit-content;
+        width: 100%;
+        margin-top: 20px;
+        box-shadow: 1px 6px 8px rgba(0, 0, 0, 0.16);
     }
 `
 export const ModalDivider = styled.div`
     height: 430px;
     width: 0;
     border: 1px solid #C1C3C4;
+    ${width920} {
+        display: none;
+    }
 `
 export const ModalRightSide = styled.div`
     height: 100%;
@@ -184,6 +212,7 @@ export const ModalRightSide = styled.div`
     align-items: center;
     justify-content: center;
     width: 50%;
+    padding: 10px 0 10px 0;
     form {
         display: flex;
         flex-direction: column;
@@ -242,6 +271,32 @@ export const ModalRightSide = styled.div`
         textarea {
             max-height: 70px;
             height: 70px;
+        }
+    }
+    ${width920} {
+        height: 100vh;
+        width: 100%;
+        overflow-y: scroll;
+        justify-content: center;
+        align-items: flex-start;
+        ::-webkit-scrollbar {
+            border-radius: 50px;
+            width: 5px;     
+        }
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 1px grey; 
+            border-radius: 50px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2BC1F3; 
+            border-radius: 10px;
+            margin: 50px 0;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            opacity: 0.6;
+        }
+        form {
+            min-height: 400px;
         }
     }
 `

@@ -145,6 +145,9 @@ export const Li = styled.li`
     margin: 10px 0;
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.16);
     padding: 5px;
+    &:hover {
+        opacity: 0.8;
+    }
     p, img {
         margin: 0 10px;
     }
@@ -157,6 +160,8 @@ export const Li = styled.li`
             border: unset;
             font-size: 16px;
             cursor: pointer;
+            padding: 5px;
+            border-radius: 20px;
             span {
                 img {
                     width: 15px;
@@ -168,12 +173,21 @@ export const Li = styled.li`
                 align-items: center;
                 justify-content: center;
             }
+            &:active, &:focus {
+                outline: none;
+            }
         }
         button:first-child {
             color: red;
+            &:hover {
+                border: 0.5px solid red;
+            }
         }
         button:last-child {
             color: #2BC1F3;
+            &:hover {                
+                border: 0.5px solid #2BC1F3;
+            }
         }
     }    
 `
@@ -213,6 +227,10 @@ export const ModalCard = styled.section`
         width: 70%;
         border: 0.5px solid #C1C3C42f;
     }
+    ${width920} {
+        width: 100%;
+        height: 80%;
+    }
 `
 
 export const ModalForm = styled.form`
@@ -220,6 +238,8 @@ export const ModalForm = styled.form`
     display: flex;
     width: 85%;
     flex-direction: column;
+    overflow-y: scroll;
+
     h2 {
         font-weight: 400;
         font-size: 24px;
@@ -227,7 +247,7 @@ export const ModalForm = styled.form`
     }
     .form-group {
         margin: 5px;
-        width: 100%;
+        width: 98%;
         display: flex;
         flex-direction: column;
         input {
@@ -265,5 +285,29 @@ export const ModalForm = styled.form`
         &:hover {
             opacity: 0.6;
         }
+        &:active, &:focus {
+            outline: none;
+        }
+    }   
+
+    ::-webkit-scrollbar {
+        border-radius: 50px;
+        width: 5px;     
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 1px grey; 
+        border-radius: 50px;
+    }    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #2BC1F3; 
+        border-radius: 10px;
+        margin: 50px 0;
+    }    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        opacity: 0.6;
     }
 `

@@ -211,10 +211,6 @@ export const SendButton = styled.button`
 export const UserIcon = styled.img`
     border-radius: 100px;
     box-shadow: 4px 2px 10px 0 rgba(0, 0, 0, 0.1);
-    transition: 200ms transform;
-    &:hover {
-        transform: scale(1.1);
-    }
     ${width920} {
         display: none;
     }
