@@ -100,8 +100,18 @@ export default class Adverts extends Component {
     }
     acceptBook = async () => {
         const book = this.state.modalBook;
-        book.status = 1;
-        const { data } = await api.put(`/books/${this.state.modalBook.id}`, book);
+        book.status_id = 2;
+        const { data } = await api.put(`/books/${this.state.modalBook.id}/status`, book);
+        this.setState({
+            modalOpen: false,
+            adverts: this.state.adverts.filter(ad => ad.id !== data.id),
+            filtered: this.state.adverts.filter(ad => ad.id !== data.id)
+        });
+    }
+    refuseBook = async () => {
+        const book = this.state.modalBook;
+        book.status_id = 3;
+        const { data } = await api.put(`/books/${this.state.modalBook.id}/status`, book);
         this.setState({
             modalOpen: false,
             adverts: this.state.adverts.filter(ad => ad.id !== data.id),
@@ -174,7 +184,7 @@ export default class Adverts extends Component {
                                 ))}
                             </div>
                             <div id="buttons">
-                                <img src={refuse} alt="Refuse Button" onClick={() => { }} title="Recusar" />
+                                <img src={refuse} alt="Refuse Button" onClick={this.refuseBook} title="Recusar" />
                                 <img src={accept} alt="Accept Button" onClick={this.acceptBook} title="Aceitar" />
                             </div>
                         </ModalLeftSide>
