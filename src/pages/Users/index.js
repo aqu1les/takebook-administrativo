@@ -3,6 +3,7 @@ import { Wrapper, Card, Header, Main, Content, Footer, Li, ModalCard, ModalForm 
 import SearchField from "../../components/SearchField";
 import Modal from "../../components/Modal";
 import PopUp from "../../components/Popup";
+import Loading from "../../components/Loading";
 import api from "../../services/api";
 import userIcon from "../../assets/icons/defaultProfile.svg";
 import deleteIcon from "../../assets/icons/delete.svg";
@@ -13,6 +14,7 @@ export default class Users extends Component {
 
     state = {
         users: [],
+        nameSearch: "",
         filtered: [],
         usersPages: [],
         modalOpen: false,
@@ -28,7 +30,7 @@ export default class Users extends Component {
             first_name: "",
             last_name: ""
         },
-        loading: true,
+        isLoading: true,
         notify: {}
     }
     componentDidMount() {
@@ -44,7 +46,7 @@ export default class Users extends Component {
             users: this.state.users.concat(response.data.data),
             usersPages: { ...response.data, data: null },
             filtered: this.state.users.concat(response.data.data),
-            loading: false
+            isLoading: false
         });
     }
     handleChange = e => {
@@ -53,6 +55,24 @@ export default class Users extends Component {
                 ...this.state.modalUser,
                 [e.target.name]: e.target.value
             }
+        });
+    }
+    handleSearch = (e) => {
+        if (!e.target.value) {
+            return this.setState({
+                nameSearch: e.target.value,
+                filtered: this.state.users
+            });
+        }
+        return this.setState({
+            nameSearch: e.target.value,
+            filtered: this.state.users.filter(
+                (user) => {
+                    return user.first_name.toLowerCase()
+                        .indexOf(this.state.nameSearch.toLowerCase()) !== -1 || user.last_name.toLowerCase()
+                            .indexOf(this.state.nameSearch.toLowerCase()) !== -1;
+                }
+            )
         });
     }
     openModal = (id, e) => {
@@ -66,10 +86,9 @@ export default class Users extends Component {
     }
     updateUser = async (e) => {
         e.preventDefault();
-        console.log(this.state.modalUser);
         const response = await api.put(`/users/${this.state.modalUser.id}`, this.state.modalUser);
         !response ? this.notifyError("Erro no servidor!") : this.notifySuccess("Usuário atualizado!");
-        return this.setState({ modalOpen: false });
+        return this.setState({ modalUser: response.data, users: this.state.users.map(user => user.id === this.state.modalUser.id ? user = response.data : user) });
     }
     notifyError(msg) {
         this.setState({ notify: { show: true, notificationMessage: msg, variant: "danger" } });
@@ -99,43 +118,47 @@ export default class Users extends Component {
                 paginate.push(li);
             }
         }
-
         return (
             <Wrapper>
                 <h2>Usuários</h2>
                 <Card>
                     <Header>
-                        <SearchField />
+                        <SearchField onChange={this.handleSearch} onClick={this.searchUser} />
                     </Header>
                     <Main>
-                        <h2>Resultado</h2>
-                        <Content>
-                            <ul>
-                                {this.state.filtered.length > 0 ?
-                                    this.state.filtered.map(user => (
-                                        <Li key={user.id}>
-                                            <p>{user.id}</p>
-                                            <img src={user.avatar_url ? user.avatar_url : userIcon} alt="" />
-                                            <p>{user.first_name} {user.last_name}</p>
-                                            <div>
-                                                <button onClick={(e) => this.removeUser(user.id, e)}>
-                                                    <span>
-                                                        <img src={deleteIcon} alt="" />
-                                                        Excluir
-                                                    </span>
-                                                </button>
-                                                <button onClick={(e) => this.openModal(user.id, e)}>
-                                                    <span>
-                                                        <img src={updateIcon} alt="" />
-                                                        Editar
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </Li>
-                                    )) : "Nenhum usuário está cadastrado!"
-                                }
-                            </ul>
-                        </Content>
+                        {this.state.isLoading ?
+                            <Loading /> :
+                            <>
+                                <h2>Resultado</h2>
+                                <Content>
+                                    <ul>
+                                        {this.state.filtered.length > 0 ?
+                                            this.state.filtered.map(user => (
+                                                <Li key={user.id}>
+                                                    <p>{user.id}</p>
+                                                    <img src={user.avatar_url ? user.avatar_url : userIcon} alt="" />
+                                                    <p>{user.first_name} {user.last_name}</p>
+                                                    <div>
+                                                        <button onClick={(e) => this.removeUser(user.id, e)}>
+                                                            <span>
+                                                                <img src={deleteIcon} alt="" />
+                                                                Excluir
+                                                        </span>
+                                                        </button>
+                                                        <button onClick={(e) => this.openModal(user.id, e)}>
+                                                            <span>
+                                                                <img src={updateIcon} alt="" />
+                                                                Editar
+                                                        </span>
+                                                        </button>
+                                                    </div>
+                                                </Li>
+                                            )) : "Nenhum usuário está cadastrado!"
+                                        }
+                                    </ul>
+                                </Content>
+                            </>
+                        }
                     </Main>
                     <Footer>
                         <ul>

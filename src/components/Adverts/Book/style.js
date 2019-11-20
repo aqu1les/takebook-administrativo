@@ -26,6 +26,7 @@ export const Card = styled.div`
             left: 15px;
             bottom: 0;
             top: 15px;
+            border-radius: 8px;
         }
         div {
             margin-left: 101px;

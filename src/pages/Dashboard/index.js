@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Wrapper, Loading } from "./style";
+import { Wrapper } from "./style";
+import Loading from "../../components/Loading";
 import api from "../../services/api";
 import axios from 'axios';
 
@@ -51,9 +52,7 @@ export default class Dashboard extends Component {
         let { isLoading } = this.state;
         if (isLoading) {
             return (
-                <Loading>
-                    <div className="lds-dual-ring"></div>
-                </Loading>
+                <Loading />
             );
         } else {
             return (

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Wrapper, Card, Header, Main, Content, Footer, ModalCard, ModalLeftSide, ModalDivider, ModalRightSide, Holder } from "./style";
+import { Wrapper, Card, Header, Main, Content, Footer, ModalCard, ModalLeftSide, ModalDivider, ModalRightSide } from "./style";
 import api from "../../services/api";
 import Book from "../../components/Adverts/Book";
 import SearchField from "../../components/SearchField";
+import Loading from "../../components/Loading";
 import Modal from "../../components/Modal";
 import accept from "../../assets/icons/accept.svg";
 import refuse from "../../assets/icons/refuse.svg";
@@ -34,7 +35,7 @@ export default class Adverts extends Component {
             user: {}
         },
         categories: [],
-        loading: true
+        isLoading: true
     }
     componentDidMount() {
         try {
@@ -51,7 +52,7 @@ export default class Adverts extends Component {
             advPages: { ...response.data, data: null },
             filtered: this.state.adverts.concat(response.data.data),
             categories: this.state.categories.concat(categoriesResponse.data.data),
-            loading: false
+            isLoading: false
         });
     }
     handleChange = e => {
@@ -119,18 +120,17 @@ export default class Adverts extends Component {
         });
     }
     getData = async (e, page) => {
-        this.setState({ loading: true });
+        this.setState({ isLoading: true });
         const response = await api.get(`/books/validate?page=${page}`);
         this.setState({
             adverts: response.data.data,
             advPages: { ...response.data, data: null },
             filtered: response.data.data,
-            loading: false
+            isLoading: false
         });
     }
 
     render() {
-        const holder = [];
         const paginate = [];
         let body = this.state.filtered.length > 0 ?
             this.state.filtered.map(ad => (
@@ -146,11 +146,6 @@ export default class Adverts extends Component {
             paginate.push(li);
         }
 
-        for (let i = 1; i <= 12; i++) {
-            const bookCard = <Holder key={i} />;
-            holder.push(bookCard);
-        }
-
         return (
             <Wrapper>
                 <h2 id="page">Anúncios</h2>
@@ -159,10 +154,14 @@ export default class Adverts extends Component {
                         <SearchField onChange={this.handleChange} onClick={this.searchAdvert} />
                     </Header>
                     <Main>
-                        <h2>Resultado</h2>
-                        <Content>
-                            {this.state.loading ? holder : body}
-                        </Content>
+                        {this.state.isLoading ?
+                            <Loading /> : <>
+                                <h2>Resultado</h2>
+                                <Content>
+                                    {body}
+                                </Content>
+                            </>
+                        }
                     </Main>
                     <Footer>
                         <ul>
@@ -215,7 +214,7 @@ export default class Adverts extends Component {
                                 <div id="categories">
                                     {this.state.categories.map(cat => (
                                         <div key={cat.id}>
-                                            <input type="checkbox" id={cat.name} />
+                                            <input type="checkbox" id={cat.name} defaultChecked={true || false} />
                                             <label htmlFor={cat.name}>{cat.name}</label>
                                         </div>
                                     ))}

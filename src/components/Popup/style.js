@@ -2,24 +2,23 @@ import styled, { keyframes } from "styled-components";
 
 const moveLeft = keyframes`
     from {
-        transform: translateX(20px);
+        width: 0;
         opacity: 0;
     }
     75% {
         opacity: 0.5;
     }
     to {
-        transform: translateX(0);
+        width: 220px;
         opacity: 1;
     }
 `;
 const disappear = keyframes`
     from {
-        transform: translateX(0);
         opacity: 1;
     }
     to {
-        transform: translateX(20px);
+        width: 0;
         opacity: 0;
     }
 `;

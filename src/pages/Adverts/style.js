@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 const width920 = "@media only screen and (max-width: 920px)";
 
@@ -164,7 +164,7 @@ export const ModalLeftSide = styled.div`
             button {
                 position: absolute;
                 background-color: #FB8C00;
-                bottom: 0;
+                bottom: 5px;
                 left: 90px;
                 width: 20px;
                 height: 20px;
@@ -299,21 +299,4 @@ export const ModalRightSide = styled.div`
             min-height: 400px;
         }
     }
-`
-const fade = keyframes`
-    from {
-        background-image: linear-gradient(to right, #dcdcdc, #dcdcdc);
-    }
-    to {
-        background-image: linear-gradient(to right, #FFFFFF, #FFF);
-    }
-`
-export const Holder = styled.div`
-    width: 280px;
-    height: 130px;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.16);
-    border-radius: 12px;
-    padding: 5px;
-    margin: 10px;
-    animation: ${fade} 2s infinite;
 `
