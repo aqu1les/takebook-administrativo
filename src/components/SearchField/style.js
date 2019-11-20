@@ -11,6 +11,11 @@ export const Div = styled.div`
     display: flex;
     align-items: center;
     background-color: white;
+    transition: width 100ms;
+
+    &:hover, &:focus {
+        width: 85%;
+    }
 
     input {
         border: none;

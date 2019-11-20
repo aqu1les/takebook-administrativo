@@ -4,6 +4,7 @@ import Menu from "./Menu";
 import styled from "styled-components";
 import topRight from "../../assets/login/top-right.svg";
 import leftBottom from "../../assets/login/left-bottom.svg";
+import rightBottom from "../../assets/right-bottom.svg";
 
 export default function Layout(props) {
     return (
@@ -16,9 +17,9 @@ export default function Layout(props) {
 }
 const Main = styled.main`
     height: 100%;
-    background-image: url(${topRight}), url(${leftBottom});
-    background-position: right top, left bottom;
-    background-size: 300px, 280px;
+    background-image: url(${topRight}), url(${leftBottom}), url(${rightBottom});
+    background-position: right top, left bottom, right bottom;
+    background-size: 300px, 280px, 280px;
     background-repeat: no-repeat;
     flex-grow: 100;
     & > div {

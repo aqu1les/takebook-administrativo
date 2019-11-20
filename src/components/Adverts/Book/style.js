@@ -21,9 +21,9 @@ export const Card = styled.div`
         width: 100%;
         img {
             height: 80%;
-            width: 35%;
+            width: 25%;
             position: absolute;
-            left: 0;
+            left: 15px;
             bottom: 0;
             top: 15px;
         }
@@ -56,7 +56,6 @@ export const Card = styled.div`
         font-weight: 700;
         align-self: center;
         cursor: pointer;
-        transition: transform 500ms, border 0ms;
         padding: 5px;
         border-radius: 20px;
 
@@ -64,7 +63,6 @@ export const Card = styled.div`
             outline: none;
         }
         &:hover {
-            transform: scale(1.1);
             border: 0.5px solid #2BC1F3;
         }
     }
