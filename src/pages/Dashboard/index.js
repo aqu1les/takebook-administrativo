@@ -49,17 +49,11 @@ export default class Dashboard extends Component {
         this.signal.cancel('Api is being canceled');
     }
     render() {
-        let { isLoading } = this.state;
-        if (isLoading) {
-            return (
-                <Loading />
-            );
-        } else {
-            return (
-                <Wrapper>
-                    <h2>Página Inicial</h2>
-                </Wrapper>
-            );
-        }
+        return (
+            <Wrapper>
+                <h2>Página Inicial</h2>
+                {this.state.isLoading ? <Loading /> : ""}
+            </Wrapper>
+        );
     }
 }

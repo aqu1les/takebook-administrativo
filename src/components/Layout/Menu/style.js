@@ -14,6 +14,14 @@ export const Menu = styled.aside`
     flex-direction: column;
     background: linear-gradient(to bottom, #004975, #0091e4);
     align-items: center;
+    * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
     #img {
         background-color: rgba(255, 255, 255, 0.2);
         border-radius: 100px;

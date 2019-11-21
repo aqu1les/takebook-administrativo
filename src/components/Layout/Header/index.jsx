@@ -29,14 +29,6 @@ export default class header extends Component {
             .querySelector("aside")
             .addEventListener("mousedown", this.handleClickOutside);
     }
-    componentWillUnmount() {
-        document
-            .querySelector("main")
-            .addEventListener("mousedown", this.handleClickOutside);
-        document
-            .querySelector("aside")
-            .addEventListener("mousedown", this.handleClickOutside);
-    }
     logout = () => {
         sessionStorage.removeItem("authKey");
         localStorage.removeItem("user_info");
@@ -46,16 +38,19 @@ export default class header extends Component {
         return this.setState({ profile: true });
     };
     handleDropdown = () => {
-        const dropdown = document.getElementById("dropdown-content");
-        dropdown.classList.toggle("open");
+        this.refs.dropdownContent.classList.toggle("open");
+        this.refs.dropdownArrow.classList.toggle("open");
+        this.refs.notifications.classList.remove("open");
     };
     handleClickOutside = () => {
-        const dropdown = document.getElementById("dropdown-content");
-        dropdown.classList.forEach(c => {
-            if (c === "open") {
-                dropdown.classList.remove("open");
-            }
-        });
+        this.refs.dropdownArrow.classList.remove("open");
+        this.refs.dropdownContent.classList.remove("open");
+        this.refs.notifications.classList.remove("open");
+    };
+    openNotifications = () => {
+        this.refs.notifications.classList.toggle("open");
+        this.refs.dropdownContent.classList.remove("open");
+        this.refs.dropdownArrow.classList.remove("open");
     };
     render() {
         if (this.state.logout) return <Redirect to="/login" />;
@@ -63,19 +58,22 @@ export default class header extends Component {
             return (
                 <Header>
                     <nav role="navigation">
-                        <img
-                            src={notificationIcon}
-                            alt="Ícone de notificação"
-                            width="20"
-                            height="20"
-                            id="btnNotification"
-                        />
-                        <div id="notification_counter">0</div>
+                        <div onClick={this.openNotifications}>
+                            <img
+                                src={notificationIcon}
+                                alt="Ícone de notificação"
+                                id="btnNotification"
+                            />
+                            <div id="notification_counter">10</div>
+                        </div>
+                        <div id="notifications" ref="notifications">
+                            <div className="divider"></div>
+                        </div>
                         <div id="dropdown" onClick={this.handleDropdown}>
                             <h5>{this.state.user_name}</h5>
-                            <i className="arrow-down"></i>
+                            <i id="arrow-down" ref="dropdownArrow"></i>
                         </div>
-                        <ul id="dropdown-content">
+                        <ul id="dropdown-content" ref="dropdownContent">
                             <li onClick={this.handleRedirectProfile}>
                                 <NavLink to="/me">Perfil</NavLink>
                             </li>
