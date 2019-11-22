@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import { Wrapper, Card, Header, Main, Content, Footer, ModalCard, ModalLeftSide, ModalDivider, ModalRightSide } from "./style";
-import api from "../../services/api";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Wrapper, Card, Header, Main, Content, ModalCard, ModalLeftSide, ModalDivider, ModalRightSide } from "./style";
+import { loadAdvertsAction, loadCategoriesAction, updateAdvertAction } from "../../redux/actions";
 import Book from "../../components/Adverts/Book";
 import SearchField from "../../components/SearchField";
 import Loading from "../../components/Loading";
@@ -8,128 +9,145 @@ import Modal from "../../components/Modal";
 import accept from "../../assets/icons/accept.svg";
 import refuse from "../../assets/icons/refuse.svg";
 
-export default class Adverts extends Component {
+export default function Adverts() {
+    const dispatch = useDispatch();
+    const adverts = useSelector(state => state.adverts);
+    const categories = useSelector(state => state.categories);
+    const [isLoading, setIsLoading] = useState(false);
+    const [nameSearch, setNameSearch] = useState("");
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalAdvert, setModalAdvert] = useState({ covers_url: [] });
 
-    state = {
-        adverts: [],
-        advPages: {
-            current_page: "",
-            last_page: "",
-            prev_page_url: "",
-            next_page_url: ""
-        },
-        filtered: [],
-        filterByTitle: "",
-        modalOpen: false,
-        modalBook: {
-            id: "",
-            author: "",
-            count_likes: "",
-            covers_url: [{
-                id: "",
-                url: ""
-            }],
-            description: "",
-            price: "",
-            title: "",
-            user: {}
-        },
-        categories: [],
-        isLoading: true
+    useEffect(() => {
+        setIsLoading(true);
+        dispatch(loadAdvertsAction());
+        dispatch(loadCategoriesAction());
+        setIsLoading(false);
+    }, [dispatch]);
+
+    let filtered = adverts ? adverts.filter(ad => ad.title.toLowerCase().indexOf(nameSearch.toLowerCase()) !== -1) : [];
+
+    async function openModal(id, e) {
+        e.preventDefault();
+        setModalOpen(true);
+        await setModalAdvert(adverts.find(ad => ad.id === id));
+        return changeCover();
     }
-    componentDidMount() {
-        try {
-            this.loadData();
-        } catch (err) {
-            console.log(err);
+
+    function changeCover(index = 0) {
+        const x = document.getElementsByClassName("slide");
+        for (let i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        if (index >= 0) {
+            if (index >= x.length) index = 0;
+            return x[index].style.display = "block";
+        } else {
+            if (x[0]) x[0].style.display = "block";
         }
     }
-    loadData = async () => {
-        const response = await api.get("/books/validate");
-        const categoriesResponse = await api.get("/categories");
-        this.setState({
-            adverts: this.state.adverts.concat(response.data.data),
-            advPages: { ...response.data, data: null },
-            filtered: this.state.adverts.concat(response.data.data),
-            categories: this.state.categories.concat(categoriesResponse.data.data),
-            isLoading: false
-        });
+    async function acceptBook() {
+        setModalAdvert({ ...modalAdvert, status_id: 2 });
+        const check = await updateBook();
+        if (check) return console.error(check);
+        setModalOpen(false);
     }
-    handleChange = e => {
-        if (!e.target.value) {
-            return this.setState({
-                filterByTitle: e.target.value,
-                filtered: this.state.adverts
-            });
-        }
-        return this.setState({
-            filterByTitle: e.target.value,
-            filtered: this.state.adverts.filter(
-                (book) => {
-                    return book.title.toLowerCase()
-                        .indexOf(this.state.filterByTitle.toLowerCase()) !== -1;
-                }
-            )
-        });
+    async function refuseBook() {
+        setModalAdvert({ ...modalAdvert, status_id: 3 });
+        const check = await updateBook();
+        if (check) return console.error(check);
+        setModalOpen(false);
     }
+    async function updateBook() {
+        const action = await dispatch(updateAdvertAction(modalAdvert));
+        if (!action || action.error) return action.error;
+        return;
+    }
+
+    return (
+        <Wrapper>
+            <h2 id="page">Anúncios</h2>
+            <Card>
+                <Header>
+                    <SearchField onChange={(e) => setNameSearch(e.target.value)} onClick={(e) => setNameSearch(nameSearch)} />
+                </Header>
+                <Main>
+                    <h2>Resultado</h2>
+                    <Content>
+                        {isLoading ?
+                            <Loading /> :
+                            filtered.map(ad => (
+                                <Book book={ad} key={ad.id} onClick={(e) => openModal(ad.id, e)} />
+                            ))
+                        }
+                    </Content>
+                </Main>
+            </Card>
+            <Modal open={modalOpen} click={() => setModalOpen(false)}>
+                <ModalCard>
+                    <ModalLeftSide>
+                        <div id="covers">
+                            {modalAdvert.covers_url.map((cover, index) => (
+                                <div key={index} className="slide">
+                                    <img src={cover.url} alt="Book" />
+                                    <button onClick={(e) => changeCover(index + 1)}></button>
+                                </div>
+                            ))}
+                        </div>
+                        <div id="buttons">
+                            <img src={refuse} alt="Refuse Button" onClick={refuseBook} title="Recusar" />
+                            <img src={accept} alt="Accept Button" onClick={acceptBook} title="Aceitar" />
+                        </div>
+                    </ModalLeftSide>
+                    <ModalDivider />
+                    <ModalRightSide>
+                        <form>
+                            <label htmlFor="title">Título do anúncio</label>
+                            <input type="text" id="title" placeholder={modalAdvert.title} disabled />
+
+                            <label htmlFor="author">Autor do livro</label>
+                            <input type="text" id="author" placeholder={modalAdvert.author} disabled />
+
+                            <div className="row">
+                                <div>
+                                    <label htmlFor="status">Estado</label>
+                                    <select id="status" disabled placeholder={modalAdvert.status}>
+                                        <option value="0" >Novo</option>
+                                        <option value="1">Usado</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label htmlFor="price">Preço</label>
+                                    <input id="price" placeholder={modalAdvert.price} disabled />
+                                </div>
+                            </div>
+
+                            <label htmlFor="categories">Categorias</label>
+                            <div id="categories">
+                                {categories.map(cat => (
+                                    <div key={cat.id}>
+                                        <input type="checkbox" id={cat.name} defaultChecked={true || false} />
+                                        <label htmlFor={cat.name}>{cat.name}</label>
+                                    </div>
+                                ))}
+                            </div>
+                            <label>Descrição</label>
+                            <textarea placeholder={modalAdvert.description} disabled ></textarea>
+                        </form>
+                    </ModalRightSide>
+                </ModalCard>
+            </Modal>
+        </Wrapper>
+    );
+}
+
+/*export default class Adverts extends Component {
+
     searchAdvert = () => {
         const title = this.state.filterByTitle;
         const filtered = this.state.adverts.filter(ad => ad.title === title);
         return this.setState({ filtered });
     }
-    openModal = async (id, e) => {
-        await this.setState({ modalOpen: true, modalBook: this.state.adverts.find(ad => ad.id === id) });
-        return this.changeCover();
-    }
-    closeModal = () => {
-        this.changeCover();
-        return this.setState({ modalOpen: false });
-    }
-    changeCover = (index) => {
-        const x = document.getElementsByClassName("slide");
-        let slideIndex = index;
-        for (let i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        if (index >= 0) {
-            if (index >= x.length) slideIndex = 0;
-
-            return x[slideIndex].style.display = "block";
-        } else {
-            if (x[0]) x[0].style.display = "block";
-        }
-    }
-    acceptBook = async () => {
-        const book = this.state.modalBook;
-        book.status_id = 2;
-        const { data } = await api.put(`/books/${this.state.modalBook.id}/status`, book);
-        this.setState({
-            modalOpen: false,
-            adverts: this.state.adverts.filter(ad => ad.id !== data.id),
-            filtered: this.state.adverts.filter(ad => ad.id !== data.id)
-        });
-    }
-    refuseBook = async () => {
-        const book = this.state.modalBook;
-        book.status_id = 3;
-        const { data } = await api.put(`/books/${this.state.modalBook.id}/status`, book);
-        this.setState({
-            modalOpen: false,
-            adverts: this.state.adverts.filter(ad => ad.id !== data.id),
-            filtered: this.state.adverts.filter(ad => ad.id !== data.id)
-        });
-    }
-    getData = async (e, page) => {
-        this.setState({ isLoading: true });
-        const response = await api.get(`/books/validate?page=${page}`);
-        this.setState({
-            adverts: response.data.data,
-            advPages: { ...response.data, data: null },
-            filtered: response.data.data,
-            isLoading: false
-        });
-    }
-
     render() {
         const paginate = [];
         let body = this.state.filtered.length > 0 ?
@@ -146,86 +164,5 @@ export default class Adverts extends Component {
             paginate.push(li);
         }
 
-        return (
-            <Wrapper>
-                <h2 id="page">Anúncios</h2>
-                <Card>
-                    <Header>
-                        <SearchField onChange={this.handleChange} onClick={this.searchAdvert} />
-                    </Header>
-                    <Main>
-                        {this.state.isLoading ?
-                            <Loading /> : <>
-                                <h2>Resultado</h2>
-                                <Content>
-                                    {body}
-                                </Content>
-                            </>
-                        }
-                    </Main>
-                    <Footer>
-                        <ul>
-                            <li><button onClick={(e) => this.getData(e, 1)} disabled={!this.state.advPages.prev_page_url}>First Page</button></li>
-                            {paginate}
-                            <li><button onClick={(e) => this.getData(e, this.state.advPages.last_page)} disabled={!this.state.advPages.next_page_url}>Last Page</button></li>
-                        </ul>
-                    </Footer>
-                </Card>
-                <Modal open={this.state.modalOpen} click={this.closeModal}>
-                    <ModalCard>
-                        <ModalLeftSide>
-                            <div id="covers">
-                                {this.state.modalBook.covers_url.map((cover, index) => (
-                                    <div key={index} className="slide">
-                                        <img src={cover.url} alt="Book" />
-                                        <button onClick={() => this.changeCover(index + 1)}></button>
-                                    </div>
-                                ))}
-                            </div>
-                            <div id="buttons">
-                                <img src={refuse} alt="Refuse Button" onClick={this.refuseBook} title="Recusar" />
-                                <img src={accept} alt="Accept Button" onClick={this.acceptBook} title="Aceitar" />
-                            </div>
-                        </ModalLeftSide>
-                        <ModalDivider />
-                        <ModalRightSide>
-                            <form>
-                                <label htmlFor="title">Título do anúncio</label>
-                                <input type="text" id="title" value={this.state.modalBook.title} disabled />
-
-                                <label htmlFor="author">Autor do livro</label>
-                                <input type="text" id="author" value={this.state.modalBook.author} disabled />
-
-                                <div className="row">
-                                    <div>
-                                        <label htmlFor="status">Estado</label>
-                                        <select id="status" disabled value={this.state.modalBook.status}>
-                                            <option value="0" >Novo</option>
-                                            <option value="1">Usado</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label htmlFor="price">Preço</label>
-                                        <input id="price" value={this.state.modalBook.price} disabled />
-                                    </div>
-                                </div>
-
-                                <label htmlFor="categories">Categorias</label>
-                                <div id="categories">
-                                    {this.state.categories.map(cat => (
-                                        <div key={cat.id}>
-                                            <input type="checkbox" id={cat.name} defaultChecked={true || false} />
-                                            <label htmlFor={cat.name}>{cat.name}</label>
-                                        </div>
-                                    ))}
-                                </div>
-                                <label>Descrição</label>
-                                <textarea value={this.state.modalBook.description} disabled></textarea>
-                            </form>
-                        </ModalRightSide>
-                    </ModalCard>
-                </Modal>
-            </Wrapper>
-        );
     }
-}
+}*/

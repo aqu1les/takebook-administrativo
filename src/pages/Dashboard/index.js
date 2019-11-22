@@ -1,18 +1,29 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Wrapper } from "./style";
 import Loading from "../../components/Loading";
-import api from "../../services/api";
-import axios from 'axios';
+import { loadAdvertsAction, loadUsersAction } from "../../redux/actions";
 
-export default class Dashboard extends Component {
+export default function Dashboard() {
+    const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(false);
+    const users = useSelector(state => state.users);
+    useEffect(() => {
+        setIsLoading(true);
+        if (users.length > 0) return setIsLoading(false);
+        dispatch(loadAdvertsAction());
+        dispatch(loadUsersAction());
+    }, [dispatch, users]);
+    return (
+        <Wrapper>
+            <h2>Página Inicial</h2>
+            {isLoading ? <Loading /> : ""}
+        </Wrapper>
+    );
+}
+
+/*export default class Dashboard extends Component {
     signal = axios.CancelToken.source();
-    componentDidMount() {
-        try {
-            this.loadData();
-        } catch (err) {
-            console.log(err);
-        }
-    }
     state = {
         totalUsers: 0,
         totalBooks: 0,
@@ -23,6 +34,11 @@ export default class Dashboard extends Component {
     }
     loadData = async () => {
         this.setState({ isLoading: true });
+        const dispatch = useDispatch();
+        dispatch(loadAdvertsAction);
+        dispatch(loadUsersAction);
+        const users = useSelector(state => state.users);
+        console.log(users);
         try {
             const totalUsers = await api.get("/users", { cancelToken: this.signal.token });
             const totalBooks = await api.get("/books", { cancelToken: this.signal.token });
@@ -50,10 +66,7 @@ export default class Dashboard extends Component {
     }
     render() {
         return (
-            <Wrapper>
-                <h2>Página Inicial</h2>
-                {this.state.isLoading ? <Loading /> : ""}
-            </Wrapper>
+
         );
     }
-}
+}*/

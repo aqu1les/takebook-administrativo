@@ -40,6 +40,7 @@ export const Main = styled.main`
     margin-left: 20px;
     h2 {
         margin-bottom: 10px;
+        font-weight: 400;
     }
     ${width920} {
         height: 75%;        

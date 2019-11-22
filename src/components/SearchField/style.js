@@ -42,12 +42,16 @@ export const Div = styled.div`
         height: 30px;
         width: 80px;
         border-radius: 40px;
+        cursor: pointer;
         img {
             height: 24px;
             width: 24px;
         }
         &:focus, &:active {
             outline: none;
+        }
+        &:hover {
+            opacity: 0.8;
         }
     }
     ${width920} {
