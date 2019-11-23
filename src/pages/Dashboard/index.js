@@ -7,7 +7,7 @@ import { loadAdvertsAction, loadUsersAction } from "../../redux/actions";
 export default function Dashboard() {
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);
-    const users = useSelector(state => state.users);
+    const users = useSelector(state => state.users.data);
     useEffect(() => {
         setIsLoading(true);
         if (users.length > 0) return setIsLoading(false);

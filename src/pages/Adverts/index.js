@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Wrapper, Card, Header, Main, Content, ModalCard, ModalLeftSide, ModalDivider, ModalRightSide } from "./style";
-import { loadAdvertsAction, loadCategoriesAction, updateAdvertAction } from "../../redux/actions";
+import { Wrapper, Card, Header, Main, Content, Footer, ModalCard, ModalLeftSide, ModalDivider, ModalRightSide } from "./style";
+import { loadAdvertsAction, loadAdvertPage, loadCategoriesAction, updateAdvertAction } from "../../redux/actions";
 import Book from "../../components/Adverts/Book";
+import Paginate from "../../components/Paginate";
 import SearchField from "../../components/SearchField";
 import Loading from "../../components/Loading";
 import Modal from "../../components/Modal";
@@ -11,8 +12,9 @@ import refuse from "../../assets/icons/refuse.svg";
 
 export default function Adverts() {
     const dispatch = useDispatch();
-    const adverts = useSelector(state => state.adverts);
-    const categories = useSelector(state => state.categories);
+    const adverts = useSelector(state => state.adverts.data);
+    const dataInfo = useSelector(state => state.adverts);
+    const categories = useSelector(state => state.categories.data);
     const [isLoading, setIsLoading] = useState(false);
     const [nameSearch, setNameSearch] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
@@ -33,7 +35,6 @@ export default function Adverts() {
         await setModalAdvert(adverts.find(ad => ad.id === id));
         return changeCover();
     }
-
     function changeCover(index = 0) {
         const x = document.getElementsByClassName("slide");
         for (let i = 0; i < x.length; i++) {
@@ -63,6 +64,12 @@ export default function Adverts() {
         if (!action || action.error) return action.error;
         return;
     }
+    async function getData(e, page) {
+        setIsLoading(true);
+        const action = await dispatch(loadAdvertPage(page));
+        if (!action) return setIsLoading(false);
+        return;
+    }
 
     return (
         <Wrapper>
@@ -82,6 +89,9 @@ export default function Adverts() {
                         }
                     </Content>
                 </Main>
+                <Footer>
+                    <Paginate onClick={(e, page) => getData(e, page)} dataInfo={dataInfo} />
+                </Footer>
             </Card>
             <Modal open={modalOpen} click={() => setModalOpen(false)}>
                 <ModalCard>
@@ -140,29 +150,3 @@ export default function Adverts() {
         </Wrapper>
     );
 }
-
-/*export default class Adverts extends Component {
-
-    searchAdvert = () => {
-        const title = this.state.filterByTitle;
-        const filtered = this.state.adverts.filter(ad => ad.title === title);
-        return this.setState({ filtered });
-    }
-    render() {
-        const paginate = [];
-        let body = this.state.filtered.length > 0 ?
-            this.state.filtered.map(ad => (
-                <Book book={ad} key={ad.id} onClick={(e) => this.openModal(ad.id, e)} />
-            ))
-            :
-            "Nenhum livro foi encontrado!";
-
-        for (let i = 1; i <= this.state.advPages.last_page; i++) {
-            const li = <li key={i}>
-                <button onClick={(e) => this.getData(e, i)} className={this.state.advPages.current_page === i ? "active" : ""} disabled={this.state.advPages.current_page === i ? true : false}>{i}</button>
-            </li>;
-            paginate.push(li);
-        }
-
-    }
-}*/

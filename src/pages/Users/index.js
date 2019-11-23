@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { Wrapper, Card, Header, Main, Content, Li, ModalCard, ModalForm } from "./style";
-import { loadUsersAction, updateUserAction } from "../../redux/actions";
+import { Wrapper, Card, Header, Main, Content, Footer, Li, ModalCard, ModalForm } from "./style";
+import { loadUsersAction, loadUserPage, updateUserAction } from "../../redux/actions";
 import SearchField from "../../components/SearchField";
+import Paginate from "../../components/Paginate";
 import Modal from "../../components/Modal";
 import PopUp from "../../components/Popup";
 import Loading from "../../components/Loading";
@@ -13,7 +14,8 @@ import closeIcon from "../../assets/icons/close.svg";
 
 export default function Users() {
     const dispatch = useDispatch();
-    const users = useSelector(state => state.users)
+    const users = useSelector(state => state.users.data);
+    const dataInfo = useSelector(state => state.users);
     const [isLoading, setIsLoading] = useState(false);
     const [nameSearch, setNameSearch] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
@@ -48,28 +50,30 @@ export default function Users() {
             setNotify({ show: false });
         }, 3000);
     }
-
     function openModal(id, e) {
         e.preventDefault();
         setModalOpen(true);
         setModalUser(users.find(user => user.id === id));
     }
-
     function closeModal(e) {
         e.preventDefault();
         setModalOpen(false);
         setModalUser({});
     }
-
     function handleChange(e) {
         setModalUser({ ...modalUser, [e.target.name]: e.target.value });
     }
-
     async function updateUser(e) {
         e.preventDefault();
         const action = await dispatch(updateUserAction(modalUser));
         if (!action || action.error) return notifyError(action.error || "Erro no servidor.");
         return notifySuccess("Usuário alterado!");
+    }
+    async function getData(e, page) {
+        setIsLoading(true);
+        const action = await dispatch(loadUserPage(page));
+        if (!action) return setIsLoading(false);
+        return;
     }
 
     return (
@@ -110,6 +114,9 @@ export default function Users() {
                         }
                     </Content>
                 </Main>
+                <Footer>
+                    <Paginate onClick={(e, page) => getData(e, page)} dataInfo={dataInfo} />
+                </Footer>
             </Card>
             <Modal open={modalOpen} click={closeModal}>
                 <ModalCard>

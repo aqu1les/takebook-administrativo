@@ -30,18 +30,43 @@ export function updateAdvertAction(advert) {
 
 export function loadAdvertsAction() {
     return async dispatch => {
-        const response = await api.get("/books");
+        const response = await api.get("/books/validate");
         if (!response || !response.data) return;
+        dispatch({ type: "SET_INFO", info: { ...response.data, data: [] } });
         response.data.data.map(advert => {
             return dispatch(addAdvertAction(advert));
         });
     };
 }
 
+export function loadAdvertPage(page) {
+    return async dispatch => {
+        const response = await api.get(`/books/validate?page=${page}`);
+        if (!response || !response.data) return;
+        await dispatch({ type: "CLEAR_ADVERTS" });
+        dispatch({ type: "SET_INFO", info: { ...response.data, data: [] } });
+        response.data.data.map(advert => {
+            return dispatch(addAdvertAction(advert));
+        });
+    }
+}
+export function loadUserPage(page) {
+    return async dispatch => {
+        const response = await api.get(`/users?page=${page}`);
+        if (!response || !response.data) return;
+        await dispatch({ type: "CLEAR_USERS" });
+        dispatch({ type: "SET_INFO", info: { ...response.data, data: [] } });
+        response.data.data.map(user => {
+            return dispatch(addUserAction(user));
+        });
+    }
+}
+
 export function loadUsersAction() {
     return async dispatch => {
         const response = await api.get("/users");
         if (!response || !response.data) return;
+        dispatch({ type: "SET_INFO", info: { ...response.data, data: [] } });
         response.data.data.map(user => {
             return dispatch(addUserAction(user));
         });
@@ -52,6 +77,7 @@ export function loadCategoriesAction() {
     return async dispatch => {
         const response = await api.get("/categories");
         if (!response || !response.data) return;
+        dispatch({ type: "SET_INFO", info: { ...response.data, data: [] } });
         response.data.data.map(category => {
             return dispatch(addCategoryAction(category));
         });
