@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Wrapper } from "./style";
 import Loading from "../../components/Loading";
-import { loadAdvertsAction, loadUsersAction } from "../../redux/actions";
+import { loadAdvertsAction } from "../../redux/Actions/adverts";
+import { loadUsersAction } from "../../redux/Actions/users";
 
 export default function Dashboard() {
     const dispatch = useDispatch();

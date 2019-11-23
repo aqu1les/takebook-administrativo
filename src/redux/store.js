@@ -1,11 +1,9 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import ReduxThunk from "redux-thunk";
-import {
-    advertsReducer,
-    usersReducer,
-    reportsReducer,
-    categoriesReducer
-} from "./reducers";
+import { advertsReducer } from "./Reducers/advertsReducer";
+import { usersReducer } from "./Reducers/usersReducer";
+import { reportsReducer } from "./Reducers/reportsReducer";
+import { categoriesReducer } from "./Reducers/categoriesReducer";
 
 const reducers = combineReducers({
     adverts: advertsReducer,
@@ -13,4 +11,5 @@ const reducers = combineReducers({
     reports: reportsReducer,
     categories: categoriesReducer
 });
-export default createStore(reducers, applyMiddleware(ReduxThunk)); 
+
+export default createStore(reducers, applyMiddleware(ReduxThunk));

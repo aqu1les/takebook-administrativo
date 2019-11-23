@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { Wrapper, Card, Header, Main, Content, Footer, Li, ModalCard, ModalForm } from "./style";
-import { loadUsersAction, loadUserPage, updateUserAction } from "../../redux/actions";
+import { loadUsersAction, loadUserPage, updateUserAction } from "../../redux/Actions/users";
 import SearchField from "../../components/SearchField";
 import Paginate from "../../components/Paginate";
 import Modal from "../../components/Modal";

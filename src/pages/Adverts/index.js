@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Wrapper, Card, Header, Main, Content, Footer, ModalCard, ModalLeftSide, ModalDivider, ModalRightSide } from "./style";
-import { loadAdvertsAction, loadAdvertPage, loadCategoriesAction, updateAdvertAction } from "../../redux/actions";
+import { loadAdvertsAction, loadAdvertPage, updateAdvertAction } from "../../redux/Actions/adverts";
+import { loadCategoriesAction } from "../../redux/Actions/categories";
 import Book from "../../components/Adverts/Book";
 import Paginate from "../../components/Paginate";
 import SearchField from "../../components/SearchField";
