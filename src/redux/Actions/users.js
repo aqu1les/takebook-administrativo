@@ -5,7 +5,7 @@ export function loadUserPage(page) {
         const response = await api.get(`/users?page=${page}`);
         if (!response || !response.data) return;
         await dispatch({ type: "CLEAR_USERS" });
-        dispatch({ type: "SET_INFO", info: { ...response.data, data: [] } });
+        dispatch({ type: "SET_USERS_INFO", info: { ...response.data, data: [] } });
         response.data.data.map(user => {
             return dispatch(addUserAction(user));
         });
@@ -29,7 +29,7 @@ export function loadUsersAction() {
     return async dispatch => {
         const response = await api.get("/users");
         if (!response || !response.data) return;
-        dispatch({ type: "SET_INFO", info: { ...response.data, data: [] } });
+        dispatch({ type: "SET_USERS_INFO", info: { ...response.data, data: [] } });
         response.data.data.map(user => {
             return dispatch(addUserAction(user));
         });

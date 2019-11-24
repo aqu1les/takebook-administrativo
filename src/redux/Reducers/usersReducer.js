@@ -4,7 +4,7 @@ const INITIAL_STATE = {
 
 export function usersReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
-        case "SET_INFO":
+        case "SET_USERS_INFO":
             return { ...action.info, data: [...state.data] };
         case "ADD_USER":
             const users = state.data.filter(user => user.id !== action.user.id);

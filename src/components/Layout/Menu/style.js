@@ -65,7 +65,7 @@ export const Menu = styled.aside`
         width: 238px;
         border-left: 2px solid #e3b02f;
     }
-    @media only screen and (max-width: 576px) {
+    @media only screen and (max-width: 720px) {
         position: fixed;
         bottom: 0;
         height: 52px;

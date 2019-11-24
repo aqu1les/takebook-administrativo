@@ -4,7 +4,7 @@ const INITIAL_STATE = {
 
 export function reportsReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
-        case "SET_INFO":
+        case "SET_REPORTS_INFO":
             return { ...action.info, data: [...state.data] };
         case "ADD_REPORT":
             const reports = state.data.filter(report => report.id !== action.report.id);

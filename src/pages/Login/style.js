@@ -193,7 +193,7 @@ export const SendButton = styled.button`
     border-radius: 40px;
     border: 0;
     box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
-    background-color: #f58634;
+    background-color: #FF7714;
     color: #fff;
     transition: 200ms transform;
     font-weight: bolder;

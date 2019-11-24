@@ -69,6 +69,7 @@ export default class header extends Component {
                         <div id="notifications" ref="notifications">
                             <div className="divider"></div>
                         </div>
+                        <div className="vertical-divider"></div>
                         <div id="dropdown" onClick={this.handleDropdown}>
                             <h5>{this.state.user_name}</h5>
                             <i id="arrow-down" ref="dropdownArrow"></i>

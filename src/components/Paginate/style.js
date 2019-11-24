@@ -6,11 +6,13 @@ export const Pagination = styled.ul`
     justify-content: center;
     width: 100%;
     list-style: none;
+      
     li button {
         background-color: none;
         border: none;
         padding: 8px;
         border-radius: 8px;
+        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.16);
         min-width: 28px;
         color: #2bc1f3;
         background-color: #FFFFFF;

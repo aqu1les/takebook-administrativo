@@ -4,7 +4,7 @@ const INITIAL_STATE = {
 
 export function categoriesReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
-        case "SET_INFO":
+        case "SET_CATEGORIES_INFO":
             return { ...action.info, data: [...state.data] };
         case "ADD_CATEGORY":
             const categories = state.data.filter(category => category.id !== action.category.id);

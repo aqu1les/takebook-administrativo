@@ -130,7 +130,12 @@ export const Header = styled.header`
 				outline: none;
 				border: none;
 			}
-		}
+        }
+        .vertical-divider {
+            height: 50%;
+            width: 0;
+            border: 0.5px solid #F0F0F0;
+        }
 		#dropdown {
 			position: relative;
 			height: 100%;

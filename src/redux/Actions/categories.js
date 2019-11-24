@@ -8,7 +8,7 @@ export function loadCategoriesAction() {
     return async dispatch => {
         const response = await api.get("/categories");
         if (!response || !response.data) return;
-        dispatch({ type: "SET_INFO", info: { ...response.data, data: [] } });
+        dispatch({ type: "SET_CATEGORIES_INFO", info: { ...response.data, data: [] } });
         response.data.data.map(category => {
             return dispatch(addCategoryAction(category));
         });

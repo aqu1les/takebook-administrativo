@@ -15,9 +15,9 @@ export function updateAdvertAction(advert) {
 
 export function loadAdvertsAction() {
     return async dispatch => {
-        const response = await api.get("/books/validate");
+        const response = await api.get("/books");
         if (!response || !response.data) return;
-        dispatch({ type: "SET_INFO", info: { ...response.data, data: [] } });
+        dispatch({ type: "SET_ADVERTS_INFO", info: { ...response.data, data: [] } });
         response.data.data.map(advert => {
             return dispatch(addAdvertAction(advert));
         });
@@ -25,10 +25,10 @@ export function loadAdvertsAction() {
 }
 export function loadAdvertPage(page) {
     return async dispatch => {
-        const response = await api.get(`/books/validate?page=${page}`);
+        const response = await api.get(`/books?page=${page}`);
         if (!response || !response.data) return;
         await dispatch({ type: "CLEAR_ADVERTS" });
-        dispatch({ type: "SET_INFO", info: { ...response.data, data: [] } });
+        dispatch({ type: "SET_ADVERTS_INFO", info: { ...response.data, data: [] } });
         response.data.data.map(advert => {
             return dispatch(addAdvertAction(advert));
         });
