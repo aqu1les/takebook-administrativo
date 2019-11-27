@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Dashboard from "./pages/Dashboard";
 import Reports from "./pages/Report";
 import Adverts from "./pages/Adverts";
@@ -10,25 +11,81 @@ import notFound from "./pages/404-not-found";
 import Layout from "./components/Layout";
 
 export default () => {
-    return (
-        <Switch>
-            <Route exact path="/" render={() => <Redirect to="/login" />} />
-            <Route
-                path="/login"
-                render={() =>
-                    sessionStorage.getItem("authKey") ? (
-                        <Redirect to="/dashboard" />
-                    ) : (
-                            <Login />
-                        )
-                }
-            />
-            <Route path="/dashboard" render={() => <Layout><Dashboard /></Layout>} />
-            <Route path="/users" render={() => <Layout><Users /></Layout>} />
-            <Route path="/adverts" render={() => <Layout><Adverts /></Layout>} />
-            <Route path="/reports" render={() => <Layout><Reports /></Layout>} />
-            <Route path="/me" render={() => <Layout><Profile /></Layout>} />
-            <Route component={notFound} />
-        </Switch>
-    );
+	const auth = useSelector(state => state.auth);
+	return (
+		<Switch>
+			<Route exact path="/" render={() => <Redirect to="/login" />} />
+			<Route
+				path="/login"
+				render={() =>
+					auth.authenticated ? (
+						<Redirect to="/dashboard" />
+					) : (
+						<Login />
+					)
+				}
+			/>
+			<Route
+				path="/dashboard"
+				render={() =>
+					auth.authenticated ? (
+						<Layout>
+							<Dashboard />
+						</Layout>
+					) : (
+						<Redirect to="/login" />
+					)
+				}
+			/>
+			<Route
+				path="/users"
+				render={() =>
+					auth.authenticated ? (
+						<Layout>
+							<Users />
+						</Layout>
+					) : (
+						<Redirect to="/login" />
+					)
+				}
+			/>
+			<Route
+				path="/adverts"
+				render={() =>
+					auth.authenticated ? (
+						<Layout>
+							<Adverts />
+						</Layout>
+					) : (
+						<Redirect to="/login" />
+					)
+				}
+			/>
+			<Route
+				path="/reports"
+				render={() =>
+					auth.authenticated ? (
+						<Layout>
+							<Reports />
+						</Layout>
+					) : (
+						<Redirect to="/login" />
+					)
+				}
+			/>
+			<Route
+				path="/me"
+				render={() =>
+					auth.authenticated ? (
+						<Layout>
+							<Profile />
+						</Layout>
+					) : (
+						<Redirect to="/login" />
+					)
+				}
+			/>
+			<Route component={notFound} />
+		</Switch>
+	);
 };

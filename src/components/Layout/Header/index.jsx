@@ -1,105 +1,160 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
 import notificationIcon from "../../../assets/icons/notifications.svg";
 import defaultProfile from "../../../assets/icons/defaultProfile.svg";
-import { Header } from "./style";
+import { AppHeader } from "./style";
 
-export default class header extends Component {
-    state = {
-        logout: false,
-        user_name: "",
-        avatar: ""
-    };
-    componentDidMount() {
-        if (!localStorage.getItem("user_info"))
-            return this.setState({ logout: true });
-        const user = JSON.parse(localStorage.getItem("user_info"));
-        const userName = `${user.first_name} ${user.last_name.substring(
-            0,
-            1
-        )}.`;
-        this.setState({
-            avatar: user.avatar_url ? user.avatar_url : defaultProfile
-        });
-        this.setState({ user_name: userName });
-        document
-            .querySelector("main")
-            .addEventListener("mousedown", this.handleClickOutside);
-        document
-            .querySelector("aside")
-            .addEventListener("mousedown", this.handleClickOutside);
-    }
-    logout = () => {
-        sessionStorage.removeItem("authKey");
-        localStorage.removeItem("user_info");
-        return this.setState({ logout: true });
-    };
-    handleRedirectProfile = () => {
-        return this.setState({ profile: true });
-    };
-    handleDropdown = () => {
-        this.refs.dropdownContent.classList.toggle("open");
-        this.refs.dropdownArrow.classList.toggle("open");
-        this.refs.notifications.classList.remove("open");
-    };
-    handleClickOutside = () => {
-        this.refs.dropdownArrow.classList.remove("open");
-        this.refs.dropdownContent.classList.remove("open");
-        this.refs.notifications.classList.remove("open");
-    };
-    openNotifications = () => {
-        this.refs.notifications.classList.toggle("open");
-        this.refs.dropdownContent.classList.remove("open");
-        this.refs.dropdownArrow.classList.remove("open");
-    };
-    render() {
-        if (this.state.logout) return <Redirect to="/login" />;
-        else {
-            return (
-                <Header>
-                    <nav role="navigation">
-                        <div onClick={this.openNotifications}>
-                            <img
-                                src={notificationIcon}
-                                alt="Ícone de notificação"
-                                id="btnNotification"
-                            />
-                            <div id="notification_counter">10</div>
-                        </div>
-                        <div id="notifications" ref="notifications">
-                            <div className="divider"></div>
-                        </div>
-                        <div className="vertical-divider"></div>
-                        <div id="dropdown" onClick={this.handleDropdown}>
-                            <h5>{this.state.user_name}</h5>
-                            <i id="arrow-down" ref="dropdownArrow"></i>
-                        </div>
-                        <ul id="dropdown-content" ref="dropdownContent">
-                            <li onClick={this.handleRedirectProfile}>
-                                <NavLink to="/me">Perfil</NavLink>
-                            </li>
-                            <hr />
-                            <li onClick={this.logout}>
-                                Sair
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path d="M16 9v-4l8 7-8 7v-4h-8v-6h8zm-16-7v20h14v-2h-12v-16h12v-2h-14z" />
-                                </svg>
-                            </li>
-                        </ul>
-                        <img
-                            src={this.state.avatar}
-                            alt="Foto do usuário"
-                            title="Imagem do usuário"
-                            id="ProfilePic"
-                        />
-                    </nav>
-                </Header>
-            );
-        }
-    }
+export default function Header() {
+	const user = useSelector(state => state.auth);
+	const [logout, setLogout] = useState(false);
+	if (user.authenticated === false) setLogout(true);
+
+	function openNotifications(e) {}
+	function handleDropdown(e) {}
+	function handleRedirectProfile(e) {}
+	function logoff(e) {}
+
+	return (
+		<AppHeader>
+			<nav role="navigation">
+				<div onClick={openNotifications}>
+					<img
+						src={notificationIcon}
+						alt="Ícone de notificação"
+						id="btnNotification"
+					/>
+					<div id="notification_counter">10</div>
+				</div>
+				<div id="notifications">
+					<div className="divider"></div>
+				</div>
+				<div className="vertical-divider"></div>
+				<div id="dropdown" onClick={handleDropdown}>
+					<h5>{`${user.first_name} ${user.last_name.substring(
+						0,
+						1
+					)}.`}</h5>
+					<i id="arrow-down"></i>
+				</div>
+				<ul id="dropdown-content">
+					<li onClick={handleRedirectProfile}>
+						<NavLink to="/me">Perfil</NavLink>
+					</li>
+					<hr />
+					<li onClick={logoff}>
+						Sair
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+						>
+							<path d="M16 9v-4l8 7-8 7v-4h-8v-6h8zm-16-7v20h14v-2h-12v-16h12v-2h-14z" />
+						</svg>
+					</li>
+				</ul>
+				<img
+					src={user.avatar ? user.avatar : defaultProfile}
+					alt="Foto do usuário"
+					title="Imagem do usuário"
+					id="ProfilePic"
+				/>
+			</nav>
+		</AppHeader>
+	);
 }
+/*export default class header extends Component {
+	state = {
+		logout: false,
+		user_name: "",
+		avatar: ""
+	};
+	componentDidMount() {
+		
+		this.setState({
+			avatar: user.avatar_url ? user.avatar_url : defaultProfile
+		});
+		this.setState({ user_name: userName });
+		document
+			.querySelector("main")
+			.addEventListener("mousedown", this.handleClickOutside);
+		document
+			.querySelector("aside")
+			.addEventListener("mousedown", this.handleClickOutside);
+	}
+	logout = () => {
+		sessionStorage.removeItem("authKey");
+		localStorage.removeItem("user_info");
+		return this.setState({ logout: true });
+	};
+	handleRedirectProfile = () => {
+		return this.setState({ profile: true });
+	};
+	handleDropdown = () => {
+		this.refs.dropdownContent.classList.toggle("open");
+		this.refs.dropdownArrow.classList.toggle("open");
+		this.refs.notifications.classList.remove("open");
+	};
+	handleClickOutside = () => {
+		this.refs.dropdownArrow.classList.remove("open");
+		this.refs.dropdownContent.classList.remove("open");
+		this.refs.notifications.classList.remove("open");
+	};
+	openNotifications = () => {
+		this.refs.notifications.classList.toggle("open");
+		this.refs.dropdownContent.classList.remove("open");
+		this.refs.dropdownArrow.classList.remove("open");
+	};
+	render() {
+		if (this.state.logout) return <Redirect to="/login" />;
+		else {
+			return (
+				<Header>
+					<nav role="navigation">
+						<div onClick={this.openNotifications}>
+							<img
+								src={notificationIcon}
+								alt="Ícone de notificação"
+								id="btnNotification"
+							/>
+							<div id="notification_counter">10</div>
+						</div>
+						<div id="notifications" ref="notifications">
+							<div className="divider"></div>
+						</div>
+						<div className="vertical-divider"></div>
+						<div id="dropdown" onClick={this.handleDropdown}>
+							<h5>{this.state.user_name}</h5>
+							<i id="arrow-down" ref="dropdownArrow"></i>
+						</div>
+						<ul id="dropdown-content" ref="dropdownContent">
+							<li onClick={this.handleRedirectProfile}>
+								<NavLink to="/me">Perfil</NavLink>
+							</li>
+							<hr />
+							<li onClick={this.logout}>
+								Sair
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									viewBox="0 0 24 24"
+								>
+									<path d="M16 9v-4l8 7-8 7v-4h-8v-6h8zm-16-7v20h14v-2h-12v-16h12v-2h-14z" />
+								</svg>
+							</li>
+						</ul>
+						<img
+							src={this.state.avatar}
+							alt="Foto do usuário"
+							title="Imagem do usuário"
+							id="ProfilePic"
+						/>
+					</nav>
+				</Header>
+			);
+		}
+	}
+}
+*/

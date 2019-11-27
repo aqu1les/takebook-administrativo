@@ -6,9 +6,11 @@ import App from "./App";
 import store from "./redux/store";
 
 window.addEventListener("close", e => {
-    localStorage.removeItem("user_info");
+	localStorage.removeItem("user_info");
 });
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>, document.getElementById("root"));
+	<Provider store={store}>
+		<App />
+	</Provider>,
+	document.getElementById("root")
+);
