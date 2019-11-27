@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Redirect } from "react-router-dom";
 import {
     Wrapper,
@@ -21,10 +21,31 @@ import emailIcon from "../../assets/icons/email.svg";
 import PopUp from '../../components/Popup';
 
 export default function Login() {
+    const [notify, setNotify] = useState({ show: false });
+    function notifyError(msg) {
+        setNotify({
+            show: true,
+            notificationMessage: msg,
+            variant: "danger"
+        });
+        setTimeout(() => {
+            setNotify({ show: false });
+        }, 3000);
+    }
+    function notifySuccess(msg) {
+        setNotify({
+            show: true,
+            notificationMessage: msg,
+            variant: "success"
+        });
+        setTimeout(() => {
+            setNotify({ show: false });
+        }, 3000);
+    }
     return (
         <Wrapper>
             <CardAuth>
-                <PopUp show={this.state.notify.show} msg={this.state.notify.notificationMessage} variant={this.state.notify.variant} />
+                <PopUp show={notify.show} msg={notify.notificationMessage} variant={notify.variant} />
                 <LogoImg submiting={this.state.loading}>
                     <Logo src={logo} alt="Livro logo TAKEBOOK" width="200" height="200" />
                     <AppName src={logo} alt="Livro logo TAKEBOOK" />
