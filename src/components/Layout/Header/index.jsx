@@ -1,111 +1,99 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import notificationIcon from "../../../assets/icons/notifications.svg";
 import defaultProfile from "../../../assets/icons/defaultProfile.svg";
 import { AppHeader } from "./style";
 
 export default function Header() {
-	const user = useSelector(state => state.auth);
-	const [logout, setLogout] = useState(false);
-	if (user.authenticated === false) setLogout(true);
+    const dispatch = useDispatch();
+    const [toProfile, setToProfile] = useState(false);
+    const user = useSelector(state => state.auth);
+    const dropdownContent = useRef(null);
+    const dropdownArrow = useRef(null);
+    const notifications = useRef(null);
 
-	function openNotifications(e) {}
-	function handleDropdown(e) {}
-	function handleRedirectProfile(e) {}
-	function logoff(e) {}
+    useEffect(() => {
+        document
+            .querySelector("main")
+            .addEventListener("mousedown", handleClickOutside);
+        document
+            .querySelector("aside")
+            .addEventListener("mousedown", handleClickOutside);
+    });
 
-	return (
-		<AppHeader>
-			<nav role="navigation">
-				<div onClick={openNotifications}>
-					<img
-						src={notificationIcon}
-						alt="Ícone de notificação"
-						id="btnNotification"
-					/>
-					<div id="notification_counter">10</div>
-				</div>
-				<div id="notifications">
-					<div className="divider"></div>
-				</div>
-				<div className="vertical-divider"></div>
-				<div id="dropdown" onClick={handleDropdown}>
-					<h5>{`${user.first_name} ${user.last_name.substring(
-						0,
-						1
-					)}.`}</h5>
-					<i id="arrow-down"></i>
-				</div>
-				<ul id="dropdown-content">
-					<li onClick={handleRedirectProfile}>
-						<NavLink to="/me">Perfil</NavLink>
-					</li>
-					<hr />
-					<li onClick={logoff}>
-						Sair
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="24"
-							height="24"
-							viewBox="0 0 24 24"
-						>
-							<path d="M16 9v-4l8 7-8 7v-4h-8v-6h8zm-16-7v20h14v-2h-12v-16h12v-2h-14z" />
-						</svg>
-					</li>
-				</ul>
-				<img
-					src={user.avatar ? user.avatar : defaultProfile}
-					alt="Foto do usuário"
-					title="Imagem do usuário"
-					id="ProfilePic"
-				/>
-			</nav>
-		</AppHeader>
-	);
+    function handleClickOutside() {
+        dropdownArrow.current.classList.remove("open");
+        dropdownContent.current.classList.remove("open");
+        notifications.current.classList.remove("open");
+    }
+    function openNotifications(e) {
+        notifications.current.classList.toggle("open");
+        dropdownContent.current.classList.remove("open");
+        dropdownArrow.current.classList.remove("open");
+    }
+    function handleDropdown(e) {
+        dropdownContent.current.classList.toggle("open");
+        dropdownArrow.current.classList.toggle("open");
+        notifications.current.classList.remove("open");
+    }
+    const handleRedirectProfile = e => setToProfile(true);
+    const logoff = e => dispatch({ type: "LOG_OUT" });
+
+    return (
+        <>
+            {toProfile ? <Redirect to="/me" /> : null}
+            <AppHeader>
+                <nav role="navigation">
+                    <div onClick={openNotifications}>
+                        <img
+                            src={notificationIcon}
+                            alt="Ícone de notificação"
+                            id="btnNotification"
+                        />
+                        <div id="notification_counter">10</div>
+                    </div>
+                    <div id="notifications" ref={notifications}>
+                        <div className="divider"></div>
+                    </div>
+                    <div className="vertical-divider"></div>
+                    <div id="dropdown" onClick={handleDropdown}>
+                        <h5>
+                            {`${user.first_name} 
+                            ${user.last_name.substring(0, 1)}.`}
+                        </h5>
+                        <i id="arrow-down" ref={dropdownArrow}></i>
+                    </div>
+                    <ul id="dropdown-content" ref={dropdownContent}>
+                        <li onClick={handleRedirectProfile}>
+                            <NavLink to="/me">Perfil</NavLink>
+                        </li>
+                        <hr />
+                        <li onClick={logoff}>
+                            Sair
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                            >
+                                <path d="M16 9v-4l8 7-8 7v-4h-8v-6h8zm-16-7v20h14v-2h-12v-16h12v-2h-14z" />
+                            </svg>
+                        </li>
+                    </ul>
+                    <img
+                        src={user.avatar ? user.avatar : defaultProfile}
+                        alt="Foto do usuário"
+                        title="Imagem do usuário"
+                        id="ProfilePic"
+                    />
+                </nav>
+            </AppHeader>
+        </>
+    );
 }
-/*export default class header extends Component {
-	state = {
-		logout: false,
-		user_name: "",
-		avatar: ""
-	};
-	componentDidMount() {
-		
-		this.setState({
-			avatar: user.avatar_url ? user.avatar_url : defaultProfile
-		});
-		this.setState({ user_name: userName });
-		document
-			.querySelector("main")
-			.addEventListener("mousedown", this.handleClickOutside);
-		document
-			.querySelector("aside")
-			.addEventListener("mousedown", this.handleClickOutside);
-	}
-	logout = () => {
-		sessionStorage.removeItem("authKey");
-		localStorage.removeItem("user_info");
-		return this.setState({ logout: true });
-	};
-	handleRedirectProfile = () => {
-		return this.setState({ profile: true });
-	};
-	handleDropdown = () => {
-		this.refs.dropdownContent.classList.toggle("open");
-		this.refs.dropdownArrow.classList.toggle("open");
-		this.refs.notifications.classList.remove("open");
-	};
-	handleClickOutside = () => {
-		this.refs.dropdownArrow.classList.remove("open");
-		this.refs.dropdownContent.classList.remove("open");
-		this.refs.notifications.classList.remove("open");
-	};
-	openNotifications = () => {
-		this.refs.notifications.classList.toggle("open");
-		this.refs.dropdownContent.classList.remove("open");
-		this.refs.dropdownArrow.classList.remove("open");
-	};
+/*
 	render() {
 		if (this.state.logout) return <Redirect to="/login" />;
 		else {
