@@ -2,7 +2,7 @@ const INITIAL_STATE = {
     data: []
 };
 
-export function categoriesReducer(state = INITIAL_STATE, action) {
+export default function categoriesReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
         case "SET_CATEGORIES_INFO":
             return { ...action.info, data: [...state.data] };

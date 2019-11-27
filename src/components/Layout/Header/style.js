@@ -207,6 +207,7 @@ export const Header = styled.header`
         }
     }
     @media only screen and (max-width: 576px) {
-        max-width: 200px;
+        max-width: 100vw;
+        width: 220px;
     }    
 `;

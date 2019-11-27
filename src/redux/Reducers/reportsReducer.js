@@ -2,7 +2,7 @@ const INITIAL_STATE = {
     data: []
 };
 
-export function reportsReducer(state = INITIAL_STATE, action) {
+export default function reportsReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
         case "SET_REPORTS_INFO":
             return { ...action.info, data: [...state.data] };

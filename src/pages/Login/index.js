@@ -20,7 +20,34 @@ import passwordIcon from "../../assets/icons/password.svg";
 import emailIcon from "../../assets/icons/email.svg";
 import PopUp from '../../components/Popup';
 
-class Login extends Component {
+export default function Login() {
+    return (
+        <Wrapper>
+            <CardAuth>
+                <PopUp show={this.state.notify.show} msg={this.state.notify.notificationMessage} variant={this.state.notify.variant} />
+                <LogoImg submiting={this.state.loading}>
+                    <Logo src={logo} alt="Livro logo TAKEBOOK" width="200" height="200" />
+                    <AppName src={logo} alt="Livro logo TAKEBOOK" />
+                </LogoImg>
+                <Divider />
+                <Form>
+                    <UserIcon src={user} alt="Ícone de usuário" />
+                    <h2>Login</h2>
+                    <FormGroup error={this.state.emailError}>
+                        <label htmlFor="email_input"><img src={emailIcon} alt="Ícone do e-mail" /></label>
+                        <Input id="email_input" name="email" type="email" onChange={this.handleChange} placeholder="Digite aqui seu e-mail" required={true} autoFocus={true} />
+                    </FormGroup>
+                    <FormGroup error={this.state.passwordError}>
+                        <label htmlFor="password_input"><img src={passwordIcon} alt="Ícone da senha" /></label>
+                        <Input id="password_input" name="password" type="password" required={true} onChange={this.handleChange} placeholder="Digite aqui a sua senha" onKeyPress={this.handleKeyPress} />
+                    </FormGroup>
+                    <SendButton id="send_button" onClick={this.handleSubmitLogin}>ENVIAR</SendButton>
+                </Form>
+            </CardAuth>
+        </Wrapper>
+    );
+}
+/*export default class Login extends Component {
     state = {
         email: "",
         password: "",
@@ -128,5 +155,4 @@ class Login extends Component {
             </Wrapper>
     }
 }
-
-export default Login;
+*/

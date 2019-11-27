@@ -2,7 +2,7 @@ const INITIAL_STATE = {
     data: []
 };
 
-export function advertsReducer(state = INITIAL_STATE, action) {
+export default function advertsReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
         case "SET_ADVERTS_INFO":
             return { ...action.info, data: [...state.data] };

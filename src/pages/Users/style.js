@@ -228,8 +228,8 @@ export const ModalCard = styled.section`
         border: 0.5px solid #C1C3C42f;
     }
     ${width920} {
-        width: 100%;
-        height: 80%;
+        width: 99%;
+        height: 79%;
     }
 `
 

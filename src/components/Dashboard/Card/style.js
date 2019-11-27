@@ -27,6 +27,7 @@ export const Wrapper = styled.div`
         text-decoration: none;        
     }
     h2, h3 {
+        text-align: center;
         transition: transform 150ms;
         &:hover {
             transform: scale(1.1);
@@ -46,6 +47,12 @@ export const Wrapper = styled.div`
     }
     @media only screen and (max-width: 576px) {
         min-width: 80px;
-        font-size: 8px;
+        font-size: 10px;
+        img {
+            top: 5px;
+            left: 10px;
+            width: 15px;
+            height: 15px;
+        }
     }
 `;
