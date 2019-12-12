@@ -14,11 +14,13 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import notFound from "./pages/404-not-found";
 import Layout from "./components/Layout";
+import Requests from "./pages/Requests";
 
 export default () => {
     const auth = useSelector(state => state.auth);
     const dispatch = useDispatch();
     const token = sessionStorage.getItem("authKey");
+
     useEffect(() => {
         async function getInfo(token) {
             const response = await api.get("/users/me");
@@ -103,6 +105,18 @@ export default () => {
                     auth.authenticated ? (
                         <Layout>
                             <Profile />
+                        </Layout>
+                    ) : (
+                            <Redirect to="/login" />
+                        )
+                }
+            />
+            <Route
+                path="/requests"
+                render={() =>
+                    auth.authenticated ? (
+                        <Layout>
+                            <Requests />
                         </Layout>
                     ) : (
                             <Redirect to="/login" />

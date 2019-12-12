@@ -44,7 +44,7 @@ export default function Login() {
         }
     }
     function handleKeyPress(e) {
-        if (e.key === "Enter") return handleSubmitLogin();
+        if (e.key === "Enter") return handleSubmitLogin(e);
     }
     const handleSubmitLogin = async (e) => {
         e.preventDefault();

@@ -1,10 +1,17 @@
 import axios from "axios";
 
+export const API_URL = 'http://localhost:8000';
+export const SOCKET_URL = 'http://localhost:2021';
+
 const api = axios.create({
-    baseURL: "http://takebook-api.test"
+    baseURL: API_URL
 });
+
 api.interceptors.request.use(config => {
     const token = sessionStorage.getItem("authKey");
+    config.headers = {
+        'Access-Control-Allow-Origin': 'http://localhost:3000'
+    }
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
@@ -31,3 +38,4 @@ api.interceptors.response.use(
 );
 
 export default api;
+
