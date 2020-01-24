@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+    web:
+        image: node
+        container_name: takebook_adm
+        build: .
+        ports:
+            - '3000:3000'
+        volumes:
+            - .:/var/www/html:cached
+        networks:
+            - takebook-network
+        working_dir: /var/www/html
+
+networks:
+    takebook-network:
+        driver: bridge
