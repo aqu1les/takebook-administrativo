@@ -1,24 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import Header from './Header';
 import Menu from './Menu';
 import styled from 'styled-components';
 import topRight from '../../assets/login/top-right.svg';
 import leftBottom from '../../assets/login/left-bottom.svg';
 import rightBottom from '../../assets/right-bottom.svg';
-import { ClientSocket } from 'use-socketio';
-import { SOCKET_URL } from '../../services/api';
 
 export default function Layout(props) {
-    const user = useSelector(state => state.auth);
     return (
-        <ClientSocket url={`${SOCKET_URL}?user_id=${user.id}`}>
-            <Wrapper>
-                <Header />
-                <Menu />
-                <Main>{props.children}</Main>
-            </Wrapper>
-        </ClientSocket>
+        <Wrapper>
+            <Header />
+            <Menu />
+            <Main>{props.children}</Main>
+        </Wrapper>
     );
 }
 const Main = styled.main`

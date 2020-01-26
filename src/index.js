@@ -1,14 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import * as serviceWorker from './serviceWorker';
 import './index.css';
 import App from './App';
 import store from './redux/store';
 
-window.addEventListener('close', e => {
-    localStorage.removeItem('user_info');
-});
 ReactDOM.render(
     <Provider store={store}>
         <App />
@@ -16,4 +12,3 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-serviceWorker.register();

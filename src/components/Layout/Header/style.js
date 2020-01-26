@@ -45,7 +45,14 @@ export const AppHeader = styled.header`
 			-moz-user-select: none;
 			-ms-user-select: none;
 			user-select: none;
-		}
+        }
+        a {
+            color: #000;
+            text-decoration: none;
+            &:visited {
+                color: #000;
+            }
+        }
 		div {
 			#btnNotification {
 				cursor: pointer;
@@ -85,15 +92,21 @@ export const AppHeader = styled.header`
 			transition: height 200ms ease-in;
 			display: flex;
 			flex-direction: column;
-			align-items: center;
+            align-items: center;
+            &>* {
+                display: none;
+            }
 
 			&.open {
 				height: 500px;
 				width: 240px;
 				ul {
+                    display: flex;
+                    flex-direction: column;
 					height: 100%;
 					width: 100%;
-					animation: ${fadeIn} 1s;
+                    animation: ${fadeIn} 1s;
+                    list-style: none;
 				}
 				.divider {
 					margin-top: 10px;
@@ -189,12 +202,6 @@ export const AppHeader = styled.header`
 				justify-content: space-between;
 				align-items: center;
 				animation: ${fadeIn} 1s;
-				a {
-					text-decoration: none;
-					&:visited {
-						color: #000;
-					}
-				}
 				&:hover {
 					opacity: 0.5;
 				}

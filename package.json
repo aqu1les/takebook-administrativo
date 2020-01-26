@@ -2,8 +2,11 @@
     "name": "takebook-administrativo",
     "version": "0.2.0",
     "private": false,
+    "license": "",
     "dependencies": {
         "axios": "^0.19.0",
+        "date-fns": "^2.9.0",
+        "date-fns-tz": "^1.0.9",
         "material-table": "^1.50.0",
         "react": "^16.9.0",
         "react-charts": "^2.0.0-beta.6",
@@ -20,8 +23,8 @@
         "use-socketio": "^1.0.1"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
+        "start": "react-scripts start && cra-append-sw --mode dev ./src/custom-sw.js",
+        "build": "react-scripts build && cra-append-sw ./src/custom-sw.js",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
@@ -41,6 +44,7 @@
         ]
     },
     "devDependencies": {
+        "cra-append-sw": "^2.7.0",
         "jsonwebtoken": "^8.5.1",
         "react-test-renderer": "^16.9.0"
     }

@@ -20,6 +20,7 @@ import passwordIcon from "../../assets/icons/password.svg";
 import emailIcon from "../../assets/icons/email.svg";
 import PopUp from "../../components/Popup";
 import { setUserAction } from "../../redux/Actions/auth";
+import * as serviceWorker from '../../serviceWorker';
 
 export default function Login() {
     // eslint-disable-next-line 
@@ -64,6 +65,8 @@ export default function Login() {
             setIsLoading(false);
             return setErrorEmail(true);
         }
+        localStorage.setItem('user_info', JSON.stringify({ ...response.data.user, token: response.data.token }));
+        serviceWorker.register();
         setTimeout(() => {
             dispatch(setUserAction({ ...response.data.user, token: response.data.token }));
         }, 3000);

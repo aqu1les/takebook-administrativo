@@ -1,7 +1,6 @@
 import axios from "axios";
 
-export const API_URL = 'http://localhost:8000';
-export const SOCKET_URL = 'http://localhost:2021';
+export const API_URL = 'http://10.0.0.8:8000';
 
 const api = axios.create({
     baseURL: API_URL
@@ -9,9 +8,6 @@ const api = axios.create({
 
 api.interceptors.request.use(config => {
     const token = sessionStorage.getItem("authKey");
-    config.headers = {
-        'Access-Control-Allow-Origin': 'http://localhost:3000'
-    }
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }

@@ -1,10 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Redirect } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
-import notificationIcon from "../../../assets/icons/notifications.svg";
-import defaultProfile from "../../../assets/icons/defaultProfile.svg";
-import { AppHeader } from "./style";
+import React, { useState, useRef, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import notificationIcon from '../../../assets/icons/notifications.svg';
+import defaultProfile from '../../../assets/icons/defaultProfile.svg';
+import { AppHeader } from './style';
+import Notification from '../../Notification';
 
 export default function Header() {
     const dispatch = useDispatch();
@@ -16,30 +17,30 @@ export default function Header() {
 
     useEffect(() => {
         document
-            .querySelector("main")
-            .addEventListener("mousedown", handleClickOutside);
+            .querySelector('main')
+            .addEventListener('mouseup', handleClickOutside);
         document
-            .querySelector("aside")
-            .addEventListener("mousedown", handleClickOutside);
+            .querySelector('aside')
+            .addEventListener('mouseup', handleClickOutside);
     });
 
     function handleClickOutside() {
-        dropdownArrow.current.classList.remove("open");
-        dropdownContent.current.classList.remove("open");
-        notifications.current.classList.remove("open");
+        dropdownArrow.current.classList.remove('open');
+        dropdownContent.current.classList.remove('open');
+        notifications.current.classList.remove('open');
     }
     function openNotifications(e) {
-        notifications.current.classList.toggle("open");
-        dropdownContent.current.classList.remove("open");
-        dropdownArrow.current.classList.remove("open");
+        notifications.current.classList.toggle('open');
+        dropdownContent.current.classList.remove('open');
+        dropdownArrow.current.classList.remove('open');
     }
     function handleDropdown(e) {
-        dropdownContent.current.classList.toggle("open");
-        dropdownArrow.current.classList.toggle("open");
-        notifications.current.classList.remove("open");
+        dropdownContent.current.classList.toggle('open');
+        dropdownArrow.current.classList.toggle('open');
+        notifications.current.classList.remove('open');
     }
     const handleRedirectProfile = e => setToProfile(true);
-    const logoff = e => dispatch({ type: "LOG_OUT" });
+    const logoff = e => dispatch({ type: 'LOG_OUT' });
 
     return (
         <>
@@ -52,10 +53,24 @@ export default function Header() {
                             alt="Ícone de notificação"
                             id="btnNotification"
                         />
-                        <div id="notification_counter">10</div>
+                        <div id="notification_counter">
+                            {user.notifications ? user.notifications.length : 0}
+                        </div>
                     </div>
                     <div id="notifications" ref={notifications}>
                         <div className="divider"></div>
+                        <ul>
+                            {user.notifications
+                                ? user.notifications.map(
+                                      (notification, index) => (
+                                          <Notification
+                                              key={notification.id}
+                                              notification={notification}
+                                          />
+                                      )
+                                  )
+                                : ''}
+                        </ul>
                     </div>
                     <div className="vertical-divider"></div>
                     <div id="dropdown" onClick={handleDropdown}>
