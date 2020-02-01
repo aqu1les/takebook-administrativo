@@ -23,8 +23,8 @@ const fadeIn = keyframes`
 export const AppHeader = styled.header`
 	height: 62px;
 	position: absolute;
-	max-width: 240px;
-	width: 240px;
+	max-width: 280px;
+	width: 280px;
 	top: 0;
 	right: 0;
 	z-index: 10;
@@ -99,7 +99,9 @@ export const AppHeader = styled.header`
 
 			&.open {
 				height: 500px;
-				width: 240px;
+                width: 280px;
+                padding: 5px 0 5px 0;
+                
 				ul {
                     display: flex;
                     flex-direction: column;
@@ -107,6 +109,8 @@ export const AppHeader = styled.header`
 					width: 100%;
                     animation: ${fadeIn} 1s;
                     list-style: none;
+                    overflow-y: scroll;
+                    overflow-x: hidden;
 				}
 				.divider {
 					margin-top: 10px;

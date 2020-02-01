@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Pusher from 'pusher-js';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -6,6 +7,8 @@ import notificationIcon from '../../../assets/icons/notifications.svg';
 import defaultProfile from '../../../assets/icons/defaultProfile.svg';
 import { AppHeader } from './style';
 import Notification from '../../Notification';
+import { addAdvertAction } from '../../../redux/Actions/adverts';
+import { addNotificationAction } from '../../../redux/Actions/auth';
 
 export default function Header() {
     const dispatch = useDispatch();
@@ -24,21 +27,42 @@ export default function Header() {
             .addEventListener('mouseup', handleClickOutside);
     });
 
+    useEffect(() => {
+        Pusher.logToConsole = true;
+        const pusher = new Pusher('06aeebf69251841ae50a', {
+            cluster: 'us2',
+            forceTLS: true
+        });
+
+        const broadcastChannel = pusher.subscribe(`all-clients`);
+        broadcastChannel.bind('book-accepted', function(event) {
+            dispatch(addAdvertAction(event.message));
+        });
+
+        const privateChannel = pusher.subscribe(`userID${user.id}`);
+        privateChannel.bind('new-notification', function(event) {
+            dispatch(addNotificationAction(event.message));
+        });
+    }, [user.id, dispatch]);
+
     function handleClickOutside() {
         dropdownArrow.current.classList.remove('open');
         dropdownContent.current.classList.remove('open');
         notifications.current.classList.remove('open');
     }
+
     function openNotifications(e) {
         notifications.current.classList.toggle('open');
         dropdownContent.current.classList.remove('open');
         dropdownArrow.current.classList.remove('open');
     }
+
     function handleDropdown(e) {
         dropdownContent.current.classList.toggle('open');
         dropdownArrow.current.classList.toggle('open');
         notifications.current.classList.remove('open');
     }
+
     const handleRedirectProfile = e => setToProfile(true);
     const logoff = e => dispatch({ type: 'LOG_OUT' });
 
@@ -59,12 +83,12 @@ export default function Header() {
                     </div>
                     <div id="notifications" ref={notifications}>
                         <div className="divider"></div>
-                        <ul>
+                        <ul className="notifications-list custom-scroll">
                             {user.notifications
                                 ? user.notifications.map(
                                       (notification, index) => (
                                           <Notification
-                                              key={notification.id}
+                                              key={index}
                                               notification={notification}
                                           />
                                       )

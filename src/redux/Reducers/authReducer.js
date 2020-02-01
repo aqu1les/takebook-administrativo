@@ -10,6 +10,8 @@ export default function authReducer(state = INITIAL_STATE, action) {
         case "SET_USER":
             sessionStorage.setItem("authKey", action.user.token);
             return { ...state, ...action.user, authenticated: true };
+        case "ADD_NOTIFICATION":
+            return { ...state, notifications: [action.notification, ...state.notifications] };
         case "LOG_OUT":
             sessionStorage.removeItem("authKey");
             const swclient = JSON.parse(sessionStorage.getItem('swclient'));

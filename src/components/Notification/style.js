@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.li`
-    width: 100%;
+    width: 95%;
     height: 100px;
     position: relative;
     cursor: pointer;
@@ -30,7 +30,7 @@ export const Main = styled.main`
     }
     p {
         text-decoration: none;
-        font-size: 10px;
+        font-size: 14px;
         &:link {
             text-decoration: none;
         }
@@ -40,7 +40,7 @@ export const Main = styled.main`
 export const TimeStamp = styled.footer`
     position: absolute;
     font-style: italic;
-    font-size: 8px;
+    font-size: 11px;
     bottom: 0;
     right: 2px;
 `
