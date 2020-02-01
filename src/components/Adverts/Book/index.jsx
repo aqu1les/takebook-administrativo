@@ -1,18 +1,18 @@
-import React from "react";
-import { Card } from "./style";
+import React from 'react';
+import { Card, Header, Body, Button } from './style';
 
 export default function Book(props) {
     const { author, title, covers_url } = props.book;
     return (
         <Card>
-            <header>
+            <Header>
                 <img src={covers_url[0].url} alt="Capa do livro" />
-                <div>
+                <Body>
                     <h2>{title}</h2>
                     <h3>{author}</h3>
-                </div>
-            </header>
-            <button onClick={props.onClick}>> Ver</button>
+                </Body>
+            </Header>
+            <Button onClick={props.onClick}>> Ver</Button>
         </Card>
     );
 }

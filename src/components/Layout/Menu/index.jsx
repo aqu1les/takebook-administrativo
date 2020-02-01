@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu } from './style.js';
-import logo from '../../../assets/book-app.png';
+import logo from '../../../assets/Takebook.svg';
 import mainIcon from '../../../assets/icons/main.svg';
 import adIcon from '../../../assets/icons/ad-icon.svg';
 import userIcon from '../../../assets/icons/user-icon.svg';
