@@ -5,10 +5,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import notificationIcon from '../../../assets/icons/notifications.svg';
 import defaultProfile from '../../../assets/icons/defaultProfile.svg';
-import { AppHeader } from './style';
+import { AppHeader, NotificationCounter } from './style';
 import Notification from '../../Notification';
 import { addAdvertAction } from '../../../redux/Actions/adverts';
-import { addNotificationAction } from '../../../redux/Actions/auth';
+import {
+    addNotificationAction,
+    openNotificationAction
+} from '../../../redux/Actions/auth';
+import api from '../../../services/api';
 
 export default function Header() {
     const dispatch = useDispatch();
@@ -17,6 +21,9 @@ export default function Header() {
     const dropdownContent = useRef(null);
     const dropdownArrow = useRef(null);
     const notifications = useRef(null);
+    const notificationCounter = useSelector(
+        state => state.auth.notificationsCount
+    );
 
     useEffect(() => {
         document
@@ -42,6 +49,9 @@ export default function Header() {
         const privateChannel = pusher.subscribe(`userID${user.id}`);
         privateChannel.bind('new-notification', function(event) {
             dispatch(addNotificationAction(event.message));
+            if (event.message.book) {
+                dispatch(addAdvertAction(event.message.book));
+            }
         });
     }, [user.id, dispatch]);
 
@@ -63,6 +73,14 @@ export default function Header() {
         notifications.current.classList.remove('open');
     }
 
+    async function handleOpenNotification(notification) {
+        if (notification.opened) return;
+        const response = await api.put(`/notifications/${notification.id}`);
+        if (response.data) {
+            dispatch(openNotificationAction(notification));
+        }
+    }
+
     const handleRedirectProfile = e => setToProfile(true);
     const logoff = e => dispatch({ type: 'LOG_OUT' });
 
@@ -77,9 +95,11 @@ export default function Header() {
                             alt="Ícone de notificação"
                             id="btnNotification"
                         />
-                        <div id="notification_counter">
-                            {user.notifications ? user.notifications.length : 0}
-                        </div>
+                        <NotificationCounter
+                            show={notificationCounter > 0 ? true : false}
+                        >
+                            {notificationCounter}
+                        </NotificationCounter>
                     </div>
                     <div id="notifications" ref={notifications}>
                         <div className="divider"></div>
@@ -87,10 +107,19 @@ export default function Header() {
                             {user.notifications
                                 ? user.notifications.map(
                                       (notification, index) => (
-                                          <Notification
-                                              key={index}
-                                              notification={notification}
-                                          />
+                                          <NavLink
+                                              key={notification.id}
+                                              to="/adverts"
+                                              onClick={() =>
+                                                  handleOpenNotification(
+                                                      notification
+                                                  )
+                                              }
+                                          >
+                                              <Notification
+                                                  notification={notification}
+                                              />
+                                          </NavLink>
                                       )
                                   )
                                 : ''}

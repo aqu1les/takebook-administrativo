@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
 const shake = keyframes`
     from {
@@ -64,20 +64,7 @@ export const AppHeader = styled.header`
 				}
 			}
 			#notification_counter {
-				position: absolute;
-				z-index: 1;
-				background-color: red;
-				width: 16px;
-				height: 14px;
-				color: #fff;
-				left: 23px;
-				top: 15px;
-				border-radius: 3px;
-				font-size: 8pt;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				cursor: default;
+				
 			}
 		}
 		#notifications {
@@ -217,3 +204,25 @@ export const AppHeader = styled.header`
 		width: 220px;
 	}
 `;
+
+export const NotificationCounter = styled.div`
+    position: absolute;
+    z-index: 1;
+    background-color: red;
+    width: 16px;
+    height: 14px;
+    color: #fff;
+    left: 23px;
+    top: 15px;
+    border-radius: 3px;
+    font-size: 8pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+    ${props =>
+        !props.show &&
+        css`
+        display: none;
+    `}
+`

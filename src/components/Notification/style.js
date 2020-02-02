@@ -1,10 +1,12 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Wrapper = styled.li`
     width: 95%;
     height: 100px;
     position: relative;
     cursor: pointer;
+    border-radius: 4px;
+    padding: 5px;
 
     &:hover {
         opacity: 0.8;
@@ -12,6 +14,10 @@ export const Wrapper = styled.li`
     *, *:link {
         text-decoration: none;
     }
+    ${props => !props.opened &&
+        css`
+        background-color: #edf2fa;
+    `}
     
 `
 
@@ -41,6 +47,6 @@ export const TimeStamp = styled.footer`
     position: absolute;
     font-style: italic;
     font-size: 11px;
-    bottom: 0;
+    bottom: 5px;
     right: 2px;
 `
