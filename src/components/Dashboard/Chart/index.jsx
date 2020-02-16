@@ -1,58 +1,57 @@
 import React from "react";
 import { Background } from "./style";
 import { Chart } from "react-charts";
+import { generateArrayOfMonths, getMonthProperty } from '../../../utils/Date';
 
 export default props => {
-    //const { data } = props;
+    const { adverts, users, reports } = props;
+    const usersData = generateArrayOfMonths();
+    const advertsData = generateArrayOfMonths();
+    const reportsData = generateArrayOfMonths();
+
+    users.forEach(user => {
+        const month = getMonthProperty(user.created_at);
+        usersData[month][1] += 1;
+    });
+
+    adverts.forEach(advert => {
+        const month = getMonthProperty(advert.created_at);
+        advertsData[month][1] += 1;
+    });
+
+    reports.forEach(report => {
+        const month = getMonthProperty(report.created_at);
+        reportsData[month][1] += 1;
+    });
+
     const data = React.useMemo(
         () => [
             {
-                label: "Usuários",
-                data: [
-                    { x: "Janeiro", y: 8 },
-                    ["Fevereiro", 2],
-                    ["Março", 4],
-                    ["Abril", 2],
-                    ["Maio", 7],
-                    ["Junho", 6],
-                    ["Julho", 2],
-                    ["Agosto", 3],
-                    ["Setembro", 7],
-                    ["Outubro", 9],
-                    ["Novembro", 16],
-                    ["Dezembro", 26]
-                ]
+                label: "Usuários cadastrados",
+                data: usersData
             },
             {
-                label: "Livros",
-                data: [
-                    { x: "Janeiro", y: 10 },
-                    ["Fevereiro", 1],
-                    ["Março", 5],
-                    ["Abril", 6],
-                    ["Maio", 4],
-                    ["Junho", 6],
-                    ["Julho", 2],
-                    ["Agosto", 3],
-                    ["Setembro", 7],
-                    ["Outubro", 9],
-                    ["Novembro", 16],
-                    ["Dezembro", 26]
-                ]
+                label: "Anúncios criados",
+                data: advertsData
+            },
+            {
+                label: "Denúncias",
+                data: reportsData
             }
         ],
-        []
+        [advertsData, usersData, reportsData]
     );
     const series = React.useMemo(
         () => ({
-            type: "area"
+            type: 'bar',
+            showPoints: true
         }),
         []
     );
     const axes = React.useMemo(
         () => [
             { primary: true, position: "bottom", type: "ordinal" },
-            { type: "linear", position: "left" }
+            { position: "left", type: "linear",  }
         ],
         []
     );

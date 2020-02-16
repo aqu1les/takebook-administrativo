@@ -11,14 +11,14 @@ export const Wrapper = styled.div`
 `;
 export const Card = styled.div`
     width: 100%;
-    height: 98%;
+    height: 95%;
     margin-top: 15px;
+    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.16);
     border-radius: 8px;
     background-color: #EFEFEF;
-    padding: 0 10px;
     ${width920} {
         height: 100%;
         width: 100%;
@@ -46,16 +46,7 @@ export const Main = styled.main`
         height: 75%;        
     }
 `;
-export const Footer = styled.footer`
-    height: 7%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    ${width920} {
-        height: 12%;     
-    }
-`;
+
 export const Content = styled.section`
     height: 92%;
     width: 100%;

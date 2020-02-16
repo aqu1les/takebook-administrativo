@@ -31,7 +31,7 @@ export const CardContent = styled.main`
     margin-top: 10px;
     height: 50%;
     width: 100%;
-    background-color: #EFEFEF;
+    background-color: #fefefe;
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.16);
     border-radius: 8px;
     display: flex;

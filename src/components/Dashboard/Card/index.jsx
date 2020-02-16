@@ -9,7 +9,7 @@ export default function Card(props) {
             <img src={icon} alt="Ícone do card" />
             <h2>
                 <NavLink to={`/${link}`} activeClassName="active">
-                    {data}
+                    {data || 0}
                 </NavLink>
             </h2>
             <h3>

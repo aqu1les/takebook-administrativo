@@ -2,7 +2,8 @@ import * as serviceWorker from '../../serviceWorker';
 import api from "../../services/api";
 
 const INITIAL_STATE = {
-    authenticated: false
+    authenticated: false,
+    loading: false
 };
 
 export default function authReducer(state = INITIAL_STATE, action) {
@@ -10,12 +11,35 @@ export default function authReducer(state = INITIAL_STATE, action) {
         case "SET_USER":
             sessionStorage.setItem("authKey", action.user.token);
             const notificationsCount = action.user.notifications.filter(notification => notification.opened === 0).length;
-            return { ...state, ...action.user, authenticated: true, notificationsCount };
+            return {
+                ...state,
+                ...action.user,
+                authenticated: true,
+                notificationsCount
+            };
+        case "CHECK_TOKEN":
+            return {
+                ...state,
+                loading: true
+            };
+        case "CHECK_TOKEN_SUCCESS":
+            return {
+                ...state,
+                loading: false
+            };
         case "ADD_NOTIFICATION":
-            return { ...state, notifications: [action.notification, ...state.notifications], notificationsCount: state.notificationsCount + 1 };
+            return {
+                ...state,
+                notifications: [action.notification, ...state.notifications],
+                notificationsCount: state.notificationsCount + 1
+            };
         case "OPEN_NOTIFICATION":
             const notifications = state.notifications.map(notification => notification.id === action.notification.id ? { ...notification, opened: 1 } : notification);
-            return { ...state, notifications, notificationsCount: state.notificationsCount - 1 };
+            return {
+                ...state,
+                notifications,
+                notificationsCount: state.notificationsCount - 1
+            };
         case "LOG_OUT":
             sessionStorage.removeItem("authKey");
             const swclient = JSON.parse(sessionStorage.getItem('swclient'));

@@ -1,27 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Wrapper, Card, CardHeader, CardContent } from "./style";
-import StatCard from "../../components/Dashboard/Card";
-import Loading from "../../components/Loading";
-import Chart from "../../components/Dashboard/Chart";
-import advertIcon from "../../assets/icons/ad-icon.svg";
-import userIcon from "../../assets/icons/user-icon.svg";
-import reportIcon from "../../assets/icons/reports-icon.svg";
+import React, {useEffect, useMemo} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getYear } from 'date-fns';
+import { Wrapper, Card, CardHeader, CardContent } from './style';
+import StatCard from '../../components/Dashboard/Card';
+import Loading from '../../components/Loading';
+import Chart from '../../components/Dashboard/Chart';
+import advertIcon from '../../assets/icons/ad-icon.svg';
+import userIcon from '../../assets/icons/user-icon.svg';
+import reportIcon from '../../assets/icons/reports-icon.svg';
+import { loadAdvertsAction } from '../../redux/Actions/adverts';
+import { loadCategoriesAction } from '../../redux/Actions/categories';
+import { loadUsersAction } from '../../redux/Actions/users';
+import { loadReportsAction } from '../../redux/Actions/reports';
+
 
 export default function Dashboard() {
     const dispatch = useDispatch();
-    const [isLoading, setIsLoading] = useState(false);
-    const adverts = useSelector(state => state.adverts.data);
-    const totalReports = useSelector(state => state.reports.total);
-    const totalUsers = useSelector(state => state.users.total);
-    const totalAdverts = useSelector(state => state.adverts.total);
-    const analyze_adverts = adverts.filter(ad => ad.status_id === 1).length;
-    const approved_adverts = adverts.filter(ad => ad.status_id === 2).length;
-    const rejected_adverts = adverts.filter(ad => ad.status_id === 3).length;
+    const isLoading = useSelector(state => state.adverts.loading);
+    const allReports = useSelector(state => state.reports.data);
+    const allUsers = useSelector(state => state.users.data);
+    const allAdverts = useSelector(state => state.adverts.allAdverts);
+    const analyzeAdverts = useSelector(state => state.adverts.toValidateAdverts.length);
+    const approvedAdverts = useSelector(state => state.adverts.approvedAdverts.length);
+    const rejectedAdverts = useSelector(state => state.adverts.rejectedAdverts.length);
+
+    const totalUsers = useMemo(() => allUsers.length, [allUsers]);
+    const totalAdverts = useMemo(() => allAdverts.length, [allAdverts]);
+    const totalReports = useMemo(() => allReports.length, [allReports]);
 
     useEffect(() => {
-        setIsLoading(true);
-        return setIsLoading(v => !v);
+        dispatch(loadAdvertsAction());
+        dispatch(loadCategoriesAction());
+        dispatch(loadUsersAction());
+        dispatch(loadReportsAction());
     }, [dispatch]);
 
     return (
@@ -33,60 +44,48 @@ export default function Dashboard() {
                     <Card>
                         <CardHeader>
                             <StatCard
-                                title="Anúncios"
+                                title='Anúncios'
                                 data={totalAdverts}
                                 icon={advertIcon}
-                                link="adverts"
+                                link='adverts'
                             />
                             <StatCard
-                                title="Usuários"
+                                title='Usuários'
                                 data={totalUsers}
                                 icon={userIcon}
-                                link="users"
+                                link='users'
                             />
                             <StatCard
-                                title="Anúncios em análise"
-                                data={analyze_adverts}
+                                title='Anúncios em análise'
+                                data={analyzeAdverts}
                                 icon={advertIcon}
-                                link="adverts"
+                                link='adverts'
                             />
                             <StatCard
-                                title="Anúncios aprovados"
-                                data={approved_adverts}
+                                title='Anúncios aprovados'
+                                data={approvedAdverts}
                                 icon={advertIcon}
-                                link="adverts"
+                                link='adverts'
                             />
                             <StatCard
-                                title="Anúncios rejeitados"
-                                data={rejected_adverts}
+                                title='Anúncios rejeitados'
+                                data={rejectedAdverts}
                                 icon={advertIcon}
-                                link="adverts"
+                                link='adverts'
                             />
                             <StatCard
-                                title="Denúncias"
+                                title='Denúncias'
                                 data={totalReports}
                                 icon={reportIcon}
-                                link="reports"
+                                link='reports'
                             />
                         </CardHeader>
                         <CardContent>
-                            <h2>Usuários e Livros - Estatísticas</h2>
-                            <Chart />
+                            <h2>Usuários e Livros - {getYear(new Date())}</h2>
+                            <Chart adverts={allAdverts} users={allUsers} reports={allReports} />
                         </CardContent>
                     </Card>
                 )}
         </Wrapper>
     );
 }
-
-/*export default class Dashboard extends Component {
-    signal = axios.CancelToken.source();
-    componentWillUnmount() {
-        this.signal.cancel('Api is being canceled');
-    }
-    render() {
-        return (
-
-        );
-    }
-}*/

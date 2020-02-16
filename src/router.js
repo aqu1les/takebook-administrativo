@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { loadAdvertsAction } from "./redux/Actions/adverts";
-import { loadUsersAction } from "./redux/Actions/users";
-import { loadReportsAction } from "./redux/Actions/reports";
-import { setUserAction } from "./redux/Actions/auth";
+import {setUserAction, checkIfTokenValid, tokenValidated} from "./redux/Actions/auth";
 import api from "./services/api";
 import Dashboard from "./pages/Dashboard";
 import Reports from "./pages/Report";
@@ -12,12 +9,12 @@ import Adverts from "./pages/Adverts";
 import Users from "./pages/Users";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
-import notFound from "./pages/404-not-found";
+import NotFound from "./pages/404-not-found";
 import Layout from "./components/Layout";
 import Requests from "./pages/Requests";
 
 export default () => {
-    const auth = useSelector(state => state.auth);
+    const authenticated = useSelector(state => state.auth.authenticated);
     const dispatch = useDispatch();
     const token = sessionStorage.getItem("authKey");
 
@@ -26,15 +23,14 @@ export default () => {
             const response = await api.get("/users/me");
             if (response) {
                 if (response.status === 200) {
+                    dispatch(tokenValidated());
                     dispatch(setUserAction({ ...response.data, token }));
                 }
             }
         }
         if (token) {
+            dispatch(checkIfTokenValid());
             getInfo(token);
-            dispatch(loadAdvertsAction());
-            dispatch(loadUsersAction());
-            dispatch(loadReportsAction());
         }
     }, [token, dispatch]);
 
@@ -44,7 +40,7 @@ export default () => {
             <Route
                 path="/login"
                 render={() =>
-                    auth.authenticated ? (
+                    authenticated ? (
                         <Redirect to="/dashboard" />
                     ) : (
                             <Login />
@@ -54,7 +50,7 @@ export default () => {
             <Route
                 path="/dashboard"
                 render={() =>
-                    auth.authenticated ? (
+                    authenticated ? (
                         <Layout>
                             <Dashboard />
                         </Layout>
@@ -66,7 +62,7 @@ export default () => {
             <Route
                 path="/users"
                 render={() =>
-                    auth.authenticated ? (
+                    authenticated ? (
                         <Layout>
                             <Users />
                         </Layout>
@@ -78,7 +74,7 @@ export default () => {
             <Route
                 path="/adverts"
                 render={() =>
-                    auth.authenticated ? (
+                    authenticated ? (
                         <Layout>
                             <Adverts />
                         </Layout>
@@ -90,7 +86,7 @@ export default () => {
             <Route
                 path="/reports"
                 render={() =>
-                    auth.authenticated ? (
+                    authenticated ? (
                         <Layout>
                             <Reports />
                         </Layout>
@@ -102,7 +98,7 @@ export default () => {
             <Route
                 path="/me"
                 render={() =>
-                    auth.authenticated ? (
+                    authenticated ? (
                         <Layout>
                             <Profile />
                         </Layout>
@@ -114,7 +110,7 @@ export default () => {
             <Route
                 path="/requests"
                 render={() =>
-                    auth.authenticated ? (
+                    authenticated ? (
                         <Layout>
                             <Requests />
                         </Layout>
@@ -123,7 +119,7 @@ export default () => {
                         )
                 }
             />
-            <Route component={notFound} />
+            <Route component={NotFound} />
         </Switch>
     );
 };
