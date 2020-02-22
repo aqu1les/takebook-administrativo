@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import jQuery from 'jquery';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -7,15 +7,16 @@ import {
     Header,
     Main,
     Content,
+    Footer,
     ModalCard,
     ModalLeftSide,
     ModalDivider,
-    ModalRightSide
+    ModalRightSide,
 } from './style';
 import {
     loadAdvertsAction,
     loadNextPage,
-    updateAdvertAction
+    updateAdvertAction,
 } from '../../redux/Actions/adverts';
 import { loadCategoriesAction } from '../../redux/Actions/categories';
 import Book from '../../components/Adverts/Book';
@@ -27,8 +28,10 @@ import refuse from '../../assets/icons/refuse.svg';
 
 export default function Adverts() {
     const dispatch = useDispatch();
-    const adverts = useSelector(state => state.adverts.toValidateAdverts);
-    const nextPage = useSelector(state => state.adverts.nextPage);
+    const adverts = useSelector(state => state.adverts.toValidateAdverts.data);
+    const nextPage = useSelector(
+        state => state.adverts.toValidateAdverts.nextPage
+    );
     const categories = useSelector(state => state.categories.data);
     const isLoading = useSelector(state => state.adverts.loading);
     const isLoadingMore = useSelector(state => state.adverts.loadingMore);
@@ -45,22 +48,26 @@ export default function Adverts() {
         const scrollableSection = jQuery('#content-scroll');
         scrollableSection.on('scroll', handleScroll);
         function handleScroll(event) {
-            if(scrollableSection.scrollTop() + scrollableSection.innerHeight() >= scrollableSection[0].scrollHeight && nextPage) {
-                console.log('loading more', nextPage);
+            if (
+                scrollableSection.scrollTop() +
+                    scrollableSection.innerHeight() >=
+                    scrollableSection[0].scrollHeight &&
+                nextPage
+            ) {
                 dispatch(loadNextPage(nextPage));
             }
         }
         return () => {
             scrollableSection.off('scroll', handleScroll);
-        }
+        };
     }, [dispatch, nextPage]);
 
     let filtered = adverts
         ? adverts.filter(
-            ad =>
-                ad.title.toLowerCase().indexOf(nameSearch.toLowerCase()) !==
-                -1
-        )
+              ad =>
+                  ad.title.toLowerCase().indexOf(nameSearch.toLowerCase()) !==
+                  -1
+          )
         : [];
 
     async function openModal(id, e) {
@@ -104,7 +111,7 @@ export default function Adverts() {
 
     return (
         <Wrapper>
-            <h2 id='page'>Anúncios</h2>
+            <h2 id="page">Anúncios</h2>
             <Card>
                 <Header>
                     <SearchField
@@ -114,94 +121,99 @@ export default function Adverts() {
                 </Header>
                 <Main>
                     <h2>Resultado</h2>
-                    <Content id='content-scroll'>
+                    <Content id="content-scroll">
                         {isLoading && !isLoadingMore ? (
                             <Loading />
-                        ) : filtered.length > 0 ? filtered.map((ad, index) => (
-                            <Book
-                                book={ad}
-                                key={index}
-                                onClick={e => openModal(ad.id, e)}
-                            />
-                        )) : <h1>Não tem nenhum livro para ser analizado!</h1>}
+                        ) : filtered.length > 0 ? (
+                            filtered.map((ad, index) => (
+                                <Book
+                                    book={ad}
+                                    key={index}
+                                    onClick={e => openModal(ad.id, e)}
+                                />
+                            ))
+                        ) : (
+                            <h1>Não tem nenhum livro para ser analizado!</h1>
+                        )}
                     </Content>
                 </Main>
+                <Footer>{isLoadingMore ? <Loading /> : null}</Footer>
             </Card>
             <Modal open={modalOpen} click={() => setModalOpen(false)}>
                 <ModalCard>
                     <ModalLeftSide>
-                        <div id='covers'>
+                        <div id="covers">
                             {modalAdvert.covers_url.map((cover, index) => (
-                                <div key={index} className='slide'>
-                                    <img src={cover.url} alt='Book' />
+                                <div key={index} className="slide">
+                                    <img src={cover.url} alt="Book" />
                                     <button
                                         onClick={e => changeCover(index + 1)}
                                     ></button>
                                 </div>
                             ))}
                         </div>
-                        <div id='buttons'>
+                        <div id="buttons">
                             <img
                                 src={refuse}
-                                alt='Refuse Button'
+                                alt="Refuse Button"
                                 onClick={refuseBook}
-                                title='Recusar'
+                                title="Recusar"
                             />
                             <img
                                 src={accept}
-                                alt='Accept Button'
+                                alt="Accept Button"
                                 onClick={acceptBook}
-                                title='Aceitar'
+                                title="Aceitar"
                             />
                         </div>
                     </ModalLeftSide>
                     <ModalDivider />
                     <ModalRightSide>
                         <form>
-                            <label htmlFor='title'>Título do anúncio</label>
+                            <label htmlFor="title">Título do anúncio</label>
                             <input
-                                type='text'
-                                id='title'
+                                type="text"
+                                id="title"
                                 placeholder={modalAdvert.title}
                                 disabled
                             />
 
-                            <label htmlFor='author'>Autor do livro</label>
+                            <label htmlFor="author">Autor do livro</label>
                             <input
-                                type='text'
-                                id='author'
+                                type="text"
+                                id="author"
                                 placeholder={modalAdvert.author}
                                 disabled
                             />
 
-                            <div className='row'>
+                            <div className="row">
                                 <div>
-                                    <label htmlFor='status'>Estado</label>
+                                    <label htmlFor="status">Estado</label>
                                     <select
-                                        id='status'
+                                        id="status"
                                         disabled
                                         placeholder={modalAdvert.status}
                                     >
-                                        <option value='0'>Novo</option>
-                                        <option value='1'>Usado</option>
+                                        <option value="0">Novo</option>
+                                        <option value="1">Usado</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label htmlFor='price'>Preço</label>
+                                    <label htmlFor="price">Preço</label>
                                     <input
-                                        id='price'
+                                        id="price"
                                         placeholder={modalAdvert.price}
                                         disabled
                                     />
                                 </div>
                             </div>
 
-                            <label htmlFor='categories'>Categorias</label>
-                            <div id='categories'>
+                            <label htmlFor="categories">Categorias</label>
+                            <div id="categories">
                                 {categories.map(cat => (
                                     <div key={cat.id}>
                                         <input
-                                            type='checkbox'
+                                            type="checkbox"
                                             id={cat.name}
                                             defaultChecked={true || false}
                                         />

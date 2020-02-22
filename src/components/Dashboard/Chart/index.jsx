@@ -1,6 +1,6 @@
-import React from "react";
-import { Background } from "./style";
-import { Chart } from "react-charts";
+import React from 'react';
+import { Background } from './style';
+import { Chart } from 'react-charts';
 import { generateArrayOfMonths, getMonthProperty } from '../../../utils/Date';
 
 export default props => {
@@ -27,31 +27,31 @@ export default props => {
     const data = React.useMemo(
         () => [
             {
-                label: "Usuários cadastrados",
-                data: usersData
+                label: 'Usuários cadastrados',
+                data: usersData,
             },
             {
-                label: "Anúncios criados",
-                data: advertsData
+                label: 'Anúncios criados',
+                data: advertsData,
             },
             {
-                label: "Denúncias",
-                data: reportsData
-            }
+                label: 'Denúncias',
+                data: reportsData,
+            },
         ],
         [advertsData, usersData, reportsData]
     );
     const series = React.useMemo(
         () => ({
             type: 'bar',
-            showPoints: true
+            showPoints: true,
         }),
         []
     );
     const axes = React.useMemo(
         () => [
-            { primary: true, position: "bottom", type: "ordinal" },
-            { position: "left", type: "linear",  }
+            { primary: true, position: 'bottom', type: 'ordinal' },
+            { position: 'left', type: 'linear' },
         ],
         []
     );

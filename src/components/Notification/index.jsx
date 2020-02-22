@@ -37,7 +37,7 @@ export default function Notification({ notification }) {
             </Main>
             <TimeStamp>
                 {formatDistanceToNow(datetime, {
-                    locale: pt
+                    locale: pt,
                 })}
             </TimeStamp>
         </Wrapper>

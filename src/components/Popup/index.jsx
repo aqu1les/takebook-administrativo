@@ -1,6 +1,6 @@
-import React from "react";
-import { PopUp } from "./style";
-import error from "../../assets/icons/error.svg";
+import React from 'react';
+import { PopUp } from './style';
+import error from '../../assets/icons/error.svg';
 
 export default function Popup(props) {
     const { msg, show, variant } = props;

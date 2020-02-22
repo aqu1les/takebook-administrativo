@@ -1,7 +1,20 @@
-import api from "../../services/api";
+import api from '../../services/api';
+
+export const ADD_REPORT = 'ADD_REPORT';
+export const SET_REPORTS_INFO = 'SET_REPORTS_INFO';
+export const CLEAR_REPORTS = 'CLEAR_REPORTS';
+
 
 export function addReportAction(report) {
-    return { type: "ADD_REPORT", report };
+    return { type: ADD_REPORT, report };
+}
+
+export function setReportsInfoAction(info) {
+    return { type: SET_REPORTS_INFO, info };
+}
+
+export function clearReports() {
+    return { type: CLEAR_REPORTS };
 }
 
 /*export function updateReportAction(report) {
@@ -15,9 +28,9 @@ export function addReportAction(report) {
 
 export function loadReportsAction() {
     return async dispatch => {
-        const response = await api.get("/reports");
+        const response = await api.get('/reports');
         if (!response || !response.data) return;
-        dispatch({ type: "SET_REPORTS_INFO", info: { ...response.data, data: [] } });
+        dispatch(setReportsInfoAction({ ...response.data, data: [] }));
         response.data.data.map(report => {
             return dispatch(addReportAction(report));
         });
@@ -27,8 +40,8 @@ export function loadReportPage(page) {
     return async dispatch => {
         const response = await api.get(`/reports?page=${page}`);
         if (!response || !response.data) return;
-        await dispatch({ type: "CLEAR_REPORTS" });
-        dispatch({ type: "SET_REPORTS_INFO", info: { ...response.data, data: [] } });
+        await dispatch(clearReports());
+        dispatch(setReportsInfoAction({ ...response.data, data: [] }));
         response.data.data.map(report => {
             return dispatch(addReportAction(report));
         });

@@ -1,5 +1,5 @@
-import React from "react";
-import { Wrapper, Bg } from "./style";
+import React from 'react';
+import { Wrapper, Bg } from './style';
 
 export default function Modal(props) {
     const { open, children, click } = props;
@@ -8,5 +8,5 @@ export default function Modal(props) {
             <Bg onClick={click} />
             {children}
         </Wrapper>
-    )
+    );
 }

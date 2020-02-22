@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Card = styled.div`
     width: 280px;
     height: 130px;
-    align-items: center;        
+    align-items: center;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.16);
     border-radius: 12px;
     padding: 5px;
@@ -11,7 +11,7 @@ export const Card = styled.div`
     flex-direction: column;
     margin: 10px;
     position: relative;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 
     @media only screen and (max-width: 576px) {
         width: 232px;
@@ -34,7 +34,7 @@ export const Header = styled.header`
         top: 15px;
         border-radius: 8px;
     }
-`
+`;
 export const Body = styled.div`
     margin-left: 101px;
     padding: 5px;
@@ -53,13 +53,13 @@ export const Body = styled.div`
         font-weight: 400;
         margin-bottom: 80px;
     }
-`
+`;
 
 export const Button = styled.button`
     justify-self: center;
     background-color: unset;
     border: none;
-    color: #2BC1F3;
+    color: #2bc1f3;
     font-size: 18px;
     font-weight: 700;
     align-self: center;
@@ -67,10 +67,11 @@ export const Button = styled.button`
     padding: 5px;
     border-radius: 20px;
 
-    &:focus, &:active {
+    &:focus,
+    &:active {
         outline: none;
     }
     &:hover {
         opacity: 0.8;
     }
-`
+`;

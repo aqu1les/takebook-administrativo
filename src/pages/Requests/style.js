@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // eslint-disable-next-line
-const width920 = "@media only screen and (max-width: 920px)";
+const width920 = '@media only screen and (max-width: 920px)';
 
 export const Wrapper = styled.div`
     display: flex;

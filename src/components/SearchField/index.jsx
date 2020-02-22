@@ -1,6 +1,6 @@
-import React from "react";
-import { Div } from "./style";
-import searchIcon from "../../assets/icons/search.svg";
+import React from 'react';
+import { Div } from './style';
+import searchIcon from '../../assets/icons/search.svg';
 
 export default function Search(props) {
     return (

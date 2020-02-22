@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.li`
     width: 95%;
@@ -11,15 +11,16 @@ export const Wrapper = styled.li`
     &:hover {
         opacity: 0.8;
     }
-    *, *:link {
+    *,
+    *:link {
         text-decoration: none;
     }
-    ${props => !props.opened &&
+    ${props =>
+        !props.opened &&
         css`
-        background-color: #edf2fa;
-    `}
-    
-`
+            background-color: #edf2fa;
+        `}
+`;
 
 export const Main = styled.main`
     width: 100%;
@@ -41,7 +42,7 @@ export const Main = styled.main`
             text-decoration: none;
         }
     }
-`
+`;
 
 export const TimeStamp = styled.footer`
     position: absolute;
@@ -49,4 +50,4 @@ export const TimeStamp = styled.footer`
     font-size: 11px;
     bottom: 5px;
     right: 2px;
-`
+`;

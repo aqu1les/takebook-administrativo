@@ -1,6 +1,6 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { Wrapper } from "./style";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { Wrapper } from './style';
 
 export default function Card(props) {
     const { title, data, icon, link } = props;

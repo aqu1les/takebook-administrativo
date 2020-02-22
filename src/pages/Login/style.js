@@ -3,7 +3,7 @@ import leftBottom from '../../assets/login/left-bottom.svg';
 import bottomCenter from '../../assets/login/bottom-center.svg';
 import topRight from '../../assets/login/top-right.svg';
 
-const width920 = "@media only screen and (max-width: 920px)";
+const width920 = '@media only screen and (max-width: 920px)';
 
 const fade = keyframes`
     from {

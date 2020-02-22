@@ -10,9 +10,10 @@ import Notification from '../../Notification';
 import { addAdvertAction } from '../../../redux/Actions/adverts';
 import {
     addNotificationAction,
-    openNotificationAction
-} from '../../../redux/Actions/auth';
+    openNotificationAction,
+} from '../../../redux/Actions/notifications';
 import api from '../../../services/api';
+import { logOutAction } from '../../../redux/Actions/auth';
 
 export default function Header() {
     const dispatch = useDispatch();
@@ -20,9 +21,10 @@ export default function Header() {
     const user = useSelector(state => state.auth);
     const dropdownContent = useRef(null);
     const dropdownArrow = useRef(null);
-    const notifications = useRef(null);
-    const notificationCounter = useSelector(
-        state => state.auth.notificationsCount
+    const notificationsRef = useRef(null);
+    const notifications = useSelector(state => state.notifications.data);
+    const unseenNotifications = useSelector(
+        state => state.notifications.unseen
     );
 
     useEffect(() => {
@@ -38,7 +40,7 @@ export default function Header() {
         Pusher.logToConsole = true;
         const pusher = new Pusher('06aeebf69251841ae50a', {
             cluster: 'us2',
-            forceTLS: true
+            forceTLS: true,
         });
 
         const broadcastChannel = pusher.subscribe(`all-clients`);
@@ -58,11 +60,11 @@ export default function Header() {
     function handleClickOutside() {
         dropdownArrow.current.classList.remove('open');
         dropdownContent.current.classList.remove('open');
-        notifications.current.classList.remove('open');
+        notificationsRef.current.classList.remove('open');
     }
 
     function openNotifications(e) {
-        notifications.current.classList.toggle('open');
+        notificationsRef.current.classList.toggle('open');
         dropdownContent.current.classList.remove('open');
         dropdownArrow.current.classList.remove('open');
     }
@@ -70,7 +72,7 @@ export default function Header() {
     function handleDropdown(e) {
         dropdownContent.current.classList.toggle('open');
         dropdownArrow.current.classList.toggle('open');
-        notifications.current.classList.remove('open');
+        notificationsRef.current.classList.remove('open');
     }
 
     async function handleOpenNotification(notification) {
@@ -82,7 +84,7 @@ export default function Header() {
     }
 
     const handleRedirectProfile = e => setToProfile(true);
-    const logoff = e => dispatch({ type: 'LOG_OUT' });
+    const logoff = e => dispatch(logOutAction());
 
     return (
         <>
@@ -96,32 +98,30 @@ export default function Header() {
                             id="btnNotification"
                         />
                         <NotificationCounter
-                            show={notificationCounter > 0 ? true : false}
+                            show={unseenNotifications > 0 ? true : false}
                         >
-                            {notificationCounter}
+                            {unseenNotifications}
                         </NotificationCounter>
                     </div>
-                    <div id="notifications" ref={notifications}>
+                    <div id="notifications" ref={notificationsRef}>
                         <div className="divider"></div>
                         <ul className="notifications-list custom-scroll">
-                            {user.notifications
-                                ? user.notifications.map(
-                                      (notification, index) => (
-                                          <NavLink
-                                              key={notification.id}
-                                              to="/adverts"
-                                              onClick={() =>
-                                                  handleOpenNotification(
-                                                      notification
-                                                  )
-                                              }
-                                          >
-                                              <Notification
-                                                  notification={notification}
-                                              />
-                                          </NavLink>
-                                      )
-                                  )
+                            {notifications
+                                ? notifications.map((notification, index) => (
+                                      <NavLink
+                                          key={notification.id}
+                                          to="/adverts"
+                                          onClick={() =>
+                                              handleOpenNotification(
+                                                  notification
+                                              )
+                                          }
+                                      >
+                                          <Notification
+                                              notification={notification}
+                                          />
+                                      </NavLink>
+                                  ))
                                 : ''}
                         </ul>
                     </div>

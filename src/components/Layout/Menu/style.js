@@ -1,11 +1,11 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const Menu = styled.aside`
     ${props =>
         !props.show &&
         css`
-        display: none;
-    `}
+            display: none;
+        `}
     width: 240px;
     height: 100%;
     transition: width 300ms;
@@ -32,9 +32,9 @@ export const Menu = styled.aside`
         align-items: center;
         margin-top: 10px;
         margin-bottom: 10px;
-        img {           
+        img {
             width: 70px;
-            height: 70px;        
+            height: 70px;
         }
     }
     a {
@@ -80,8 +80,9 @@ export const Menu = styled.aside`
                 margin: 0;
             }
         }
-        #img, a>p {
-            display: none
+        #img,
+        a > p {
+            display: none;
         }
         a.active {
             background-color: #0a85ae;

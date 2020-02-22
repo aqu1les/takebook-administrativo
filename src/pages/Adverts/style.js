@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-const width920 = "@media only screen and (max-width: 920px)";
+const width920 = '@media only screen and (max-width: 920px)';
 
 export const Wrapper = styled.div`
     display: flex;
@@ -18,16 +18,17 @@ export const Card = styled.div`
     flex-direction: column;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.16);
     border-radius: 8px;
-    background-color: #EFEFEF;
+    background-color: #efefef;
     ${width920} {
         height: 100%;
         width: 100%;
         padding: 0;
         box-shadow: none;
         margin: 0;
-        background-color: #FFF;
+        background-color: #fff;
     }
 `;
+
 export const Header = styled.header`
     height: 13%;
     display: flex;
@@ -35,6 +36,7 @@ export const Header = styled.header`
     justify-content: center;
     align-items: center;
 `;
+
 export const Main = styled.main`
     height: 80%;
     margin-left: 20px;
@@ -43,7 +45,7 @@ export const Main = styled.main`
         font-weight: 400;
     }
     ${width920} {
-        height: 75%;        
+        height: 75%;
     }
 `;
 
@@ -57,29 +59,38 @@ export const Content = styled.section`
 
     ::-webkit-scrollbar {
         border-radius: 50px;
-        width: 5px;     
+        width: 5px;
     }
-    
+
     /* Track */
     ::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 1px grey; 
+        box-shadow: inset 0 0 1px grey;
         border-radius: 50px;
-    }    
+    }
     /* Handle */
     ::-webkit-scrollbar-thumb {
-        background: #2BC1F3; 
+        background: #2bc1f3;
         border-radius: 10px;
         margin: 50px 0;
-    }    
+    }
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
         opacity: 0.6;
     }
 `;
+
+export const Footer = styled.footer`
+    height: 7%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+`;
+
 export const ModalCard = styled.section`
     width: 810px;
     height: 540px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-radius: 25px;
     display: flex;
     flex-direction: row;
@@ -94,7 +105,7 @@ export const ModalCard = styled.section`
         height: 80%;
         border-radius: 0;
     }
-`
+`;
 export const ModalLeftSide = styled.div`
     height: 100%;
     width: 50%;
@@ -102,10 +113,10 @@ export const ModalLeftSide = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
     div#covers {
         padding: 5px;
-        div.slide {            
+        div.slide {
             position: relative;
             width: 200px;
             height: 300px;
@@ -118,7 +129,7 @@ export const ModalLeftSide = styled.div`
             }
             button {
                 position: absolute;
-                background-color: #FB8C00;
+                background-color: #fb8c00;
                 bottom: 5px;
                 left: 90px;
                 width: 20px;
@@ -128,14 +139,14 @@ export const ModalLeftSide = styled.div`
                 cursor: pointer;
                 ${width920} {
                     left: 50px;
-                }                
+                }
             }
             ${width920} {
                 width: 120px;
                 height: 200px;
             }
-        }        
-    }    
+        }
+    }
     div#buttons img {
         height: 90px;
         width: 90px;
@@ -152,15 +163,15 @@ export const ModalLeftSide = styled.div`
         margin-top: 20px;
         box-shadow: 1px 6px 8px rgba(0, 0, 0, 0.16);
     }
-`
+`;
 export const ModalDivider = styled.div`
     height: 430px;
     width: 0;
-    border: 1px solid #C1C3C4;
+    border: 1px solid #c1c3c4;
     ${width920} {
         display: none;
     }
-`
+`;
 export const ModalRightSide = styled.div`
     height: 100%;
     display: flex;
@@ -174,33 +185,36 @@ export const ModalRightSide = styled.div`
         height: 80%;
         width: 80%;
         label {
-            color: #6D6E6E;
+            color: #6d6e6e;
             font-size: 16px;
         }
-        input, textarea, select {
-            border: 1px solid #E2E4E5;
+        input,
+        textarea,
+        select {
+            border: 1px solid #e2e4e5;
             border-radius: 10px;
             height: 28px;
             max-height: 46px;
             padding: 8px;
             margin: 5px 0;
             width: 100%;
-            &:focus, &:active {
-                border: 1px solid #2BC1F3;
+            &:focus,
+            &:active {
+                border: 1px solid #2bc1f3;
                 outline: none;
             }
         }
         .row {
             display: flex;
             flex-direction: row;
-            justify-content: space-between
-            div {
+            justify-content: space-between div {
                 display: flex;
                 flex-direction: column;
                 select {
                     height: 46px;
                 }
-                input, select {
+                input,
+                select {
                     min-width: 120px;
                 }
             }
@@ -236,14 +250,14 @@ export const ModalRightSide = styled.div`
         align-items: flex-start;
         ::-webkit-scrollbar {
             border-radius: 50px;
-            width: 5px;     
+            width: 5px;
         }
         ::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 1px grey; 
+            box-shadow: inset 0 0 1px grey;
             border-radius: 50px;
         }
         ::-webkit-scrollbar-thumb {
-            background: #2BC1F3; 
+            background: #2bc1f3;
             border-radius: 10px;
             margin: 50px 0;
         }
@@ -254,4 +268,4 @@ export const ModalRightSide = styled.div`
             min-height: 400px;
         }
     }
-`
+`;
