@@ -31,10 +31,12 @@ export function loadedAdverts(toValidate, approvedAdverts, rejectedAdverts) {
 
 export function updateAdvertAction(advert) {
     return async dispatch => {
-        const response = await api.put(`/books/${advert.id}/status`, advert);
+        const response = await api.put(`/books/${advert.id}/status`, {
+            id: advert.id,
+            status_id: advert.status_id,
+        });
         if (!response || !response.data) return;
-        if (response.data.success || response.data.id)
-            return dispatch(addAdvertAction(response.data));
+        if (response.data.success || response.data.id) return { status: 'ok' };
         return { error: response.data.error.message };
     };
 }

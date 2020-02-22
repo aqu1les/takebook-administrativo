@@ -66,15 +66,39 @@ export default function advertsReducer(state = INITIAL_STATE, action) {
             };
         }
         case ADD_ADVERT: {
-            const adverts = state.toValidateAdverts.filter(
-                advert => advert.id !== action.advert.id
+            const toValidateAdverts = removeAdvertFromArray(
+                state.toValidateAdverts,
+                action.advert
+            );
+            const approvedAdverts = removeAdvertFromArray(
+                state.approvedAdverts,
+                action.advert
+            );
+            const rejectedAdverts = removeAdvertFromArray(
+                state.rejectedAdverts,
+                action.advert
             );
             return {
                 ...state,
-                toValidateAdverts: [action.advert, ...adverts],
+                toValidateAdverts: {
+                    ...state.toValidateAdverts,
+                    data: [action.advert, ...toValidateAdverts],
+                },
+                approvedAdverts: {
+                    ...state.approvedAdverts,
+                    data: [action.advert, ...approvedAdverts],
+                },
+                rejectedAdverts: {
+                    ...state.rejectedAdverts,
+                    data: [action.advert, ...rejectedAdverts],
+                },
             };
         }
         default:
             return state;
     }
+}
+
+function removeAdvertFromArray(array, advertToRemove) {
+    return array.filter(advert => advert.id !== advertToRemove.id);
 }

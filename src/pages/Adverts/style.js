@@ -85,6 +85,21 @@ export const Footer = styled.footer`
     display: flex;
     justify-content: center;
     border-radius: 8px;
+
+    button {
+        height: 90%;
+        width: 100px;
+        border: 1px solid #2bc1f3;
+        border-radius: 8px;
+        color: #2bc1f3;
+        background-color: #ffffff;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        &:focus,
+        &:hover {
+            outline: none;
+        }
+    }
 `;
 
 export const ModalCard = styled.section`
@@ -198,6 +213,7 @@ export const ModalRightSide = styled.div`
             padding: 8px;
             margin: 5px 0;
             width: 100%;
+            max-width: 100%;
             &:focus,
             &:active {
                 border: 1px solid #2bc1f3;
@@ -236,6 +252,9 @@ export const ModalRightSide = styled.div`
                     margin: 0 5px;
                 }
             }
+        }
+        select {
+            min-height: 46px;
         }
         textarea {
             max-height: 70px;

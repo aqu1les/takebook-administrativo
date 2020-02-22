@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import jQuery from 'jquery';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -39,6 +39,11 @@ export default function Adverts() {
     const [modalOpen, setModalOpen] = useState(false);
     const [modalAdvert, setModalAdvert] = useState({ covers_url: [] });
 
+    const loadMorePosts = useCallback(() => {
+        dispatch(loadNextPage(nextPage));
+        console.log('LOADING');
+    }, [dispatch, nextPage]);
+
     useEffect(() => {
         dispatch(loadAdvertsAction());
         dispatch(loadCategoriesAction());
@@ -54,13 +59,13 @@ export default function Adverts() {
                     scrollableSection[0].scrollHeight &&
                 nextPage
             ) {
-                dispatch(loadNextPage(nextPage));
+                loadMorePosts();
             }
         }
         return () => {
             scrollableSection.off('scroll', handleScroll);
         };
-    }, [dispatch, nextPage]);
+    }, [dispatch, nextPage, loadMorePosts]);
 
     let filtered = adverts
         ? adverts.filter(
@@ -137,7 +142,13 @@ export default function Adverts() {
                         )}
                     </Content>
                 </Main>
-                <Footer>{isLoadingMore ? <Loading /> : null}</Footer>
+                <Footer>
+                    {isLoadingMore ? (
+                        <Loading />
+                    ) : nextPage ? (
+                        <button onClick={loadMorePosts}>Carregar mais</button>
+                    ) : null}
+                </Footer>
             </Card>
             <Modal open={modalOpen} click={() => setModalOpen(false)}>
                 <ModalCard>
