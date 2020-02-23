@@ -1,9 +1,11 @@
-FROM node:latest
+FROM node:alpine
 
 COPY . /var/www/html
 WORKDIR /var/www/html
-RUN npm install --silent
-RUN npm fund
-RUN npm audit fix
+RUN rm -rf node_modules/
+RUN rm package-lock.json
+RUN rm yarn.lock
+RUN yarn install --silent
+RUN yarn global add serve
 
-CMD ["npm", "start"]
+CMD ["yarn", "build"]

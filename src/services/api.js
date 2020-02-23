@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-export const API_URL = 'http://10.0.0.8:8000';
-
 const api = axios.create({
-    baseURL: API_URL
+    baseURL: process.env.REACT_APP_API_URL,
 });
 
 api.interceptors.request.use(config => {
@@ -34,4 +32,3 @@ api.interceptors.response.use(
 );
 
 export default api;
-

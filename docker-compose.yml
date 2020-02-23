@@ -8,10 +8,9 @@ services:
         ports:
             - '3000:3000'
         volumes:
-            - .:/var/www/html:cached
+            - .:/var/www/html
         networks:
             - takebook-network
-        working_dir: /var/www/html
 
 networks:
     takebook-network:
