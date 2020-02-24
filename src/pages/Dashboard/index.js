@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getYear } from 'date-fns';
 import { Wrapper, Card, CardHeader, CardContent } from './style';
@@ -20,25 +20,38 @@ export default function Dashboard() {
     const allUsers = useSelector(state => state.users.data);
     const allAdverts = useSelector(state => state.adverts.all);
     const analyzeAdverts = useSelector(
-        state => state.adverts.toValidateAdverts.data.length
+        state => state.adverts.toValidateAdverts.total
     );
     const approvedAdverts = useSelector(
-        state => state.adverts.approvedAdverts.data.length
+        state => state.adverts.approvedAdverts.total
     );
     const rejectedAdverts = useSelector(
-        state => state.adverts.rejectedAdverts.data.length
+        state => state.adverts.rejectedAdverts.total
     );
 
     const totalUsers = useMemo(() => allUsers.length, [allUsers]);
-    const totalAdverts = useMemo(() => allAdverts.length, [allAdverts]);
+    const totalAdverts = useMemo(
+        () => analyzeAdverts + approvedAdverts + rejectedAdverts,
+        [analyzeAdverts, approvedAdverts, rejectedAdverts]
+    );
     const totalReports = useMemo(() => allReports.length, [allReports]);
 
-    useEffect(() => {
+    const canLoadData = useMemo(() => totalAdverts === 0 && !isLoading, [
+        totalAdverts,
+        isLoading,
+    ]);
+    const loadData = useCallback(() => {
         dispatch(loadAdvertsAction());
         dispatch(loadCategoriesAction());
         dispatch(loadUsersAction());
         dispatch(loadReportsAction());
     }, [dispatch]);
+
+    useEffect(() => {
+        if (canLoadData) {
+            loadData();
+        }
+    }, [loadData, canLoadData]);
 
     return (
         <Wrapper>

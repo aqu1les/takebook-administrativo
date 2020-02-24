@@ -43,7 +43,7 @@ export function updateAdvertAction(advert) {
 
 export function loadAdvertsAction() {
     return async dispatch => {
-        dispatch({ type: LOAD_ADVERTS });
+        await dispatch({ type: LOAD_ADVERTS });
         try {
             const booksToValidate = await getBooksToValidate();
             const booksApproved = await getBooksApproved();

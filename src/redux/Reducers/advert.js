@@ -12,14 +12,17 @@ const INITIAL_STATE = {
     toValidateAdverts: {
         data: [],
         nextPage: null,
+        total: 0,
     },
     approvedAdverts: {
         data: [],
         nextPage: null,
+        total: 0,
     },
     rejectedAdverts: {
         data: [],
         nextPage: null,
+        total: 0,
     },
     all: [],
 };
@@ -57,11 +60,13 @@ export default function advertsReducer(state = INITIAL_STATE, action) {
                 ...state,
                 loadingMore: false,
                 toValidateAdverts: {
+                    ...state.toValidateAdverts,
                     data: [
                         ...state.toValidateAdverts.data,
                         ...action.booksToValidate.data,
                     ],
                     nextPage: action.booksToValidate.nextPage,
+                    total: action.booksToValidate.total,
                 },
             };
         }
@@ -83,14 +88,17 @@ export default function advertsReducer(state = INITIAL_STATE, action) {
                 toValidateAdverts: {
                     ...state.toValidateAdverts,
                     data: [action.advert, ...toValidateAdverts],
+                    total: state.toValidateAdverts.total + 1,
                 },
                 approvedAdverts: {
                     ...state.approvedAdverts,
                     data: [action.advert, ...approvedAdverts],
+                    total: state.approvedAdverts.total + 1,
                 },
                 rejectedAdverts: {
                     ...state.rejectedAdverts,
                     data: [action.advert, ...rejectedAdverts],
+                    total: state.rejectedAdverts.total + 1,
                 },
             };
         }

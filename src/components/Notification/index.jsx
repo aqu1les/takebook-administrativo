@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Wrapper, Main, TimeStamp } from './style';
 import { formatDistanceToNow } from 'date-fns';
 import pt from 'date-fns/locale/pt-BR';
 
-export default function Notification({ notification }) {
+function Notification({ notification }) {
     const date = notification.created_at + '';
     const datetime = date.includes('T')
         ? new Date(notification.created_at)
@@ -43,3 +43,5 @@ export default function Notification({ notification }) {
         </Wrapper>
     );
 }
+
+export default memo(Notification);

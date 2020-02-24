@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Wrapper } from './style';
 
-export default function Card(props) {
+function Card(props) {
     const { title, data, icon, link } = props;
     return (
         <Wrapper>
@@ -20,3 +20,5 @@ export default function Card(props) {
         </Wrapper>
     );
 }
+
+export default memo(Card);

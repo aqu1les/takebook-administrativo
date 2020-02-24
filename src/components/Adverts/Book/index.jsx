@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card, Header, Body, Button } from './style';
+import { memo } from 'react';
 
-export default function Book(props) {
+function Book(props) {
     const { author, title, covers_url } = props.book;
     return (
         <Card>
@@ -16,3 +17,5 @@ export default function Book(props) {
         </Card>
     );
 }
+
+export default memo(Book);

@@ -12,20 +12,25 @@ import {
     FormGroup,
     Input,
     SendButton,
-    UserIcon
+    UserIcon,
 } from './style';
 import user from '../../assets/icons/user.svg';
 import logo from '../../assets/book-app.png';
 import passwordIcon from '../../assets/icons/password.svg';
 import emailIcon from '../../assets/icons/email.svg';
 import PopUp from '../../components/Popup';
-import { setUserAction, checkIfTokenValid, tokenValidated } from '../../redux/Actions/auth';
+import {
+    setUserAction,
+    checkIfTokenValid,
+    tokenValidated,
+} from '../../redux/Actions/auth';
 import * as serviceWorker from '../../serviceWorker';
 import { setNotificationsAction } from '../../redux/Actions/notifications';
 import { loadAdvertsAction } from '../../redux/Actions/adverts';
+import { loadUsersAction } from '../../redux/Actions/users';
 
 export default function Login() {
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const dispatch = useDispatch();
     const [notify, setNotify] = useState({ show: false });
@@ -42,10 +47,13 @@ export default function Login() {
             if (response) {
                 if (response.status === 200) {
                     setIsLoading(false);
-                    dispatch(tokenValidated());
-                    dispatch(setNotificationsAction(response.data.notifications));
-                    dispatch(setUserAction({ ...response.data, token }));
                     dispatch(loadAdvertsAction());
+                    dispatch(tokenValidated());
+                    dispatch(
+                        setNotificationsAction(response.data.notifications)
+                    );
+                    dispatch(setUserAction({ ...response.data, token }));
+                    dispatch(loadUsersAction());
                 }
             }
         }
@@ -90,11 +98,22 @@ export default function Login() {
             setIsLoading(false);
             return setErrorEmail(true);
         }
-        localStorage.setItem('user_info', JSON.stringify({ ...response.data.user, token: response.data.token }));
+        localStorage.setItem(
+            'user_info',
+            JSON.stringify({
+                ...response.data.user,
+                token: response.data.token,
+            })
+        );
         serviceWorker.register();
         dispatch(setNotificationsAction(response.data.user.notifications));
         setTimeout(() => {
-            dispatch(setUserAction({ ...response.data.user, token: response.data.token }));
+            dispatch(
+                setUserAction({
+                    ...response.data.user,
+                    token: response.data.token,
+                })
+            );
         }, 3000);
         return notifySuccess('Logando...');
     }
@@ -103,7 +122,7 @@ export default function Login() {
         setNotify({
             show: true,
             notificationMessage: msg,
-            variant: 'danger'
+            variant: 'danger',
         });
         setTimeout(() => {
             setNotify({ show: false });
@@ -114,7 +133,7 @@ export default function Login() {
         setNotify({
             show: true,
             notificationMessage: msg,
-            variant: 'success'
+            variant: 'success',
         });
         setTimeout(() => {
             setNotify({ show: false });
@@ -132,46 +151,46 @@ export default function Login() {
                 <LogoImg submiting={isLoading}>
                     <Logo
                         src={logo}
-                        alt='Livro logo TAKEBOOK'
-                        width='200'
-                        height='200'
+                        alt="Livro logo TAKEBOOK"
+                        width="200"
+                        height="200"
                     />
-                    <AppName src={logo} alt='Livro logo TAKEBOOK' />
+                    <AppName src={logo} alt="Livro logo TAKEBOOK" />
                 </LogoImg>
                 <Divider />
                 <Form>
-                    <UserIcon src={user} alt='Ícone de usuário' />
+                    <UserIcon src={user} alt="Ícone de usuário" />
                     <h2>Login</h2>
                     <FormGroup error={errorEmail}>
-                        <label htmlFor='email_input'>
-                            <img src={emailIcon} alt='Ícone do e-mail' />
+                        <label htmlFor="email_input">
+                            <img src={emailIcon} alt="Ícone do e-mail" />
                         </label>
                         <Input
-                            id='email_input'
-                            name='email'
-                            type='email'
+                            id="email_input"
+                            name="email"
+                            type="email"
                             onChange={handleChange}
-                            placeholder='Digite aqui seu e-mail'
+                            placeholder="Digite aqui seu e-mail"
                             required={true}
                             autoFocus={true}
                         />
                     </FormGroup>
                     <FormGroup error={errorPassword}>
-                        <label htmlFor='password_input'>
-                            <img src={passwordIcon} alt='Ícone da senha' />
+                        <label htmlFor="password_input">
+                            <img src={passwordIcon} alt="Ícone da senha" />
                         </label>
                         <Input
-                            id='password_input'
-                            name='password'
-                            type='password'
+                            id="password_input"
+                            name="password"
+                            type="password"
                             required={true}
                             onChange={handleChange}
-                            placeholder='Digite aqui a sua senha'
+                            placeholder="Digite aqui a sua senha"
                             onKeyPress={handleKeyPress}
                         />
                     </FormGroup>
                     <SendButton
-                        id='send_button'
+                        id="send_button"
                         onClick={handleSubmitLogin}
                         disabled={
                             errorEmail ||
@@ -181,7 +200,7 @@ export default function Login() {
                         }
                     >
                         ENVIAR
-					</SendButton>
+                    </SendButton>
                 </Form>
             </CardAuth>
         </Wrapper>

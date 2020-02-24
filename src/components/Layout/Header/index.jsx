@@ -37,8 +37,7 @@ export default function Header() {
     });
 
     useEffect(() => {
-        Pusher.logToConsole = true;
-        const pusher = new Pusher('06aeebf69251841ae50a', {
+        const pusher = new Pusher(process.env.REACT_APP_PUSHER_KEY, {
             cluster: 'us2',
             forceTLS: true,
         });

@@ -41,7 +41,6 @@ export default function Adverts() {
 
     const loadMorePosts = useCallback(() => {
         dispatch(loadNextPage(nextPage));
-        console.log('LOADING');
     }, [dispatch, nextPage]);
 
     useEffect(() => {
@@ -65,7 +64,7 @@ export default function Adverts() {
         return () => {
             scrollableSection.off('scroll', handleScroll);
         };
-    }, [dispatch, nextPage, loadMorePosts]);
+    }, [nextPage, loadMorePosts]);
 
     let filtered = adverts
         ? adverts.filter(

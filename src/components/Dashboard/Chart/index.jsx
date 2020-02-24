@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useMemo, memo } from 'react';
 import { Background } from './style';
-import { Chart } from 'react-charts';
+import { Chart as ReactChart } from 'react-charts';
 import { generateArrayOfMonths, getMonthProperty } from '../../../utils/Date';
 
-export default props => {
+function Chart(props) {
     const { adverts, users, reports } = props;
     const usersData = generateArrayOfMonths();
     const advertsData = generateArrayOfMonths();
@@ -24,7 +24,7 @@ export default props => {
         reportsData[month][1] += 1;
     });
 
-    const data = React.useMemo(
+    const data = useMemo(
         () => [
             {
                 label: 'Usuários cadastrados',
@@ -41,14 +41,14 @@ export default props => {
         ],
         [advertsData, usersData, reportsData]
     );
-    const series = React.useMemo(
+    const series = useMemo(
         () => ({
             type: 'bar',
             showPoints: true,
         }),
         []
     );
-    const axes = React.useMemo(
+    const axes = useMemo(
         () => [
             { primary: true, position: 'bottom', type: 'ordinal' },
             { position: 'left', type: 'linear' },
@@ -57,7 +57,9 @@ export default props => {
     );
     return (
         <Background>
-            <Chart data={data} series={series} axes={axes} tooltip />
+            <ReactChart data={data} series={series} axes={axes} tooltip />
         </Background>
     );
-};
+}
+
+export default memo(Chart);

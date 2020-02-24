@@ -9,6 +9,7 @@ export function getBooksToValidate() {
                 resolve({
                     data: res.data.data,
                     nextPage: nextPageUrl ? nextPageUrl.split('=')[1] : null,
+                    total: res.data.total,
                 });
             })
             .catch(err => reject(err));
@@ -26,6 +27,7 @@ export function booksToValidatePagination(page) {
                 resolve({
                     data: res.data.data,
                     nextPage: nextPageUrl ? nextPageUrl.split('=')[1] : null,
+                    total: res.data.total,
                 });
             })
             .catch(err => reject(err));
@@ -43,6 +45,7 @@ export function getBooksApproved() {
                 resolve({
                     data: res.data.data,
                     nextPage: nextPageUrl ? nextPageUrl.split('=')[1] : null,
+                    total: res.data.total,
                 });
             })
             .catch(err => reject(err));
@@ -60,6 +63,7 @@ export function getBooksRejected() {
                 resolve({
                     data: res.data.data,
                     nextPage: nextPageUrl ? nextPageUrl.split('=')[1] : null,
+                    total: res.data.total,
                 });
             })
             .catch(err => reject(err));
