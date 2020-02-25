@@ -46,4 +46,7 @@ Acesse [rodando testes](https://facebook.github.io/create-react-app/docs/running
 -   [x] React.js
 -   [x] Jest
 -   [x] Redux
+-   [x] Styled Components
+-   [x] Pusher
+-   [x] jQuery
 -   [ ] Socketio
