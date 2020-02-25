@@ -1,8 +1,9 @@
 import React from 'react';
 import { PopUp } from './style';
 import error from '../../assets/icons/error.svg';
+import { memo } from 'react';
 
-export default function Popup(props) {
+function Popup(props) {
     const { msg, show, variant } = props;
     if (!show) return null;
     else {
@@ -21,3 +22,5 @@ export default function Popup(props) {
         );
     }
 }
+
+export default memo(Popup);

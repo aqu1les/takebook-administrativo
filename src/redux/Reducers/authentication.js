@@ -2,14 +2,14 @@ import {
     SET_USER,
     CHECK_TOKEN,
     CHECK_TOKEN_SUCCESS,
-    LOG_OUT
+    LOG_OUT,
 } from '../Actions/auth';
 import * as serviceWorker from '../../serviceWorker';
 import api from '../../services/api';
 
 const INITIAL_STATE = {
     authenticated: false,
-    loading: false
+    loading: false,
 };
 
 export default function authReducer(state = INITIAL_STATE, action) {
@@ -19,17 +19,18 @@ export default function authReducer(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 ...action.user,
-                authenticated: true
+                authenticated: true,
+                loading: false,
             };
         case CHECK_TOKEN:
             return {
                 ...state,
-                loading: true
+                loading: true,
             };
         case CHECK_TOKEN_SUCCESS:
             return {
                 ...state,
-                loading: false
+                loading: false,
             };
         case LOG_OUT:
             sessionStorage.removeItem('authKey');
@@ -38,7 +39,7 @@ export default function authReducer(state = INITIAL_STATE, action) {
                 api.delete(`/sw/subscriptions/${swclient.id}`);
             }
             serviceWorker.unregister();
-            return { authenticated: false };
+            return { authenticated: false, loading: false };
         default:
             return state;
     }

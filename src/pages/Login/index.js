@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import api from '../../services/api';
 import {
@@ -19,15 +19,9 @@ import logo from '../../assets/book-app.png';
 import passwordIcon from '../../assets/icons/password.svg';
 import emailIcon from '../../assets/icons/email.svg';
 import PopUp from '../../components/Popup';
-import {
-    setUserAction,
-    checkIfTokenValid,
-    tokenValidated,
-} from '../../redux/Actions/auth';
+import { setUserAction } from '../../redux/Actions/auth';
 import * as serviceWorker from '../../serviceWorker';
 import { setNotificationsAction } from '../../redux/Actions/notifications';
-import { loadAdvertsAction } from '../../redux/Actions/adverts';
-import { loadUsersAction } from '../../redux/Actions/users';
 
 export default function Login() {
     // eslint-disable-next-line
@@ -38,30 +32,6 @@ export default function Login() {
     const [form, setForm] = useState({ email: '', password: '' });
     const [errorEmail, setErrorEmail] = useState(false);
     const [errorPassword, setErrorPassword] = useState(false);
-    const token = sessionStorage.getItem('authKey');
-
-    useEffect(() => {
-        async function getInfo(token) {
-            setIsLoading(true);
-            const response = await api.get('/users/me');
-            if (response) {
-                if (response.status === 200) {
-                    setIsLoading(false);
-                    dispatch(loadAdvertsAction());
-                    dispatch(tokenValidated());
-                    dispatch(
-                        setNotificationsAction(response.data.notifications)
-                    );
-                    dispatch(setUserAction({ ...response.data, token }));
-                    dispatch(loadUsersAction());
-                }
-            }
-        }
-        if (token) {
-            dispatch(checkIfTokenValid());
-            getInfo(token);
-        }
-    }, [token, dispatch]);
 
     function handleChange(e) {
         setForm({ ...form, [e.target.name]: e.target.value });

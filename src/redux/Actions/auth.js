@@ -1,3 +1,10 @@
+import api from '../../services/api';
+import { loadUsersAction } from './users';
+import { loadAdvertsAction } from './adverts';
+import { loadCategoriesAction } from './categories';
+import { loadReportsAction } from './reports';
+import { setNotificationsAction } from './notifications';
+
 export const SET_USER = 'SET_USER';
 
 export const CHECK_TOKEN = 'CHECK_TOKEN';
@@ -10,8 +17,28 @@ export function setUserAction(user) {
     return { type: SET_USER, user };
 }
 
-export function checkIfTokenValid() {
-    return { type: CHECK_TOKEN };
+export function checkIfTokenValid(token) {
+    return async dispatch => {
+        dispatch({ type: CHECK_TOKEN });
+        try {
+            const response = await api.get('/users/me');
+            if (response) {
+                if (response.status === 200) {
+                    await dispatch(loadAdvertsAction());
+                    await dispatch(
+                        setNotificationsAction(response.data.notifications)
+                    );
+                    await dispatch(loadUsersAction());
+                    await dispatch(loadCategoriesAction());
+                    await dispatch(loadReportsAction());
+                    await dispatch(setUserAction({ ...response.data, token }));
+                    await dispatch(tokenValidated());
+                }
+            }
+        } catch (e) {
+            console.log('ERROR WHILE CHECKING TOKEN', e);
+        }
+    };
 }
 
 export function tokenValidated() {

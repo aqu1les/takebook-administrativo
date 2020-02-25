@@ -1,6 +1,6 @@
-import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import Dashboard from './pages/Dashboard';
 import Reports from './pages/Report';
 import Adverts from './pages/Adverts';
@@ -10,95 +10,76 @@ import Login from './pages/Login';
 import NotFound from './pages/404-not-found';
 import Layout from './components/Layout';
 import Requests from './pages/Requests';
+import PrivateRoute from './components/PrivateRoute';
+import { checkIfTokenValid } from './redux/Actions/auth';
+import Loading from './pages/Loading';
 
 export default () => {
+    const isLoading = useSelector(state => state.auth.loading);
     const authenticated = useSelector(state => state.auth.authenticated);
+    const dispatch = useDispatch();
+    const location = useLocation();
 
-    return (
+    useEffect(() => {
+        if (location.pathname !== '/login') {
+            localStorage.setItem('lastPage', location.pathname);
+        }
+    }, [location]);
+
+    useEffect(() => {
+        const token = sessionStorage.getItem('authKey');
+        if (token && !authenticated) {
+            dispatch(checkIfTokenValid(token));
+        }
+    }, [dispatch, authenticated]);
+
+    return isLoading ? (
+        <Loading />
+    ) : (
         <Switch>
-            <Route exact path='/' render={() => <Redirect to='/login' />} />
+            <Route exact path="/" render={() => <Redirect to="/login" />} />
             <Route
-                path='/login'
+                path="/login"
                 render={() =>
                     authenticated ? (
-                        <Redirect to='/dashboard' />
+                        <Redirect
+                            to={
+                                localStorage.getItem('lastPage') || '/dashboard'
+                            }
+                        />
                     ) : (
-                            <Login />
-                        )
+                        <Login />
+                    )
                 }
             />
-            <Route
-                path='/dashboard'
-                render={() =>
-                    authenticated ? (
-                        <Layout>
-                            <Dashboard />
-                        </Layout>
-                    ) : (
-                            <Redirect to='/login' />
-                        )
-                }
-            />
-            <Route
-                path='/users'
-                render={() =>
-                    authenticated ? (
-                        <Layout>
-                            <Users />
-                        </Layout>
-                    ) : (
-                            <Redirect to='/login' />
-                        )
-                }
-            />
-            <Route
-                path='/adverts'
-                render={() =>
-                    authenticated ? (
-                        <Layout>
-                            <Adverts />
-                        </Layout>
-                    ) : (
-                            <Redirect to='/login' />
-                        )
-                }
-            />
-            <Route
-                path='/reports'
-                render={() =>
-                    authenticated ? (
-                        <Layout>
-                            <Reports />
-                        </Layout>
-                    ) : (
-                            <Redirect to='/login' />
-                        )
-                }
-            />
-            <Route
-                path='/me'
-                render={() =>
-                    authenticated ? (
-                        <Layout>
-                            <Profile />
-                        </Layout>
-                    ) : (
-                            <Redirect to='/login' />
-                        )
-                }
-            />
-            <Route
-                path='/requests'
-                render={() =>
-                    authenticated ? (
-                        <Layout>
-                            <Requests />
-                        </Layout>
-                    ) : (
-                            <Redirect to='/login' />
-                        )
-                }
-            />
+            <PrivateRoute path="/dashboard" authenticated={authenticated}>
+                <Layout>
+                    <Dashboard />
+                </Layout>
+            </PrivateRoute>
+            <PrivateRoute path="/users" authenticated={authenticated}>
+                <Layout>
+                    <Users />
+                </Layout>
+            </PrivateRoute>
+            <PrivateRoute path="/adverts" authenticated={authenticated}>
+                <Layout>
+                    <Adverts />
+                </Layout>
+            </PrivateRoute>
+            <PrivateRoute path="/reports" authenticated={authenticated}>
+                <Layout>
+                    <Reports />
+                </Layout>
+            </PrivateRoute>
+            <PrivateRoute path="/me" authenticated={authenticated}>
+                <Layout>
+                    <Profile />
+                </Layout>
+            </PrivateRoute>
+            <PrivateRoute path="/requests" authenticated={authenticated}>
+                <Requests />
+            </PrivateRoute>
             <Route component={NotFound} />
         </Switch>
     );

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Div } from './style';
 import searchIcon from '../../assets/icons/search.svg';
+import { memo } from 'react';
 
-export default function Search(props) {
+function Search(props) {
     return (
         <Div>
             <input
@@ -17,3 +18,5 @@ export default function Search(props) {
         </Div>
     );
 }
+
+export default memo(Search);

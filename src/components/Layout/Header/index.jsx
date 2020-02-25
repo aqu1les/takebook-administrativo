@@ -14,8 +14,9 @@ import {
 } from '../../../redux/Actions/notifications';
 import api from '../../../services/api';
 import { logOutAction } from '../../../redux/Actions/auth';
+import { memo } from 'react';
 
-export default function Header() {
+function Header() {
     const dispatch = useDispatch();
     const [toProfile, setToProfile] = useState(false);
     const user = useSelector(state => state.auth);
@@ -160,56 +161,5 @@ export default function Header() {
         </>
     );
 }
-/*
-	render() {
-		if (this.state.logout) return <Redirect to="/login" />;
-		else {
-			return (
-				<Header>
-					<nav role="navigation">
-						<div onClick={this.openNotifications}>
-							<img
-								src={notificationIcon}
-								alt="Ícone de notificação"
-								id="btnNotification"
-							/>
-							<div id="notification_counter">10</div>
-						</div>
-						<div id="notifications" ref="notifications">
-							<div className="divider"></div>
-						</div>
-						<div className="vertical-divider"></div>
-						<div id="dropdown" onClick={this.handleDropdown}>
-							<h5>{this.state.user_name}</h5>
-							<i id="arrow-down" ref="dropdownArrow"></i>
-						</div>
-						<ul id="dropdown-content" ref="dropdownContent">
-							<li onClick={this.handleRedirectProfile}>
-								<NavLink to="/me">Perfil</NavLink>
-							</li>
-							<hr />
-							<li onClick={this.logout}>
-								Sair
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-								>
-									<path d="M16 9v-4l8 7-8 7v-4h-8v-6h8zm-16-7v20h14v-2h-12v-16h12v-2h-14z" />
-								</svg>
-							</li>
-						</ul>
-						<img
-							src={this.state.avatar}
-							alt="Foto do usuário"
-							title="Imagem do usuário"
-							id="ProfilePic"
-						/>
-					</nav>
-				</Header>
-			);
-		}
-	}
-}
-*/
+
+export default memo(Header);

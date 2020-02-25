@@ -56,5 +56,6 @@ export const Div = styled.div`
     }
     ${width920} {
         box-shadow: none;
+        border: 1px solid #32c2f4;
     }
 `;

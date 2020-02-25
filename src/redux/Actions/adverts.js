@@ -49,7 +49,7 @@ export function loadAdvertsAction() {
             const booksApproved = await getBooksApproved();
             const booksRejected = await getBooksRejected();
 
-            dispatch(
+            await dispatch(
                 loadedAdverts(booksToValidate, booksApproved, booksRejected)
             );
         } catch (e) {
