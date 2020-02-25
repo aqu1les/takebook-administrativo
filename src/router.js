@@ -21,7 +21,7 @@ export default () => {
     const location = useLocation();
 
     useEffect(() => {
-        if (location.pathname !== '/login') {
+        if (location.pathname !== '/login' && location.pathname !== '/') {
             localStorage.setItem('lastPage', location.pathname);
         }
     }, [location]);

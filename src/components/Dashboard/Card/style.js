@@ -49,6 +49,7 @@ export const Wrapper = styled.div`
     @media only screen and (max-width: 576px) {
         min-width: 80px;
         font-size: 10px;
+        min-height: 80px;
         img {
             top: 5px;
             left: 10px;

@@ -3,18 +3,17 @@ import styled from 'styled-components';
 const width920 = '@media only screen and (max-width: 920px)';
 
 export const Div = styled.div`
-    width: 80%;
-    margin-top: 20px;
+    width: 50%;
     height: 50px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-    border-radius: 40px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     background-color: white;
     transition: width 100ms;
 
     &:hover, &:focus {
-        width: 85%;
+        width: 55%;
     }
 
     input {
@@ -56,6 +55,11 @@ export const Div = styled.div`
     }
     ${width920} {
         box-shadow: none;
-        border: 1px solid #32c2f4;
+        width: 100%;
+
+        &:hover, &:focus {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+            width: 100%;
+        }
     }
 `;

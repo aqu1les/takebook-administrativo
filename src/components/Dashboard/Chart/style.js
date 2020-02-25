@@ -8,7 +8,7 @@ export const Background = styled.div`
     flex-direction: column;
     padding: 10px;
     @media only screen and (max-width: 576px) {
-        height: 98%;
-        width: 98%;
+        height: 90%;
+        width: 90%;
     }
 `;

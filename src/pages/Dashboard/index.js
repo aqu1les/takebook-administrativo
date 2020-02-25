@@ -18,7 +18,7 @@ export default function Dashboard() {
     const isLoading = useSelector(state => state.adverts.loading);
     const allReports = useSelector(state => state.reports.data);
     const allUsers = useSelector(state => state.users.data);
-    const allAdverts = useSelector(state => state.adverts.all);
+    const allAdverts = useSelector(state => state.adverts.all.data);
     const analyzeAdverts = useSelector(
         state => state.adverts.toValidateAdverts.total
     );
@@ -77,19 +77,19 @@ export default function Dashboard() {
                             title="Anúncios em análise"
                             data={analyzeAdverts}
                             icon={advertIcon}
-                            link="adverts"
+                            link="adverts/analyze"
                         />
                         <StatCard
                             title="Anúncios aprovados"
                             data={approvedAdverts}
                             icon={advertIcon}
-                            link="adverts"
+                            link="adverts/approved"
                         />
                         <StatCard
                             title="Anúncios rejeitados"
                             data={rejectedAdverts}
                             icon={advertIcon}
-                            link="adverts"
+                            link="adverts/refused"
                         />
                         <StatCard
                             title="Denúncias"

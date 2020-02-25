@@ -1,247 +1,82 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import jQuery from 'jquery';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-    Wrapper,
-    Card,
-    Header,
-    Main,
-    Content,
-    Footer,
-    ModalCard,
-    ModalLeftSide,
-    ModalDivider,
-    ModalRightSide,
-} from './style';
-import {
-    loadAdvertsAction,
-    loadNextPage,
-    updateAdvertAction,
-} from '../../redux/Actions/adverts';
-import { loadCategoriesAction } from '../../redux/Actions/categories';
-import Book from '../../components/Adverts/Book';
+import React, { useState } from 'react';
+import { Switch, Route, useRouteMatch, NavLink } from 'react-router-dom';
+import { Wrapper, Card, Header } from './style';
 import SearchField from '../../components/SearchField';
-import Loading from '../../components/Loading';
-import Modal from '../../components/Modal';
-import accept from '../../assets/icons/accept.svg';
-import refuse from '../../assets/icons/refuse.svg';
+import AdvertRouter from './AdvertRouter';
+import AllIcon from '../../assets/adverts/books.svg';
+import AnalyzeIcon from '../../assets/adverts/analyze.png';
+import ApprovedIcon from '../../assets/adverts/approved.png';
+import RefusedIcon from '../../assets/adverts/refused.png';
+import BookList from './AdvertRouter/BookList';
 
 export default function Adverts() {
-    const dispatch = useDispatch();
-    const adverts = useSelector(state => state.adverts.toValidateAdverts.data);
-    const nextPage = useSelector(
-        state => state.adverts.toValidateAdverts.nextPage
-    );
-    const categories = useSelector(state => state.categories.data);
-    const isLoading = useSelector(state => state.adverts.loading);
-    const isLoadingMore = useSelector(state => state.adverts.loadingMore);
     const [nameSearch, setNameSearch] = useState('');
-    const [modalOpen, setModalOpen] = useState(false);
-    const [modalAdvert, setModalAdvert] = useState({ covers_url: [] });
-
-    const loadMorePosts = useCallback(() => {
-        dispatch(loadNextPage(nextPage));
-    }, [dispatch, nextPage]);
-
-    useEffect(() => {
-        dispatch(loadAdvertsAction());
-        dispatch(loadCategoriesAction());
-    }, [dispatch]);
-
-    useEffect(() => {
-        const scrollableSection = jQuery('#content-scroll');
-        scrollableSection.on('scroll', handleScroll);
-        function handleScroll(event) {
-            if (
-                scrollableSection.scrollTop() +
-                    scrollableSection.innerHeight() >=
-                    scrollableSection[0].scrollHeight &&
-                nextPage
-            ) {
-                loadMorePosts();
-            }
-        }
-        return () => {
-            scrollableSection.off('scroll', handleScroll);
-        };
-    }, [nextPage, loadMorePosts]);
-
-    let filtered = adverts
-        ? adverts.filter(
-              ad =>
-                  ad.title.toLowerCase().indexOf(nameSearch.toLowerCase()) !==
-                  -1
-          )
-        : [];
-
-    async function openModal(id, e) {
-        e.preventDefault();
-        setModalOpen(true);
-        await setModalAdvert(adverts.find(ad => ad.id === id));
-        return changeCover();
-    }
-
-    function changeCover(index = 0) {
-        const x = jQuery('.slide');
-        for (let i = 0; i < x.length; i++) {
-            x[i].style.display = 'none';
-        }
-        if (index >= 0) {
-            if (index >= x.length) index = 0;
-            return (x[index].style.display = 'block');
-        } else {
-            if (x[0]) x[0].style.display = 'block';
-        }
-    }
-
-    async function acceptBook() {
-        setModalAdvert({ ...modalAdvert, status_id: 2 });
-        const check = await updateBook();
-        if (check) return console.error(check);
-        setModalOpen(false);
-    }
-
-    async function refuseBook() {
-        setModalAdvert({ ...modalAdvert, status_id: 3 });
-        const check = await updateBook();
-        if (check) return console.error(check);
-        setModalOpen(false);
-    }
-
-    async function updateBook() {
-        const action = await dispatch(updateAdvertAction(modalAdvert));
-        if (!action || action.error) return action.error;
-    }
+    const { path } = useRouteMatch();
 
     return (
         <Wrapper>
             <h2 id="page">Anúncios</h2>
             <Card>
                 <Header>
+                    <nav>
+                        <NavLink exact to="/adverts" activeClassName="active">
+                            <p>Todos os livros</p>
+                            <img
+                                src={AllIcon}
+                                width="24"
+                                height="24"
+                                alt="Ícone de navegação"
+                                title="Todos os anúncios"
+                            />
+                        </NavLink>
+                        <NavLink to="/adverts/analyze" activeClassName="active">
+                            <p>Livros para análise</p>
+                            <img
+                                src={AnalyzeIcon}
+                                width="24"
+                                height="24"
+                                alt="Ícone de navegação"
+                                title="Anúncios em análise"
+                            />
+                        </NavLink>
+                        <NavLink
+                            to="/adverts/approved"
+                            activeClassName="active"
+                        >
+                            <p>Livros aprovados</p>
+                            <img
+                                src={ApprovedIcon}
+                                width="24"
+                                height="24"
+                                alt="Ícone de navegação"
+                                title="Anúncios aprovados"
+                            />
+                        </NavLink>
+                        <NavLink to="/adverts/refused" activeClassName="active">
+                            <p>Livros recusados</p>
+                            <img
+                                src={RefusedIcon}
+                                width="24"
+                                height="24"
+                                alt="Ícone de navegação"
+                                title="Anúncios recusados"
+                            />
+                        </NavLink>
+                    </nav>
                     <SearchField
                         onChange={e => setNameSearch(e.target.value)}
                         onClick={e => setNameSearch(nameSearch)}
                     />
                 </Header>
-                <Main>
-                    <h2>Resultado</h2>
-                    <Content id="content-scroll">
-                        {isLoading && !isLoadingMore ? (
-                            <Loading />
-                        ) : filtered.length > 0 ? (
-                            filtered.map((ad, index) => (
-                                <Book
-                                    book={ad}
-                                    key={index}
-                                    onClick={e => openModal(ad.id, e)}
-                                />
-                            ))
-                        ) : (
-                            <h1>Não tem nenhum livro para ser analizado!</h1>
-                        )}
-                    </Content>
-                </Main>
-                <Footer>
-                    {isLoadingMore ? (
-                        <Loading />
-                    ) : nextPage ? (
-                        <button onClick={loadMorePosts}>Carregar mais</button>
-                    ) : null}
-                </Footer>
+                <Switch>
+                    <Route exact path={path}>
+                        <BookList nameSearch={nameSearch} section="all" />
+                    </Route>
+                    <Route path={`${path}/:type`}>
+                        <AdvertRouter nameSearch={nameSearch} />
+                    </Route>
+                </Switch>
             </Card>
-            <Modal open={modalOpen} click={() => setModalOpen(false)}>
-                <ModalCard>
-                    <ModalLeftSide>
-                        <div id="covers">
-                            {modalAdvert.covers_url.map((cover, index) => (
-                                <div key={index} className="slide">
-                                    <img src={cover.url} alt="Book" />
-                                    <button
-                                        onClick={e => changeCover(index + 1)}
-                                    ></button>
-                                </div>
-                            ))}
-                        </div>
-                        <div id="buttons">
-                            <img
-                                src={refuse}
-                                alt="Refuse Button"
-                                onClick={refuseBook}
-                                title="Recusar"
-                            />
-                            <img
-                                src={accept}
-                                alt="Accept Button"
-                                onClick={acceptBook}
-                                title="Aceitar"
-                            />
-                        </div>
-                    </ModalLeftSide>
-                    <ModalDivider />
-                    <ModalRightSide>
-                        <form>
-                            <label htmlFor="title">Título do anúncio</label>
-                            <input
-                                type="text"
-                                id="title"
-                                placeholder={modalAdvert.title}
-                                disabled
-                            />
-
-                            <label htmlFor="author">Autor do livro</label>
-                            <input
-                                type="text"
-                                id="author"
-                                placeholder={modalAdvert.author}
-                                disabled
-                            />
-
-                            <div className="row">
-                                <div>
-                                    <label htmlFor="status">Estado</label>
-                                    <select
-                                        id="status"
-                                        disabled
-                                        placeholder={modalAdvert.status}
-                                    >
-                                        <option value="0">Novo</option>
-                                        <option value="1">Usado</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label htmlFor="price">Preço</label>
-                                    <input
-                                        id="price"
-                                        placeholder={modalAdvert.price}
-                                        disabled
-                                    />
-                                </div>
-                            </div>
-
-                            <label htmlFor="categories">Categorias</label>
-                            <div id="categories">
-                                {categories.map(cat => (
-                                    <div key={cat.id}>
-                                        <input
-                                            type="checkbox"
-                                            id={cat.name}
-                                            defaultChecked={true || false}
-                                        />
-                                        <label htmlFor={cat.name}>
-                                            {cat.name}
-                                        </label>
-                                    </div>
-                                ))}
-                            </div>
-                            <label>Descrição</label>
-                            <textarea
-                                placeholder={modalAdvert.description}
-                                disabled
-                            ></textarea>
-                        </form>
-                    </ModalRightSide>
-                </ModalCard>
-            </Modal>
         </Wrapper>
     );
 }

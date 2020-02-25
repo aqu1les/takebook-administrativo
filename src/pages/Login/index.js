@@ -166,7 +166,8 @@ export default function Login() {
                             errorEmail ||
                             errorPassword ||
                             !form.email ||
-                            !form.password
+                            !form.password ||
+                            isLoading
                         }
                     >
                         ENVIAR

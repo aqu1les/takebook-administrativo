@@ -1,6 +1,6 @@
 {
     "name": "takebook-administrativo",
-    "version": "0.5.3",
+    "version": "0.6.0",
     "private": false,
     "license": "UNLICENSED",
     "dependencies": {
@@ -22,6 +22,7 @@
         "react-vis": "^1.11.7",
         "redux": "^4.0.4",
         "redux-thunk": "^2.3.0",
+        "serialize-javascript": "^3.0.0",
         "socket.io-client": "^2.3.0",
         "styled-components": "^4.3.2",
         "use-socket.io-client": "^1.0.4",

@@ -2,8 +2,11 @@ import {
     LOAD_ADVERTS,
     LOAD_ADVERTS_SUCCESS,
     LOAD_NEXT_PAGE_ADVERTS,
-    LOAD_NEXT_PAGE_ADVERTS_SUCCESS,
+    LOAD_NEXT_PAGE_ADVERTS_VALIDATE_SUCCESS,
     ADD_ADVERT,
+    LOAD_NEXT_PAGE_ADVERTS_ALL_SUCCESS,
+    LOAD_NEXT_PAGE_ADVERTS_APPROVED_SUCCESS,
+    LOAD_NEXT_PAGE_ADVERTS_REFUSED_SUCCESS,
 } from '../Actions/adverts';
 
 const INITIAL_STATE = {
@@ -24,7 +27,11 @@ const INITIAL_STATE = {
         nextPage: null,
         total: 0,
     },
-    all: [],
+    all: {
+        data: [],
+        nextPage: null,
+        total: 0,
+    },
 };
 
 export default function advertsReducer(state = INITIAL_STATE, action) {
@@ -42,11 +49,7 @@ export default function advertsReducer(state = INITIAL_STATE, action) {
                 toValidateAdverts: action.toValidate,
                 approvedAdverts: action.approvedAdverts,
                 rejectedAdverts: action.rejectedAdverts,
-                all: [
-                    ...action.toValidate.data,
-                    ...action.approvedAdverts.data,
-                    ...action.rejectedAdverts.data,
-                ],
+                all: action.allBooks,
             };
         }
         case LOAD_NEXT_PAGE_ADVERTS: {
@@ -55,7 +58,7 @@ export default function advertsReducer(state = INITIAL_STATE, action) {
                 loadingMore: true,
             };
         }
-        case LOAD_NEXT_PAGE_ADVERTS_SUCCESS: {
+        case LOAD_NEXT_PAGE_ADVERTS_VALIDATE_SUCCESS: {
             return {
                 ...state,
                 loadingMore: false,
@@ -67,6 +70,48 @@ export default function advertsReducer(state = INITIAL_STATE, action) {
                     ],
                     nextPage: action.booksToValidate.nextPage,
                     total: action.booksToValidate.total,
+                },
+            };
+        }
+        case LOAD_NEXT_PAGE_ADVERTS_ALL_SUCCESS: {
+            return {
+                ...state,
+                loadingMore: false,
+                all: {
+                    ...state.all,
+                    data: [...state.all.data, ...action.all.data],
+                    nextPage: action.all.nextPage,
+                    total: action.all.total,
+                },
+            };
+        }
+        case LOAD_NEXT_PAGE_ADVERTS_APPROVED_SUCCESS: {
+            return {
+                ...state,
+                loadingMore: false,
+                approvedAdverts: {
+                    ...state.approvedAdverts,
+                    data: [
+                        ...state.approvedAdverts.data,
+                        ...action.approvedAdverts.data,
+                    ],
+                    nextPage: action.approvedAdverts.nextPage,
+                    total: action.approvedAdverts.total,
+                },
+            };
+        }
+        case LOAD_NEXT_PAGE_ADVERTS_REFUSED_SUCCESS: {
+            return {
+                ...state,
+                loadingMore: false,
+                rejectedAdverts: {
+                    ...state.rejectedAdverts,
+                    data: [
+                        ...state.rejectedAdverts.data,
+                        ...action.rejectedAdverts.data,
+                    ],
+                    nextPage: action.rejectedAdverts.nextPage,
+                    total: action.rejectedAdverts.total,
                 },
             };
         }

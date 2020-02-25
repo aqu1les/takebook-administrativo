@@ -21,7 +21,9 @@ export function checkIfTokenValid(token) {
     return async dispatch => {
         dispatch({ type: CHECK_TOKEN });
         try {
-            const response = await api.get('/users/me');
+            const response = await api
+                .get('/users/me')
+                .catch(e => console.log('ERROR WHILE CHECKING TOKEN', e));
             if (response) {
                 if (response.status === 200) {
                     await dispatch(loadAdvertsAction());

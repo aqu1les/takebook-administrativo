@@ -31,10 +31,11 @@ const Main = styled.main`
         flex-grow: 100;
         height: calc(100vh - 70px);
         @media only screen and (max-width: 720px) {
-            margin: 70px 0 0 0;
+            margin: 55px 0 0 0;
             padding: 5px;
-            max-width: 100vw;
+            max-width: 98vw;
             height: calc(100vh - 140px);
+            max-height: calc(100vh - 140px);
         }
     }
     @media only screen and (max-width: 720px) {
