@@ -2,16 +2,13 @@
     "name": "takebook-administrativo",
     "version": "0.6.0",
     "private": false,
-    "license": "UNLICENSED",
+    "license": "MIT",
     "dependencies": {
         "axios": "^0.19.0",
         "babel-eslint": "10.0.2",
         "date-fns": "^2.9.0",
         "date-fns-tz": "^1.0.9",
-        "highcharts": "^8.0.0",
-        "highcharts-react-official": "^2.2.2",
         "jquery": "^3.4.1",
-        "material-table": "^1.50.0",
         "pusher-js": "^5.0.3",
         "react": "^16.9.0",
         "react-charts": "^2.0.0-beta.6",
@@ -19,14 +16,10 @@
         "react-redux": "^7.1.3",
         "react-router-dom": "^5.0.1",
         "react-scripts": "3.1.1",
-        "react-vis": "^1.11.7",
         "redux": "^4.0.4",
         "redux-thunk": "^2.3.0",
         "serialize-javascript": "^3.0.0",
-        "socket.io-client": "^2.3.0",
-        "styled-components": "^4.3.2",
-        "use-socket.io-client": "^1.0.4",
-        "use-socketio": "^1.0.1"
+        "styled-components": "^4.3.2"
     },
     "scripts": {
         "start": "react-scripts start && cra-append-sw --mode dev ./src/custom-sw.js",
