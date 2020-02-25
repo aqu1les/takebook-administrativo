@@ -36,10 +36,10 @@ export default function Dashboard() {
     );
     const totalReports = useMemo(() => allReports.length, [allReports]);
 
-    const canLoadData = useMemo(() => totalAdverts === 0 && !isLoading, [
-        totalAdverts,
-        isLoading,
-    ]);
+    const canLoadData = useMemo(
+        () => totalAdverts === 0 && !isLoading && totalUsers === 0,
+        [totalAdverts, isLoading, totalUsers]
+    );
     const loadData = useCallback(() => {
         dispatch(loadAdvertsAction());
         dispatch(loadCategoriesAction());
