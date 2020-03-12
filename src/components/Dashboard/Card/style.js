@@ -16,6 +16,10 @@ export const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     position: relative;
+    transition: transform 250ms;
+    &:hover {
+        transform: scale(1.05);
+    }
     * { 
         color: #FFF;
     }
@@ -28,11 +32,7 @@ export const Wrapper = styled.div`
         text-decoration: none;        
     }
     h2, h3 {
-        text-align: center;
-        transition: transform 150ms;
-        &:hover {
-            transform: scale(1.1);
-        }
+        text-align: center;        
     }
     a h3 {
         text-align: center;

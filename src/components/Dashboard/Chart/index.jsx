@@ -43,7 +43,7 @@ function Chart(props) {
     );
     const series = useMemo(
         () => ({
-            type: 'bar',
+            type: 'line',
             showPoints: true,
         }),
         []
@@ -51,7 +51,7 @@ function Chart(props) {
     const axes = useMemo(
         () => [
             { primary: true, position: 'bottom', type: 'ordinal' },
-            { position: 'left', type: 'linear' },
+            { position: 'left', type: 'ordinal' },
         ],
         []
     );

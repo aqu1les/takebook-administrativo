@@ -14,6 +14,7 @@ export const Menu = styled.aside`
     flex-direction: column;
     background: linear-gradient(to bottom, #004975, #0091e4);
     align-items: center;
+
     * {
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -22,6 +23,7 @@ export const Menu = styled.aside`
         -ms-user-select: none;
         user-select: none;
     }
+
     #img {
         background-color: rgba(255, 255, 255, 0.2);
         border-radius: 100px;
@@ -37,6 +39,7 @@ export const Menu = styled.aside`
             height: 70px;
         }
     }
+
     a {
         text-decoration: none;
         color: #fff;
@@ -60,11 +63,23 @@ export const Menu = styled.aside`
             margin-left: 25px;
         }
     }
+
     a.active {
         background-color: #0a85ae;
         width: 238px;
         border-left: 2px solid #e3b02f;
     }
+
+    a.nav-item-disabled {
+        pointer-events: none;
+        &:hover {
+            cursor: not-allowed;
+        }
+        p {
+            color: #eeea;
+        }
+    }
+
     @media only screen and (max-width: 720px) {
         position: fixed;
         bottom: 0;

@@ -22,10 +22,9 @@ import PopUp from '../../components/Popup';
 import { setUserAction } from '../../redux/Actions/auth';
 import * as serviceWorker from '../../serviceWorker';
 import { setNotificationsAction } from '../../redux/Actions/notifications';
+import { EMAIL_REGEX } from '../../utils/Constants';
 
 export default function Login() {
-    // eslint-disable-next-line
-    const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const dispatch = useDispatch();
     const [notify, setNotify] = useState({ show: false });
     const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +32,7 @@ export default function Login() {
     const [errorEmail, setErrorEmail] = useState(false);
     const [errorPassword, setErrorPassword] = useState(false);
 
-    function handleChange(e) {
+    function handleInputChange(e) {
         setForm({ ...form, [e.target.name]: e.target.value });
         if (e.target.name === 'email') {
             return !EMAIL_REGEX.test(e.target.value)
@@ -55,37 +54,42 @@ export default function Login() {
         if (!form.password) return setErrorPassword(true);
         if (!form.email) return setErrorEmail(true);
         setIsLoading(true);
-        const response = await api.post('/admin/auth/login', form);
-        if (!response) {
-            notifyError('Erro no servidor!');
-            return setIsLoading(false);
-        } else if (response === 'Senha Inválida!') {
-            notifyError('Senha inválida!');
-            setIsLoading(false);
-            return setErrorPassword(true);
-        } else if (response === 'E-mail inválido!') {
-            notifyError('E-mail inválido!');
-            setIsLoading(false);
-            return setErrorEmail(true);
-        }
-        localStorage.setItem(
-            'user_info',
-            JSON.stringify({
-                ...response.data.user,
-                token: response.data.token,
-            })
-        );
-        serviceWorker.register();
-        dispatch(setNotificationsAction(response.data.user.notifications));
-        setTimeout(() => {
-            dispatch(
-                setUserAction({
+        try {
+            const response = await api.post('/admin/auth/login', form);
+            if (!response) {
+                notifyError('Erro no servidor!');
+                return setIsLoading(false);
+            } else if (response === 'Senha Inválida!') {
+                notifyError('Senha inválida!');
+                setIsLoading(false);
+                return setErrorPassword(true);
+            } else if (response === 'E-mail inválido!') {
+                notifyError('E-mail inválido!');
+                setIsLoading(false);
+                return setErrorEmail(true);
+            }
+            localStorage.setItem(
+                'user_info',
+                JSON.stringify({
                     ...response.data.user,
                     token: response.data.token,
                 })
             );
-        }, 3000);
-        return notifySuccess('Logando...');
+            serviceWorker.register();
+            dispatch(setNotificationsAction(response.data.user.notifications));
+            setTimeout(() => {
+                dispatch(
+                    setUserAction({
+                        ...response.data.user,
+                        token: response.data.token,
+                    })
+                );
+            }, 3000);
+            return notifySuccess('Logando...');
+        } catch (error) {
+            notifyError('Erro ao contactar o servidor!');
+            return setIsLoading(false);
+        }
     }
 
     function notifyError(msg) {
@@ -139,7 +143,7 @@ export default function Login() {
                             id="email_input"
                             name="email"
                             type="email"
-                            onChange={handleChange}
+                            onChange={handleInputChange}
                             placeholder="Digite aqui seu e-mail"
                             required={true}
                             autoFocus={true}
@@ -154,7 +158,7 @@ export default function Login() {
                             name="password"
                             type="password"
                             required={true}
-                            onChange={handleChange}
+                            onChange={handleInputChange}
                             placeholder="Digite aqui a sua senha"
                             onKeyPress={handleKeyPress}
                         />

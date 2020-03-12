@@ -34,7 +34,11 @@ export default function Aside() {
                 <img src={reportIcon} alt="" />
                 <p>Denúncias</p>
             </NavLink>
-            <NavLink to="/requests" activeClassName="active">
+            <NavLink
+                to="/requests"
+                activeClassName="active"
+                className="nav-item-disabled"
+            >
                 <img src={requestIcon} alt="" />
                 <p>Solicitações</p>
             </NavLink>
