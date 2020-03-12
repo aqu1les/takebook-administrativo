@@ -12,7 +12,7 @@ const fade = keyframes`
     to {
         opacity: 1;
     }
-`
+`;
 const rotate = keyframes`
     from {
         transform: rotate(0deg);
@@ -20,7 +20,7 @@ const rotate = keyframes`
     to {
         transform: rotate(360deg);
     }
-`
+`;
 const shake = keyframes`
     0% {
         transform: translateX(0);
@@ -34,7 +34,7 @@ const shake = keyframes`
     100% {
         transform: translateX(0);
     }
-`
+`;
 export const Wrapper = styled.div`
     width: 100vw;
     height: 100vh;
@@ -48,7 +48,7 @@ export const Wrapper = styled.div`
     ${width920} {
         width: 100vw;
         height: 100vh;
-        background-color: #FFF;
+        background-color: #fff;
         background-position: left bottom, right bottom, right top;
         background-size: 200px;
     }
@@ -91,10 +91,10 @@ export const LogoImg = styled.div`
     justify-content: center;
     animation: ${fade} 1000ms;
     ${props =>
-        props.submiting === true && css`
+        props.submiting === true &&
+        css`
             animation: ${rotate} 1s infinite ease-in-out;
-        `
-    }
+        `}
 `;
 
 export const Logo = styled.img`
@@ -126,14 +126,14 @@ export const Form = styled.form`
     height: 100%;
     h2 {
         margin-top: 5px;
-        text-shadow: 2px 2px rgba(0, 0, 0, 0.1);          
+        text-shadow: 2px 2px rgba(0, 0, 0, 0.1);
     }
     ${width920} {
         height: auto;
         min-height: 300px;
         width: auto;
         h2 {
-           margin-top: -50px;
+            margin-top: -50px;
         }
     }
 `;
@@ -143,7 +143,7 @@ export const H2 = styled.h2`
     text-shadow: 2px 2px rgba(0, 0, 0, 0.1);
     ${width920} {
         margin-top: -50px;
-    }    
+    }
 `;
 export const FormGroup = styled.div`
     display: flex;
@@ -159,16 +159,16 @@ export const FormGroup = styled.div`
         align-items: center;
     }
     ${props =>
-        props.error === true && css`
+        props.error === true &&
+        css`
             animation: ${shake} 100ms;
             border: 1px solid red;
-        `
-    }
+        `}
     ${props =>
-        props.error === false && css`
+        props.error === false &&
+        css`
             border: rgb(100, 168, 207) solid 1.5px;
-        `
-    }    
+        `}
 `;
 
 export const Input = styled.input`
@@ -193,14 +193,13 @@ export const SendButton = styled.button`
     border-radius: 40px;
     border: 0;
     box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
-    background-color: #FF7714;
+    background-color: #ff7714;
     color: #fff;
     transition: 200ms transform;
     font-weight: bolder;
     font-size: 12pt;
     &:hover {
-        transform: scale(1.05);
-        box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.19);
+        transform: scale(1.1);
         opacity: 0.8;
     }
     &:focus {

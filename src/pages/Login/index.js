@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import api from '../../services/api';
 import {
@@ -18,15 +18,15 @@ import user from '../../assets/icons/user.svg';
 import logo from '../../assets/book-app.png';
 import passwordIcon from '../../assets/icons/password.svg';
 import emailIcon from '../../assets/icons/email.svg';
-import PopUp from '../../components/Popup';
 import { setUserAction } from '../../redux/Actions/auth';
 import * as serviceWorker from '../../serviceWorker';
 import { setNotificationsAction } from '../../redux/Actions/notifications';
 import { EMAIL_REGEX } from '../../utils/Constants';
+import { PopupContext } from '../../components/Popup/Context';
 
 export default function Login() {
     const dispatch = useDispatch();
-    const [notify, setNotify] = useState({ show: false });
+    const { notifyError, notifySuccess } = useContext(PopupContext);
     const [isLoading, setIsLoading] = useState(false);
     const [form, setForm] = useState({ email: '', password: '' });
     const [errorEmail, setErrorEmail] = useState(false);
@@ -84,7 +84,7 @@ export default function Login() {
                         token: response.data.token,
                     })
                 );
-            }, 3000);
+            }, 2000);
             return notifySuccess('Logando...');
         } catch (error) {
             notifyError('Erro ao contactar o servidor!');
@@ -92,36 +92,9 @@ export default function Login() {
         }
     }
 
-    function notifyError(msg) {
-        setNotify({
-            show: true,
-            notificationMessage: msg,
-            variant: 'danger',
-        });
-        setTimeout(() => {
-            setNotify({ show: false });
-        }, 2000);
-    }
-
-    function notifySuccess(msg) {
-        setNotify({
-            show: true,
-            notificationMessage: msg,
-            variant: 'success',
-        });
-        setTimeout(() => {
-            setNotify({ show: false });
-        }, 2000);
-    }
-
     return (
         <Wrapper>
             <CardAuth>
-                <PopUp
-                    show={notify.show}
-                    msg={notify.notificationMessage}
-                    variant={notify.variant}
-                />
                 <LogoImg submiting={isLoading}>
                     <Logo
                         src={logo}

@@ -25,19 +25,20 @@ const disappear = keyframes`
 export const PopUp = styled.div`
     position: absolute;
     z-index: 100;
-    background-color: ${props => props.variant === 'danger' ? 'rgb(255, 10, 60)' : 'rgb(0, 150, 0)'};
+    background-color: ${props =>
+        props.variant === 'danger' ? 'rgb(229, 63, 82)' : 'rgb(0, 150, 0)'};
     top: 20px;
     right: 0;
     width: 220px;
     height: 50px;
     border-radius: 15px 0px 0px 15px;
-    box-shadow: 4px 2px 10px 0 rgba(0, 0, 0, 0.1);
-    color: #FFF;
-    display: flex;
+    box-shadow: 4px 2px 10px 10px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    display: ${props => (props.open ? 'flex' : 'none')};
     justify-content: center;
     align-items: center;
     animation: ${moveLeft} 500ms, ${disappear} 500ms;
-    animation-delay: 0s, 2500ms;
+    animation-delay: 0s, 1500ms;
     p {
         display: flex;
         flex-direction: row;
