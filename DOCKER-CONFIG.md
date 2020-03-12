@@ -35,6 +35,7 @@ Adicione as entradas no seu arquivo /etc/hosts com o virtual host: `api.takebook
 4. Acesse o projeto pela url "http://app.takebook.local"
 
 5. Caso não funcione, tente acessar o projeto através da url "http://localhost:3000"
+PS: Em caso funcione pela url do localhost mas não pela url do dominio, reinicie o container do nginx proxy
 
 ## Configure as variáveis de ambiente da API
 
@@ -45,7 +46,7 @@ Adicione as entradas no seu arquivo /etc/hosts com o virtual host: `api.takebook
 1. Acesse a pasta raiz do projeto "Takebook API" e rode o comando `docker-compose up --build -d`
 2. Conecte o projeto ao nginx-proxy executando: `docker network connect takebook-api_default nginx-proxy`
 3. Espere o container terminar de carregar.
-4. Rode as migrations através do comando `docker-compose run --rm php php artisan migrate --seed`
+4. Rode as migrations através do comando `docker-compose run --rm api php artisan migrate --seed`
 
 5. Acesse o projeto pela url "http://api.takebook.local"
 
