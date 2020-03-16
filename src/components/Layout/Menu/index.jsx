@@ -6,7 +6,6 @@ import mainIcon from '../../../assets/icons/main.svg';
 import adIcon from '../../../assets/icons/ad-icon.svg';
 import userIcon from '../../../assets/icons/user-icon.svg';
 import reportIcon from '../../../assets/icons/reports-icon.svg';
-import requestIcon from '../../../assets/icons/request.svg';
 
 export default function Aside() {
     return (
@@ -33,14 +32,6 @@ export default function Aside() {
             <NavLink to="/reports" activeClassName="active">
                 <img src={reportIcon} alt="" />
                 <p>Denúncias</p>
-            </NavLink>
-            <NavLink
-                to="/requests"
-                activeClassName="active"
-                className="nav-item-disabled"
-            >
-                <img src={requestIcon} alt="" />
-                <p>Solicitações</p>
             </NavLink>
         </Menu>
     );

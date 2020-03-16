@@ -9,7 +9,6 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 import NotFound from './pages/404-not-found';
 import Layout from './components/Layout';
-import Requests from './pages/Requests';
 import PrivateRoute from './components/PrivateRoute';
 import { checkIfTokenValid } from './redux/Actions/auth';
 import Loading from './pages/Loading';
@@ -76,9 +75,6 @@ export default () => {
                 <Layout>
                     <Profile />
                 </Layout>
-            </PrivateRoute>
-            <PrivateRoute path="/requests" authenticated={authenticated}>
-                <Requests />
             </PrivateRoute>
             <Route component={NotFound} />
         </Switch>

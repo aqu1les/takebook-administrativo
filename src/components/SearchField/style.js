@@ -42,6 +42,8 @@ export const Div = styled.div`
         width: 80px;
         border-radius: 40px;
         cursor: pointer;
+        transition: box-shadow 250ms;
+
         img {
             height: 24px;
             width: 24px;
@@ -51,6 +53,7 @@ export const Div = styled.div`
         }
         &:hover {
             opacity: 0.8;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
         }
     }
     ${width920} {

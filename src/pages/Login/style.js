@@ -161,7 +161,7 @@ export const FormGroup = styled.div`
     ${props =>
         props.error === true &&
         css`
-            animation: ${shake} 100ms;
+            animation: ${shake} 250ms;
             border: 1px solid red;
         `}
     ${props =>
