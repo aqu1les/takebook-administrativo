@@ -42,7 +42,8 @@
     },
     "scripts": {
         "start": "react-scripts start && cra-append-sw --mode dev ./src/custom-sw.js",
-        "build": "react-scripts build && cra-append-sw ./src/custom-sw.js && serve -l 3000 -s build",
+        "build:local": "react-scripts build && cra-append-sw ./src/custom-sw.js && serve -l 3000 -s build",
+        "build": "react-scripts build && cra-append-sw ./src/custom-sw.js",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
