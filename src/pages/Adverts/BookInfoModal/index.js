@@ -46,17 +46,20 @@ export default function BookInfoModal({ advertID }) {
     }
 
     async function acceptBook() {
-        setModalAdvert({ ...modalAdvert, status_id: 2 });
+        modalAdvert.status_id = 2
+        setModalAdvert({ modalAdvert });
         const check = await updateBook();
         if (check) return console.error(check);
-        setModalOpen(false);
+        closeModal();
     }
 
     async function refuseBook() {
-        setModalAdvert({ ...modalAdvert, status_id: 3 });
+        modalAdvert.status_id = 3
+
+        setModalAdvert({ modalAdvert });
         const check = await updateBook();
         if (check) return console.error(check);
-        setModalOpen(false);
+        closeModal();
     }
 
     async function updateBook() {
@@ -68,13 +71,14 @@ export default function BookInfoModal({ advertID }) {
         setModalOpen(false);
         history.goBack();
     }
-
-    return modalOpen ? (
+    
+    return modalOpen && modalAdvert.covers_url ? (
         <Modal open={modalOpen} click={closeModal}>
             <ModalCard>
                 <ModalLeftSide>
                     <div id="covers">
                         {modalAdvert.covers_url.map((cover, index) => (
+                            
                             <Cover
                                 key={index}
                                 url={cover.url}

@@ -49,12 +49,14 @@ export function loadedAdverts(
     };
 }
 
-export function updateAdvertAction(advert) {
+export function updateAdvertAction(advert, statusId) {
+    
     return async dispatch => {
         const response = await api.put(`/books/${advert.id}/status`, {
             id: advert.id,
             status_id: advert.status_id,
         });
+        console.log(response)
         if (!response || !response.data) return;
         if (response.data.success || response.data.id) return { status: 'ok' };
         return { error: response.data.error.message };

@@ -36,9 +36,9 @@ function Notification({ notification }) {
                 <p>{desc}</p>
             </Main>
             <TimeStamp>
-                {formatDistanceToNow(datetime, {
+                {/* {formatDistanceToNow(datetime, {
                     locale: pt,
-                })}
+                })} */}
             </TimeStamp>
         </Wrapper>
     );
