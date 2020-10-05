@@ -23,7 +23,7 @@ import closeIcon from '../../assets/icons/close.svg';
 
 export default function Users() {
     const dispatch = useDispatch();
-    const users = useSelector(state => state.users.data);
+    const users = useSelector((state) => state.users.data);
     const [isLoading, setIsLoading] = useState(false);
     const [nameSearch, setNameSearch] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
@@ -38,7 +38,7 @@ export default function Users() {
 
     let filtered = users
         ? users.filter(
-              user =>
+              (user) =>
                   `${user.first_name} ${user.last_name}`
                       .toLowerCase()
                       .indexOf(nameSearch.toLowerCase()) !== -1
@@ -70,7 +70,7 @@ export default function Users() {
     function openModal(id, e) {
         e.preventDefault();
         setModalOpen(true);
-        setModalUser(users.find(user => user.id === id));
+        setModalUser(users.find((user) => user.id === id));
     }
 
     function closeModal(e) {
@@ -97,8 +97,8 @@ export default function Users() {
             <Card>
                 <Header>
                     <SearchField
-                        onChange={e => setNameSearch(e.target.value)}
-                        onClick={e => setNameSearch(nameSearch)}
+                        onChange={(e) => setNameSearch(e.target.value)}
+                        onClick={(e) => setNameSearch(nameSearch)}
                     />
                 </Header>
                 <Main>
@@ -108,7 +108,7 @@ export default function Users() {
                             <Loading />
                         ) : (
                             <ul>
-                                {filtered.map(user => (
+                                {filtered.map((user) => (
                                     <Li key={user.id}>
                                         <p>{user.id}</p>
                                         <img
@@ -118,13 +118,18 @@ export default function Users() {
                                                     : userIcon
                                             }
                                             alt=""
+                                            style={{
+                                                height: 53,
+                                                width: 53,
+                                                borderRadius: 100,
+                                            }}
                                         />
                                         <p>
                                             {user.first_name} {user.last_name}
                                         </p>
                                         <div>
                                             <button
-                                                onClick={e =>
+                                                onClick={(e) =>
                                                     this.removeUser(user.id, e)
                                                 }
                                             >
@@ -137,7 +142,7 @@ export default function Users() {
                                                 </span>
                                             </button>
                                             <button
-                                                onClick={e =>
+                                                onClick={(e) =>
                                                     openModal(user.id, e)
                                                 }
                                             >
@@ -176,8 +181,9 @@ export default function Users() {
                             <label>Nome</label>
                             <input
                                 type="text"
-                                value={`${modalUser.first_name ||
-                                    ''} ${modalUser.last_name || ''}`}
+                                value={`${modalUser.first_name || ''} ${
+                                    modalUser.last_name || ''
+                                }`}
                                 readOnly
                             />
                         </div>
